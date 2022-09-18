@@ -1,11 +1,11 @@
 package ru.nsu.kbagryantsev;
 
 /**
- * Class for sorting integer lists in ascending order
+ * Class for sorting integer lists in ascending order.
  */
 public class Heapsort {
     /**
-     * Main method used by a callee to sort input lists
+     * Main method used by a callee to sort input lists.
      */
     public static void sort(int[] data) {
         int size = data.length;
@@ -24,7 +24,7 @@ public class Heapsort {
     }
 
     /**
-     * Sift down elements by index
+     * Sift down elements by index.
      */
     private static void heapify(int[] data, int size, int index) {
         int left = 2 * index + 1;
