@@ -63,8 +63,8 @@ public class HeapsortTest {
     @Test
     @DisplayName("Sorted list")
     void sorted() {
-        int[] test = {1, 2, 3, 4, 5, 6, 7, 8};
-        int[] reference = {1, 2, 3, 4, 5, 6, 7, 8};
+        int[] test = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] reference = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         Heapsort.sort(test);
 
