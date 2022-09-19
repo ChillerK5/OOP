@@ -8,6 +8,10 @@ public class Heapsort {
      * Main method used by a callee to sort input lists.
      */
     public static void sort(int[] data) {
+        if (data == null) {
+            return;
+        }
+
         int size = data.length;
 
         for (int i = size / 2 - 1; i >= 0; i--) {

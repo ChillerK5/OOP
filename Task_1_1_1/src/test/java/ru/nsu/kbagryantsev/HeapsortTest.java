@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
  */
 public class HeapsortTest {
     @Test
+    @DisplayName("Null list")
+    public void list_null() {
+        int[] test = null;
+
+        Heapsort.sort(test);
+    }
+    @Test
     @DisplayName("Empty list")
     public void empty() {
         int[] test = {};
