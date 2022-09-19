@@ -31,6 +31,10 @@ public class Heapsort {
      * Sift down elements by index.
      */
     private static void heapify(int[] data, int size, int index) {
+        if (data == null) {
+            return;
+        }
+
         int left = 2 * index + 1;
         int right = 2 * index + 2;
         int tracked = index;
