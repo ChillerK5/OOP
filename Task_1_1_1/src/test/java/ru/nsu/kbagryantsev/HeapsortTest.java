@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class HeapsortTest {
     @Test
     @DisplayName("Empty list")
-    void empty() {
+    public void empty() {
         int[] test = {};
         int[] reference = {};
 
@@ -21,7 +21,7 @@ public class HeapsortTest {
 
     @Test
     @DisplayName("Simple list")
-    void basic() {
+    public void basic() {
         int[] test = {5, 8, 20, 26, 1, 6};
         int[] reference = {1, 5, 6, 8, 20, 26};
 
@@ -32,7 +32,7 @@ public class HeapsortTest {
 
     @Test
     @DisplayName("Homogenous list")
-    void homogenous() {
+    public void homogenous() {
         int[] test = {5, 5, 5, 5, 1, 5, 1, 6};
         int[] reference = {1, 1, 5, 5, 5, 5, 5, 6};
 
@@ -54,7 +54,7 @@ public class HeapsortTest {
 
     @Test
     @DisplayName("List forms a non-complete binary tree")
-    void non_complete() {
+    public void non_complete() {
         int[] test = {17, 8, 5, 1, 3};
         int[] reference = {1, 3, 5, 8, 17};
 
@@ -65,7 +65,7 @@ public class HeapsortTest {
 
     @Test
     @DisplayName("Sorted list")
-    void sorted() {
+    public void sorted() {
         int[] test = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] reference = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
