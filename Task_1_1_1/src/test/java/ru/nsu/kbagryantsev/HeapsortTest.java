@@ -15,6 +15,7 @@ public class HeapsortTest {
 
         Heapsort.sort(test);
     }
+
     @Test
     @DisplayName("Empty list")
     public void empty() {
