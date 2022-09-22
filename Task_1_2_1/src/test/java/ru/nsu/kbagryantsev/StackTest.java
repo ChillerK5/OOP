@@ -29,7 +29,10 @@ class StackTest {
 
         test.pushStack(sample);
 
-        Assertions.assertArrayEquals(test.getData(), new Integer[]{1, 2, 3, 4, 5, null, null, null, null});
+        Assertions.assertArrayEquals(
+                test.getData(),
+                new Integer[]{1, 2, 3, 4, 5, null, null, null, null}
+        );
     }
 
     @Test
