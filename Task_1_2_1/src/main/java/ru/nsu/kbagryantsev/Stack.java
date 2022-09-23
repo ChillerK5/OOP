@@ -34,15 +34,6 @@ public class Stack<T> implements Stackable<T> {
     }
 
     /**
-     * Accessor method for data field.
-     *
-     * @return private field data
-     */
-    public T[] getData() {
-        return this.data;
-    }
-
-    /**
      * Pushes given value to the end of the stack.
      *
      * @param value type T given value
@@ -78,6 +69,8 @@ public class Stack<T> implements Stackable<T> {
 
     /**
      * Returns the last element from stack and decreases its occupancy.
+     *
+     * @return type T value from the end of the stack list
      */
     @Override
     public T pop() {
@@ -90,10 +83,10 @@ public class Stack<T> implements Stackable<T> {
     }
 
     /**
-     * Returns n elements from the end of the stack
+     * Returns N elements from the end of the stack
      * or as much as possible if there are too few of them.
      *
-     * @return list of elements
+     * @return type T list of elements
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -102,10 +95,16 @@ public class Stack<T> implements Stackable<T> {
             return null;
         }
 
-        this.occupancy = this.occupancy > n ? this.occupancy - n : 0;
-
         T[] returnValues = (T[]) new Object[n];
-        System.arraycopy(this.data, occupancy, returnValues, 0, n);
+
+        if (this.occupancy >= n) {
+            this.occupancy -= n;
+
+            System.arraycopy(this.data, occupancy, returnValues, 0, n);
+        } else {
+            returnValues = Arrays.copyOf(this.data, this.occupancy);
+            this.occupancy = 0;
+        }
 
         return returnValues;
     }
@@ -131,8 +130,11 @@ public class Stack<T> implements Stackable<T> {
     }
 
     /**
-     * Plug for tests.
+     * Returns current stack contains with not influencing data.
+     *
+     * @return list of type T elements currently in stack
      */
-    public void idle() {
+    public T[] peekStack() {
+        return Arrays.copyOf(this.data, this.occupancy);
     }
 }
