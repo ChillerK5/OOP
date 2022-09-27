@@ -1,11 +1,10 @@
 package ru.nsu.kbagryantsev;
 
+import java.lang.reflect.Field;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Field;
 
 class StackTest {
     @Test
