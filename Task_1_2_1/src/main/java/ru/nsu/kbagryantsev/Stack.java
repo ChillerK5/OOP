@@ -14,7 +14,11 @@ public class Stack<T> implements Stackable<T> {
     /**
      * Occupancy to capacity ratio for trimming purposes.
      */
-    private static final double OCCUPANCY_RATE = 0.25;
+    private static final double OCCUPANCY_RATE = 0.4;
+    /**
+     * Capacity decrease rate for trimming purposes.
+     */
+    private static final double TRIM_RATE = 0.3;
     /**
      * List of stack elements.
      */
@@ -68,7 +72,7 @@ public class Stack<T> implements Stackable<T> {
         int sizeValues = stack.count();
 
         if (this.occupancy + sizeValues >= this.capacity) {
-            this.capacity = occupancy + sizeValues + DEFAULT_CAPACITY;
+            this.capacity = this.occupancy + sizeValues + DEFAULT_CAPACITY;
             this.data = Arrays.copyOf(data, capacity);
         }
 
@@ -147,11 +151,13 @@ public class Stack<T> implements Stackable<T> {
     }
 
     /**
-     * Decreases the size of the stack by the OCCUPANCY_RATE if it is exceeded.
+     * Decreases the size of the stack
+     * by the TRIM_RATE
+     * if OCCUPANCY_RATE is exceeded.
      */
     private void trimStack() {
-        if (this.capacity - this.occupancy > OCCUPANCY_RATE * this.capacity) {
-            this.capacity -= OCCUPANCY_RATE * this.capacity;
+        if (this.occupancy <= OCCUPANCY_RATE * this.capacity) {
+            this.capacity -= TRIM_RATE * this.capacity;
             this.data = Arrays.copyOf(this.data, this.capacity);
         }
     }

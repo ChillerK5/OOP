@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+
 class StackTest {
     @Test
     @Tag("initializationTest")
@@ -177,5 +179,68 @@ class StackTest {
         Stack<Integer> test = new Stack<>();
 
         Assertions.assertEquals(test.count(), 0);
+    }
+
+    @Test
+    @Tag("trimStackTest")
+    @DisplayName("Trimming a stack of extended size")
+    public void extendedTrim() throws NoSuchFieldException, IllegalAccessException {
+        Stack<Integer> test = new Stack<>();
+        test.push(1).push(2).push(3).push(4).push(5);
+
+        Field capacityField = test.getClass().getDeclaredField("capacity");
+        capacityField.setAccessible(true);
+
+        test.popStack(2);
+
+        int capacity = capacityField.getInt(test);
+        Assertions.assertTrue(test.count() <= capacity);
+    }
+
+    @Test
+    @Tag("trimStackTest")
+    @DisplayName("Trimming a default sized stack")
+    public void defaultTrim() throws NoSuchFieldException, IllegalAccessException {
+        Stack<Integer> test = new Stack<>();
+        test.push(1).push(2).push(3).push(4);
+
+        Field capacityField = test.getClass().getDeclaredField("capacity");
+        capacityField.setAccessible(true);
+
+        test.pop();
+        int capacity = capacityField.getInt(test);
+        Assertions.assertTrue(test.count() <= capacity);
+
+        test.pop();
+        capacity = capacityField.getInt(test);
+        Assertions.assertTrue(test.count() <= capacity);
+
+        test.pop();
+        capacity = capacityField.getInt(test);
+        Assertions.assertTrue(test.count() <= capacity);
+
+        test.pop();
+        capacity = capacityField.getInt(test);
+        Assertions.assertTrue(test.count() <= capacity);
+    }
+
+    @Test
+    @Tag("trimStackTest")
+    @DisplayName("Trimming a stack of multiple-ways-extended size")
+    public void oddTrim() throws NoSuchFieldException, IllegalAccessException {
+        Stack<Integer> test = new Stack<>();
+        test.push(1).push(2).push(3).push(4).push(5);
+        Stack<Integer> sample = new Stack<>();
+        sample.push(6).push(7).push(8);
+
+        test.pushStack(sample);
+
+        Field capacityField = test.getClass().getDeclaredField("capacity");
+        capacityField.setAccessible(true);
+
+        test.popStack(4);
+
+        int capacity = capacityField.getInt(test);
+        Assertions.assertTrue(test.count() <= capacity);
     }
 }
