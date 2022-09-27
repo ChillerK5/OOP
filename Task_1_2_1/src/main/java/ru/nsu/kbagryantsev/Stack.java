@@ -67,7 +67,7 @@ public class Stack<T> implements Stackable<T> {
      * @param stack Stack object
      */
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", ""})
     public void pushStack(final Stackable<T> stack) {
         int sizeValues = stack.count();
 
@@ -76,21 +76,23 @@ public class Stack<T> implements Stackable<T> {
             this.data = Arrays.copyOf(data, capacity);
         }
 
-        Field data;
+        Field data = null;
         try {
             data = stack.getClass().getDeclaredField("data");
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
+        } catch (NoSuchFieldException ignore) {
+            //Ignore
         }
+        //noinspection ConstantConditions
         data.setAccessible(true);
 
-        T[] stackData;
+        T[] stackData = null;
         try {
             stackData = (T[]) data.get(stack);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (IllegalAccessException ignore) {
+            //Ignore
         }
 
+        //noinspection ConstantConditions
         System.arraycopy(stackData, 0, this.data, this.occupancy, sizeValues);
 
         this.occupancy += sizeValues;
