@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -159,7 +159,7 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Stack</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Stack initializer.</div>
+<div class="block">Stack class constructor.</div>
 </td>
 </tr>
 </table>
@@ -188,39 +188,32 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="Stack.html" title="type parameter in Stack">T</a>[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#peekStack()">peekStack</a></span>()</code></th>
-<td class="colLast">
-<div class="block">Returns current stack contains with not influencing data.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="Stack.html" title="type parameter in Stack">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pop()">pop</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the last element from stack and decreases its occupancy.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="Stack.html" title="type parameter in Stack">T</a>[]</code></td>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#popStack(int)">popStack</a></span>&#8203;(int&nbsp;n)</code></th>
 <td class="colLast">
-<div class="block">Returns N elements from the end of the stack
- or as much as possible if there are too few of them.</div>
+<div class="block">Returns Stack object of
+ N elements from the end of the stack.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>void</code></td>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="Stack.html" title="class in ru.nsu.kbagryantsev">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#push(T)">push</a></span>&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;value)</code></th>
 <td class="colLast">
 <div class="block">Pushes given value to the end of the stack.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(T%5B%5D)">pushStack</a></span>&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>[]&nbsp;values)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pushStack(ru.nsu.kbagryantsev.Stackable)">pushStack</a></span>&#8203;(<a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;stack)</code></th>
 <td class="colLast">
-<div class="block">Pushes a list of given values to the end of the stack.</div>
+<div class="block">Pushes values from a given stack.</div>
 </td>
 </tr>
 </table>
@@ -254,7 +247,7 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 <li class="blockList">
 <h4>Stack</h4>
 <pre>public&nbsp;Stack()</pre>
-<div class="block">Stack initializer.</div>
+<div class="block">Stack class constructor. Creates default sized stack.</div>
 </li>
 </ul>
 </li>
@@ -275,8 +268,9 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 <ul class="blockList">
 <li class="blockList">
 <h4>push</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;push&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;value)</pre>
-<div class="block">Pushes given value to the end of the stack.</div>
+<pre class="methodSignature">public&nbsp;<a href="Stack.html" title="class in ru.nsu.kbagryantsev">Stack</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;push&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;value)</pre>
+<div class="block">Pushes given value to the end of the stack.
+ !also supports method chaining</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Stackable.html#push(T)">push</a></code>&nbsp;in interface&nbsp;<code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></dd>
@@ -285,21 +279,19 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 </dl>
 </li>
 </ul>
-<a id="pushStack(java.lang.Object[])">
-<!--   -->
-</a><a id="pushStack(T[])">
+<a id="pushStack(ru.nsu.kbagryantsev.Stackable)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>pushStack</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;pushStack&#8203;(<a href="Stack.html" title="type parameter in Stack">T</a>[]&nbsp;values)</pre>
-<div class="block">Pushes a list of given values to the end of the stack.</div>
+<pre class="methodSignature">public&nbsp;void&nbsp;pushStack&#8203;(<a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;stack)</pre>
+<div class="block">Pushes values from a given stack.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="Stackable.html#pushStack(T%5B%5D)">pushStack</a></code>&nbsp;in interface&nbsp;<code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></dd>
+<dd><code><a href="Stackable.html#pushStack(ru.nsu.kbagryantsev.Stackable)">pushStack</a></code>&nbsp;in interface&nbsp;<code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>values</code> - list of type T values to be pushed</dd>
+<dd><code>stack</code> - Stack object</dd>
 </dl>
 </li>
 </ul>
@@ -309,13 +301,16 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 <ul class="blockList">
 <li class="blockList">
 <h4>pop</h4>
-<pre class="methodSignature">public&nbsp;<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;pop()</pre>
+<pre class="methodSignature">public&nbsp;<a href="Stack.html" title="type parameter in Stack">T</a>&nbsp;pop()
+      throws java.lang.IndexOutOfBoundsException</pre>
 <div class="block">Returns the last element from stack and decreases its occupancy.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Stackable.html#pop()">pop</a></code>&nbsp;in interface&nbsp;<code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>type T value from the end of the stack list</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IndexOutOfBoundsException</code></dd>
 </dl>
 </li>
 </ul>
@@ -325,21 +320,25 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 <ul class="blockList">
 <li class="blockList">
 <h4>popStack</h4>
-<pre class="methodSignature">public&nbsp;<a href="Stack.html" title="type parameter in Stack">T</a>[]&nbsp;popStack&#8203;(int&nbsp;n)</pre>
-<div class="block">Returns N elements from the end of the stack
- or as much as possible if there are too few of them.</div>
+<pre class="methodSignature">public&nbsp;<a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;&nbsp;popStack&#8203;(int&nbsp;n)
+                      throws java.lang.IndexOutOfBoundsException</pre>
+<div class="block">Returns Stack object of
+ N elements from the end of the stack.
+ If there are too few elements returns as much as possible</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="Stackable.html#popStack(int)">popStack</a></code>&nbsp;in interface&nbsp;<code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>type T list of elements</dd>
+<dd>new Stack object with elements</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IndexOutOfBoundsException</code></dd>
 </dl>
 </li>
 </ul>
 <a id="count()">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>count</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;count()</pre>
@@ -349,20 +348,6 @@ implements <a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Sta
 <dd><code><a href="Stackable.html#count()">count</a></code>&nbsp;in interface&nbsp;<code><a href="Stackable.html" title="interface in ru.nsu.kbagryantsev">Stackable</a>&lt;<a href="Stack.html" title="type parameter in Stack">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>integer amount of elements</dd>
-</dl>
-</li>
-</ul>
-<a id="peekStack()">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>peekStack</h4>
-<pre class="methodSignature">public&nbsp;<a href="Stack.html" title="type parameter in Stack">T</a>[]&nbsp;peekStack()</pre>
-<div class="block">Returns current stack contains with not influencing data.</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>list of type T elements currently in stack</dd>
 </dl>
 </li>
 </ul>
