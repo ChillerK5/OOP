@@ -1,5 +1,6 @@
 package ru.nsu.kbagryantsev;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 
 /**
@@ -10,6 +11,10 @@ public class Stack<T> implements Stackable<T> {
      * Predefined capacity for a construction method.
      */
     private static final int DEFAULT_CAPACITY = 4;
+    /**
+     * Occupancy to capacity ratio for trimming purposes.
+     */
+    private static final double OCCUPANCY_RATE = 0.25;
     /**
      * List of stack elements.
      */
@@ -24,7 +29,7 @@ public class Stack<T> implements Stackable<T> {
     private int capacity;
 
     /**
-     * Stack initializer.
+     * Stack class constructor. Creates default sized stack.
      */
     @SuppressWarnings("unchecked")
     public Stack() {
@@ -35,36 +40,56 @@ public class Stack<T> implements Stackable<T> {
 
     /**
      * Pushes given value to the end of the stack.
+     * !also supports method chaining
      *
      * @param value type T given value
      */
     @Override
-    public void push(final T value) {
+    public Stack<T> push(final T value) {
         if (this.occupancy == this.capacity) {
             this.data = Arrays.copyOf(data, capacity * 2);
             this.capacity *= 2;
         }
 
-        this.add(value);
+        this.data[occupancy] = value;
+        this.occupancy += 1;
+
+        return this;
     }
 
     /**
-     * Pushes a list of given values to the end of the stack.
+     * Pushes values from a given stack.
      *
-     * @param values list of type T values to be pushed
+     * @param stack Stack object
      */
     @Override
-    public void pushStack(final T[] values) {
-        int sizeValues = values.length;
+    @SuppressWarnings("unchecked")
+    public void pushStack(final Stackable<T> stack) {
+        int sizeValues = stack.count();
 
         if (this.occupancy + sizeValues >= this.capacity) {
             this.capacity = occupancy + sizeValues + DEFAULT_CAPACITY;
             this.data = Arrays.copyOf(data, capacity);
         }
 
-        for (T value : values) {
-            this.add(value);
+        Field data;
+        try {
+            data = stack.getClass().getDeclaredField("data");
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
         }
+        data.setAccessible(true);
+
+        T[] stackData;
+        try {
+            stackData = (T[]) data.get(stack);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.arraycopy(stackData, 0, this.data, this.occupancy, sizeValues);
+
+        this.occupancy += sizeValues;
     }
 
     /**
@@ -73,40 +98,42 @@ public class Stack<T> implements Stackable<T> {
      * @return type T value from the end of the stack list
      */
     @Override
-    public T pop() {
+    public T pop() throws IndexOutOfBoundsException {
         if (this.occupancy == 0) {
-            return null;
+            throw new IndexOutOfBoundsException("Empty stack");
         }
 
         this.occupancy--;
-        return this.data[occupancy];
+        T returnValue = this.data[occupancy];
+
+        trimStack();
+        return returnValue;
     }
 
     /**
-     * Returns N elements from the end of the stack
-     * or as much as possible if there are too few of them.
+     * Returns Stack object of
+     * N elements from the end of the stack.
+     * If there are too few elements returns as much as possible
      *
-     * @return type T list of elements
+     * @return new Stack object with elements
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public T[] popStack(final int n) {
+    public Stackable<T> popStack(final int n) throws IndexOutOfBoundsException {
         if (n <= 0) {
-            return null;
+            throw new IndexOutOfBoundsException("Argument must be positive");
         }
 
-        T[] returnValues = (T[]) new Object[n];
+        Stack<T> subStack = new Stack<>();
 
-        if (this.occupancy >= n) {
-            this.occupancy -= n;
+        int sourcePos = Math.max(this.occupancy - n, 0);
 
-            System.arraycopy(this.data, occupancy, returnValues, 0, n);
-        } else {
-            returnValues = Arrays.copyOf(this.data, this.occupancy);
-            this.occupancy = 0;
+        for (int i = 0; i < this.occupancy - sourcePos; i++) {
+            subStack.push(this.data[sourcePos + i]);
         }
+        this.occupancy = sourcePos;
 
-        return returnValues;
+        trimStack();
+        return subStack;
     }
 
     /**
@@ -120,21 +147,12 @@ public class Stack<T> implements Stackable<T> {
     }
 
     /**
-     * Auxiliary method, which adds an element into a stack list.
-     *
-     * @param value type T value
+     * Decreases the size of the stack by the OCCUPANCY_RATE if it is exceeded.
      */
-    private void add(final T value) {
-        this.data[occupancy] = value;
-        this.occupancy += 1;
-    }
-
-    /**
-     * Returns current stack contains with not influencing data.
-     *
-     * @return list of type T elements currently in stack
-     */
-    public T[] peekStack() {
-        return Arrays.copyOf(this.data, this.occupancy);
+    private void trimStack() {
+        if (this.capacity - this.occupancy > OCCUPANCY_RATE * this.capacity) {
+            this.capacity -= OCCUPANCY_RATE * this.capacity;
+            this.data = Arrays.copyOf(this.data, this.capacity);
+        }
     }
 }
