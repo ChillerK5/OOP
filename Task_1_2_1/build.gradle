@@ -26,6 +26,7 @@ test {
 //Workflow test system
 jacocoTestReport {
     reports {
+        html.required = true
         xml.required = true
     }
 }
