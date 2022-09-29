@@ -2,6 +2,7 @@ package ru.nsu.kbagryantsev;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 /**
  * Stack interface implementation.
@@ -50,13 +51,13 @@ public class Stack<T> implements Stackable<T> {
      */
     @Override
     public Stack<T> push(final T value) {
-        if (this.occupancy == this.capacity) {
-            this.data = Arrays.copyOf(data, capacity * 2);
-            this.capacity *= 2;
+        if (occupancy == capacity) {
+            data = Arrays.copyOf(data, capacity * 2);
+            capacity *= 2;
         }
 
-        this.data[occupancy] = value;
-        this.occupancy += 1;
+        data[occupancy] = value;
+        occupancy += 1;
 
         return this;
     }
@@ -71,9 +72,9 @@ public class Stack<T> implements Stackable<T> {
     public void pushStack(final Stackable<T> stack) {
         int sizeValues = stack.count();
 
-        if (this.occupancy + sizeValues >= this.capacity) {
-            this.capacity = this.occupancy + sizeValues + DEFAULT_CAPACITY;
-            this.data = Arrays.copyOf(data, capacity);
+        if (occupancy + sizeValues >= capacity) {
+            capacity = occupancy + sizeValues + DEFAULT_CAPACITY;
+            this.data = Arrays.copyOf(this.data, capacity);
         }
 
         Field data = null;
@@ -93,9 +94,9 @@ public class Stack<T> implements Stackable<T> {
         }
 
         //noinspection ConstantConditions
-        System.arraycopy(stackData, 0, this.data, this.occupancy, sizeValues);
+        System.arraycopy(stackData, 0, this.data, occupancy, sizeValues);
 
-        this.occupancy += sizeValues;
+        occupancy += sizeValues;
     }
 
     /**
@@ -104,13 +105,13 @@ public class Stack<T> implements Stackable<T> {
      * @return type T value from the end of the stack list
      */
     @Override
-    public T pop() throws IndexOutOfBoundsException {
-        if (this.occupancy == 0) {
-            throw new IndexOutOfBoundsException("Empty stack");
+    public T pop() throws EmptyStackException {
+        if (occupancy == 0) {
+            throw new EmptyStackException();
         }
 
-        this.occupancy--;
-        T returnValue = this.data[occupancy];
+        occupancy--;
+        T returnValue = data[occupancy];
 
         trimStack();
         return returnValue;
@@ -131,12 +132,12 @@ public class Stack<T> implements Stackable<T> {
 
         Stack<T> subStack = new Stack<>();
 
-        int sourcePos = Math.max(this.occupancy - n, 0);
+        int sourcePos = Math.max(occupancy - n, 0);
 
-        for (int i = 0; i < this.occupancy - sourcePos; i++) {
-            subStack.push(this.data[sourcePos + i]);
+        for (int i = 0; i < occupancy - sourcePos; i++) {
+            subStack.push(data[sourcePos + i]);
         }
-        this.occupancy = sourcePos;
+        occupancy = sourcePos;
 
         trimStack();
         return subStack;
@@ -149,7 +150,7 @@ public class Stack<T> implements Stackable<T> {
      */
     @Override
     public int count() {
-        return this.occupancy;
+        return occupancy;
     }
 
     /**
@@ -158,9 +159,9 @@ public class Stack<T> implements Stackable<T> {
      * if OCCUPANCY_RATE is exceeded.
      */
     private void trimStack() {
-        if (this.occupancy <= OCCUPANCY_RATE * this.capacity) {
-            this.capacity -= TRIM_RATE * this.capacity;
-            this.data = Arrays.copyOf(this.data, this.capacity);
+        if (occupancy <= OCCUPANCY_RATE * capacity) {
+            capacity -= TRIM_RATE * capacity;
+            data = Arrays.copyOf(data, capacity);
         }
     }
 }
