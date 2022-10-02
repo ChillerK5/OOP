@@ -76,11 +76,9 @@ public class Stack<T> implements Stackable<T> {
             this.data = Arrays.copyOf(this.data, capacity);
         }
 
-        for (int i = 0; i < stack.count(); i++) {
+        for (int i = 0; i < sizeValues; i++) {
             this.push(stack.pop());
         }
-
-        occupancy += sizeValues;
     }
 
     /**
