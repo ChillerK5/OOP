@@ -1,6 +1,5 @@
 package ru.nsu.kbagryantsev;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
@@ -64,11 +63,11 @@ public class Stack<T> implements Stackable<T> {
 
     /**
      * Pushes values from a given stack.
+     * ! destructs given stack
      *
      * @param stack Stack object
      */
     @Override
-    @SuppressWarnings({"unchecked", ""})
     public void pushStack(final Stackable<T> stack) {
         int sizeValues = stack.count();
 
@@ -77,24 +76,9 @@ public class Stack<T> implements Stackable<T> {
             this.data = Arrays.copyOf(this.data, capacity);
         }
 
-        Field data = null;
-        try {
-            data = stack.getClass().getDeclaredField("data");
-        } catch (NoSuchFieldException ignore) {
-            //Ignore
+        for (int i = 0; i < stack.count(); i++) {
+            this.push(stack.pop());
         }
-        //noinspection ConstantConditions
-        data.setAccessible(true);
-
-        T[] stackData = null;
-        try {
-            stackData = (T[]) data.get(stack);
-        } catch (IllegalAccessException ignore) {
-            //Ignore
-        }
-
-        //noinspection ConstantConditions
-        System.arraycopy(stackData, 0, this.data, occupancy, sizeValues);
 
         occupancy += sizeValues;
     }
