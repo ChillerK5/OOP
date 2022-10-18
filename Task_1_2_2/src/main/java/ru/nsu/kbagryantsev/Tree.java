@@ -15,9 +15,17 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Tree<T> implements Collection<T> {
     /**
-     * Root node of a tree or a subtree.
+     * Node's data.
      */
-    private Node<T> root;
+    private T data;
+    /**
+     * Link to the parent's node.
+     */
+    private Tree<T> parent;
+    /**
+     * ArrayList of node's descendants.
+     */
+    private ArrayList<Tree<T>> children;
     /**
      * Increases if a subtree was modified.
      */
@@ -27,7 +35,8 @@ public class Tree<T> implements Collection<T> {
      * Generates an empty tree.
      */
     public Tree() {
-        root = null;
+        children = new ArrayList<>();
+        parent = null;
         modCount = 0;
     }
 
@@ -39,17 +48,13 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean add(final T t) {
-        if (this.root == null) {
-            this.root = new Node<>();
-            this.root.data = t;
-            this.root.parent = null;
+        if (data == null) {
+            data = t;
         } else {
-            Node<T> node = new Node<>();
-            node.data = t;
-            node.parent = this;
-            Tree<T> element = new Tree<>();
-            element.root = node;
-            this.root.children.add(element);
+            Tree<T> child = new Tree<>();
+            child.data = t;
+            child.parent = this;
+            this.children.add(child);
         }
         modCount++;
         return true;
@@ -63,14 +68,12 @@ public class Tree<T> implements Collection<T> {
      * @return true if succeeded, false if not
      */
     public Tree<T> add(final @NotNull Tree<T> node, final T t) {
-        Node<T> newNode = new Node<>();
-        newNode.data = t;
-        newNode.parent = node;
-        Tree<T> newTree = new Tree<>();
-        newTree.root = newNode;
-        node.root.children.add(newTree);
+        Tree<T> child = new Tree<>();
+        child.data = t;
+        child.parent = node;
+        node.children.add(child);
         modCount++;
-        return newTree;
+        return child;
     }
 
     /**
@@ -93,9 +96,9 @@ public class Tree<T> implements Collection<T> {
      *
      * @return iterator object
      */
-    public Iterator<T> bfs() {
-        if (this.root == null) {
-            throw new NullPointerException();
+    public Iterator<T> bfs() throws IllegalStateException {
+        if (data == null) {
+            throw new IllegalStateException();
         }
         return new Bfs();
     }
@@ -105,7 +108,8 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public void clear() {
-        this.root = null;
+        data = null;
+        children = new ArrayList<>();
         modCount++;
     }
 
@@ -117,14 +121,14 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean contains(final Object o) {
-        if (this.root == null) {
+        if (data == null) {
             return false;
         }
-        if (root.children.contains(o) || root.data == o) {
+        if (children.contains(o) || data == o) {
             return true;
         }
 
-        return root.children.stream().anyMatch(x -> x.contains(o));
+        return children.stream().anyMatch(x -> x.contains(o));
     }
 
     /**
@@ -134,10 +138,9 @@ public class Tree<T> implements Collection<T> {
      * @return true if succeeded, false if not
      */
     @Override
-    public boolean containsAll(final @NotNull Collection<?> c)
-            throws NullPointerException {
-        if (this.root == null) {
-            throw new NullPointerException();
+    public boolean containsAll(final @NotNull Collection<?> c) {
+        if (data == null) {
+            return false;
         }
         for (Object element : c) {
             if (!this.contains(element)) {
@@ -153,9 +156,9 @@ public class Tree<T> implements Collection<T> {
      *
      * @return iterator over a tree
      */
-    public Iterator<T> dfs() {
-        if (this.root == null) {
-            throw new NullPointerException();
+    public Iterator<T> dfs() throws IllegalStateException {
+        if (data == null) {
+            throw new IllegalStateException();
         }
         return new Dfs();
     }
@@ -167,7 +170,7 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean isEmpty() {
-        return root == null;
+        return data == null;
     }
 
     /**
@@ -178,9 +181,9 @@ public class Tree<T> implements Collection<T> {
      * @return iterator object
      */
     @Override
-    public Iterator<T> iterator() {
-        if (this.root == null) {
-            throw new NullPointerException();
+    public Iterator<T> iterator() throws IllegalStateException {
+        if (data == null) {
+            throw new IllegalStateException();
         }
         return new Bfs();
     }
@@ -193,17 +196,18 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean remove(final Object o) {
-        if (this.root == null) {
+        if (data == null) {
             return true;
         }
-        if (root.parent == null && root.data == o) {
-            root = null;
+        if (parent == null && data == o) {
+            data = null;
+            children = new ArrayList<>();
             modCount++;
             return true;
         }
         boolean state;
-        state = root.children.removeIf(element -> element.root.data == o);
-        for (Tree<T> child : root.children) {
+        state = children.removeIf(node -> node.data == o);
+        for (Tree<T> child : children) {
             if (child.remove(o)) {
                 state = true;
             }
@@ -220,7 +224,7 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean removeAll(final @NotNull Collection<?> c) {
-        if (this.root == null) {
+        if (data == null) {
             return true;
         }
         c.forEach(this::remove);
@@ -236,9 +240,6 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean retainAll(final @NotNull Collection<?> c) {
-        if (this.root == null) {
-            return true;
-        }
         Object[] tree = this.toArray();
         for (Object element : tree) {
             if (!c.contains(element)) {
@@ -258,13 +259,13 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public int size() {
-        if (this.root == null) {
+        if (parent == null && data == null) {
             return 0;
         }
-        int recursiveSize = root.children.stream().mapToInt(Tree::size).sum();
-        int childrenSize = root.children.size();
+        int recursiveSize = children.stream().mapToInt(Tree::size).sum();
+        int childrenSize = children.size();
         int size = recursiveSize + childrenSize;
-        return root.parent == null ? size + 1 : size;
+        return parent == null ? size + 1 : size;
     }
 
     /**
@@ -274,7 +275,7 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public Object[] toArray() {
-        if (this.root == null) {
+        if (data == null) {
             return new Object[]{};
         }
         Iterator<T> iterator = this.iterator();
@@ -301,36 +302,6 @@ public class Tree<T> implements Collection<T> {
     @Override
     public <T1> T1[] toArray(final T1 @NotNull [] a) {
         throw new UnsupportedOperationException("toArray");
-    }
-
-    /**
-     * Auxiliary class for operating trees easier.
-     *
-     * @param <T> same as for super
-     */
-    public static class Node<T> {
-        /**
-         * Node's data.
-         */
-        private T data;
-        /**
-         * Link to the parent's node.
-         */
-        private Tree<T> parent;
-        /**
-         * ArrayList of node's descendants.
-         */
-        private final ArrayList<Tree<T>> children;
-
-        /**
-         * Creates an empty node with allocated array for children.
-         */
-        public Node() {
-            this.data = null;
-            this.parent = null;
-            this.children = new ArrayList<>();
-        }
-
     }
 
     /**
@@ -364,7 +335,7 @@ public class Tree<T> implements Collection<T> {
         @Override
         public boolean hasNext() throws ConcurrentModificationException {
             if (expectedModCount != Tree.this.modCount) {
-                throw new ConcurrentModificationException("Tree was modified");
+                throw new ConcurrentModificationException();
             }
             return !queue.isEmpty();
         }
@@ -377,14 +348,14 @@ public class Tree<T> implements Collection<T> {
         @Override
         public T next() throws NoSuchElementException {
             if (expectedModCount != Tree.this.modCount) {
-                throw new ConcurrentModificationException("Tree was modified");
+                throw new ConcurrentModificationException();
             }
             if (!this.hasNext()) {
                 throw new NoSuchElementException();
             }
             Tree<T> current = queue.removeFirst();
-            queue.addAll(current.root.children);
-            return current.root.data;
+            queue.addAll(current.children);
+            return current.data;
         }
     }
 
@@ -445,13 +416,13 @@ public class Tree<T> implements Collection<T> {
             }
             Tree<T> node = stack.removeFirst();
             visited.add(node);
-            for (int i = node.root.children.size() - 1; i >= 0; i--) {
-                Tree<T> elem = node.root.children.get(i);
+            for (int i = node.children.size() - 1; i >= 0; i--) {
+                Tree<T> elem = node.children.get(i);
                 if (!visited.contains(elem)) {
-                    stack.addFirst(node.root.children.get(i));
+                    stack.addFirst(node.children.get(i));
                 }
             }
-            return node.root.data;
+            return node.data;
         }
     }
 }

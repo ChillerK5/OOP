@@ -160,8 +160,7 @@ class TreeTest {
         @DisplayName("Empty tree")
         void empty() {
             sample = new Tree<>();
-            Assertions.assertThrowsExactly(NullPointerException.class,
-                    () -> sample.bfs());
+            Assertions.assertThrowsExactly(IllegalStateException.class, sample::bfs);
         }
     }
 
@@ -249,13 +248,11 @@ class TreeTest {
             Assertions.assertFalse(sample.containsAll(entities));
         }
 
-        @SuppressWarnings("ResultOfMethodCallIgnored")
         @Test
         @DisplayName("Empty tree")
         void empty() {
             sample = new Tree<>();
-            Assertions.assertThrowsExactly(NullPointerException.class,
-                    () -> sample.containsAll(entities));
+            Assertions.assertFalse(sample.containsAll(entities));
         }
     }
 
@@ -305,8 +302,7 @@ class TreeTest {
         @DisplayName("Empty tree")
         void empty() {
             sample = new Tree<>();
-            Assertions.assertThrowsExactly(NullPointerException.class,
-                    () -> sample.dfs());
+            Assertions.assertThrowsExactly(IllegalStateException.class, sample::dfs);
         }
     }
 
@@ -369,8 +365,7 @@ class TreeTest {
         @DisplayName("Empty tree")
         void empty() {
             sample = new Tree<>();
-            Assertions.assertThrowsExactly(NullPointerException.class,
-                    () -> sample.iterator());
+            Assertions.assertThrowsExactly(IllegalStateException.class, sample::iterator);
         }
 
         @Test
