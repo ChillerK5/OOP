@@ -175,13 +175,6 @@ implements java.util.Collection&lt;T&gt;</pre>
 <div class="block">Iterator class implementing depth-first-search in a tree.</div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code>static class&nbsp;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Tree.Node.html" title="class in ru.nsu.kbagryantsev">Tree.Node</a>&lt;<a href="Tree.Node.html" title="type parameter in Tree.Node">T</a>&gt;</span></code></th>
-<td class="colLast">
-<div class="block">Auxiliary class for operating trees easier.</div>
-</td>
-</tr>
 </table>
 </li>
 </ul>
@@ -462,13 +455,16 @@ implements java.util.Collection&lt;T&gt;</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>bfs</h4>
-<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;bfs()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;bfs()
+                          throws java.lang.IllegalStateException</pre>
 <div class="block">Iterates using bfs algorithm.
  Suppression for the interface structure corruption.
  Use BFS() and DFS() instead.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>iterator object</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalStateException</code></dd>
 </dl>
 </li>
 </ul>
@@ -511,8 +507,7 @@ implements java.util.Collection&lt;T&gt;</pre>
 <li class="blockList">
 <h4>containsAll</h4>
 <pre class="methodSignature">public&nbsp;boolean&nbsp;containsAll&#8203;(@NotNull
-                           @NotNull java.util.Collection&lt;?&gt;&nbsp;c)
-                    throws java.lang.NullPointerException</pre>
+                           @NotNull java.util.Collection&lt;?&gt;&nbsp;c)</pre>
 <div class="block">Checks whether all elements from c collection are contained in a tree.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -521,8 +516,6 @@ implements java.util.Collection&lt;T&gt;</pre>
 <dd><code>c</code> - collection to be checked for containment in this collection</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if succeeded, false if not</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.NullPointerException</code></dd>
 </dl>
 </li>
 </ul>
@@ -532,11 +525,14 @@ implements java.util.Collection&lt;T&gt;</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>dfs</h4>
-<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;dfs()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;dfs()
+                          throws java.lang.IllegalStateException</pre>
 <div class="block">Iterates over a tree using depth-first-search.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>iterator over a tree</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalStateException</code></dd>
 </dl>
 </li>
 </ul>
@@ -562,7 +558,8 @@ implements java.util.Collection&lt;T&gt;</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>iterator</h4>
-<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;iterator()</pre>
+<pre class="methodSignature">public&nbsp;java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;&nbsp;iterator()
+                               throws java.lang.IllegalStateException</pre>
 <div class="block">Iterates via BFS() auxiliary method.
  Suppression for the interface structure corruption.
  Use BFS() and DFS() instead.</div>
@@ -573,6 +570,8 @@ implements java.util.Collection&lt;T&gt;</pre>
 <dd><code>iterator</code>&nbsp;in interface&nbsp;<code>java.lang.Iterable&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>iterator object</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.IllegalStateException</code></dd>
 </dl>
 </li>
 </ul>

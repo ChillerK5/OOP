@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.kbagryantsev","l":"Tree.Bfs"},{"p":"ru.nsu.kbagryantsev","l":"Tree.Dfs"},{"p":"ru.nsu.kbagryantsev","l":"Tree.Node"},{"p":"ru.nsu.kbagryantsev","l":"Tree"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.kbagryantsev","l":"Tree.Bfs"},{"p":"ru.nsu.kbagryantsev","l":"Tree.Dfs"},{"p":"ru.nsu.kbagryantsev","l":"Tree"}]
