@@ -3,9 +3,9 @@ package ru.nsu.kbagryantsev;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,12 +18,17 @@ public class Tree<T> implements Collection<T> {
      * Root node of a tree or a subtree.
      */
     private Node<T> root;
+    /**
+     * Increases if a subtree was modified.
+     */
+    private int modCount;
 
     /**
      * Generates an empty tree.
      */
     public Tree() {
         root = null;
+        modCount = 0;
     }
 
     /**
@@ -46,6 +51,7 @@ public class Tree<T> implements Collection<T> {
             element.root = node;
             this.root.children.add(element);
         }
+        modCount++;
         return true;
     }
 
@@ -63,6 +69,7 @@ public class Tree<T> implements Collection<T> {
         Tree<T> newTree = new Tree<>();
         newTree.root = newNode;
         node.root.children.add(newTree);
+        modCount++;
         return newTree;
     }
 
@@ -74,11 +81,8 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean addAll(final @NotNull Collection<? extends T> c) {
-        for (T data : c) {
-            if (!this.add(data)) {
-                return false;
-            }
-        }
+        c.forEach(this::add);
+        modCount++;
         return true;
     }
 
@@ -102,6 +106,7 @@ public class Tree<T> implements Collection<T> {
     @Override
     public void clear() {
         this.root = null;
+        modCount++;
     }
 
     /**
@@ -193,6 +198,7 @@ public class Tree<T> implements Collection<T> {
         }
         if (root.parent == null && root.data == o) {
             root = null;
+            modCount++;
             return true;
         }
         boolean state;
@@ -202,6 +208,7 @@ public class Tree<T> implements Collection<T> {
                 state = true;
             }
         }
+        modCount++;
         return state;
     }
 
@@ -217,6 +224,7 @@ public class Tree<T> implements Collection<T> {
             return true;
         }
         c.forEach(this::remove);
+        modCount++;
         return true;
     }
 
@@ -231,12 +239,13 @@ public class Tree<T> implements Collection<T> {
         if (this.root == null) {
             return true;
         }
-        //noinspection Java8CollectionRemoveIf
-        for (T element : this) {
+        Object[] tree = this.toArray();
+        for (Object element : tree) {
             if (!c.contains(element)) {
                 this.remove(element);
             }
         }
+        modCount++;
         return true;
     }
 
@@ -332,6 +341,11 @@ public class Tree<T> implements Collection<T> {
          * Queue to hold nodes while iterating over a tree.
          */
         private final ArrayDeque<Tree<T>> queue;
+        /**
+         * Freezes modCount value of a tree
+         * at the moment of iterator's creation.
+         */
+        private final int expectedModCount;
 
         /**
          * Initialises breadth-first-search with tree's root node.
@@ -339,6 +353,7 @@ public class Tree<T> implements Collection<T> {
         public Bfs() {
             queue = new ArrayDeque<>();
             queue.addFirst(Tree.this);
+            expectedModCount = Tree.this.modCount;
         }
 
         /**
@@ -347,7 +362,10 @@ public class Tree<T> implements Collection<T> {
          * @return true if it does
          */
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() throws ConcurrentModificationException {
+            if (expectedModCount != Tree.this.modCount) {
+                throw new ConcurrentModificationException("Tree was modified");
+            }
             return !queue.isEmpty();
         }
 
@@ -358,6 +376,9 @@ public class Tree<T> implements Collection<T> {
          */
         @Override
         public T next() throws NoSuchElementException {
+            if (expectedModCount != Tree.this.modCount) {
+                throw new ConcurrentModificationException("Tree was modified");
+            }
             if (!this.hasNext()) {
                 throw new NoSuchElementException();
             }
@@ -379,6 +400,11 @@ public class Tree<T> implements Collection<T> {
          * Nodes awaiting to be visited.
          */
         private final ArrayDeque<Tree<T>> stack;
+        /**
+         * Freezes modCount value of a tree
+         * at the moment of iterator's creation.
+         */
+        private final int expectedModCount;
 
         /**
          * Initialises class field and adds a tree root into the stack.
@@ -387,6 +413,7 @@ public class Tree<T> implements Collection<T> {
             visited = new ArrayList<>();
             stack = new ArrayDeque<>();
             stack.addFirst(Tree.this);
+            expectedModCount = Tree.this.modCount;
         }
 
         /**
@@ -395,7 +422,10 @@ public class Tree<T> implements Collection<T> {
          * @return true if it does
          */
         @Override
-        public boolean hasNext() {
+        public boolean hasNext() throws ConcurrentModificationException {
+            if (expectedModCount != Tree.this.modCount) {
+                throw new ConcurrentModificationException();
+            }
             return !stack.isEmpty();
         }
 
@@ -405,7 +435,11 @@ public class Tree<T> implements Collection<T> {
          * @return next element
          */
         @Override
-        public T next() throws NoSuchElementException {
+        public T next()
+                throws NoSuchElementException, ConcurrentModificationException {
+            if (expectedModCount != Tree.this.modCount) {
+                throw new ConcurrentModificationException();
+            }
             if (!this.hasNext()) {
                 throw new NoSuchElementException();
             }

@@ -1,6 +1,7 @@
 package ru.nsu.kbagryantsev;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Assertions;
@@ -124,19 +125,35 @@ class TreeTest {
         @Test
         @DisplayName("Simple tree")
         void simple() {
-            Iterator<Character> dfs = sample.bfs();
-            Assertions.assertEquals(dfs.next(), 'A');
-            Assertions.assertEquals(dfs.next(), 'B');
-            Assertions.assertEquals(dfs.next(), 'C');
-            Assertions.assertEquals(dfs.next(), 'D');
-            Assertions.assertEquals(dfs.next(), 'E');
-            Assertions.assertEquals(dfs.next(), 'F');
-            Assertions.assertEquals(dfs.next(), 'G');
-            Assertions.assertEquals(dfs.next(), 'H');
-            Assertions.assertEquals(dfs.next(), 'I');
-            Assertions.assertEquals(dfs.next(), 'J');
+            Iterator<Character> bfs = sample.bfs();
+            Assertions.assertEquals(bfs.next(), 'A');
+            Assertions.assertEquals(bfs.next(), 'B');
+            Assertions.assertEquals(bfs.next(), 'C');
+            Assertions.assertEquals(bfs.next(), 'D');
+            Assertions.assertEquals(bfs.next(), 'E');
+            Assertions.assertEquals(bfs.next(), 'F');
+            Assertions.assertEquals(bfs.next(), 'G');
+            Assertions.assertEquals(bfs.next(), 'H');
+            Assertions.assertEquals(bfs.next(), 'I');
+            Assertions.assertEquals(bfs.next(), 'J');
             Assertions.assertThrowsExactly(NoSuchElementException.class,
-                    dfs::next);
+                    bfs::next);
+        }
+
+        @SuppressWarnings("ResultOfMethodCallIgnored")
+        @Test
+        @DisplayName("Modified tree")
+        void modified() {
+            Iterator<Character> bfs = sample.bfs();
+            Assertions.assertEquals(bfs.next(), 'A');
+            Assertions.assertEquals(bfs.next(), 'B');
+            Assertions.assertEquals(bfs.next(), 'C');
+            Assertions.assertEquals(bfs.next(), 'D');
+            sample.add('R');
+            Assertions.assertThrowsExactly(ConcurrentModificationException.class,
+                    bfs::next);
+            Assertions.assertThrowsExactly(ConcurrentModificationException.class,
+                    bfs::hasNext);
         }
 
         @Test
@@ -266,6 +283,22 @@ class TreeTest {
             Assertions.assertEquals(dfs.next(), 'F');
             Assertions.assertThrowsExactly(NoSuchElementException.class,
                     dfs::next);
+        }
+
+        @SuppressWarnings("ResultOfMethodCallIgnored")
+        @Test
+        @DisplayName("Modified tree")
+        void modified() {
+            Iterator<Character> dfs = sample.dfs();
+            Assertions.assertEquals(dfs.next(), 'A');
+            Assertions.assertEquals(dfs.next(), 'B');
+            Assertions.assertEquals(dfs.next(), 'D');
+            Assertions.assertEquals(dfs.next(), 'G');
+            sample.add('R');
+            Assertions.assertThrowsExactly(ConcurrentModificationException.class,
+                    dfs::next);
+            Assertions.assertThrowsExactly(ConcurrentModificationException.class,
+                    dfs::hasNext);
         }
 
         @Test
