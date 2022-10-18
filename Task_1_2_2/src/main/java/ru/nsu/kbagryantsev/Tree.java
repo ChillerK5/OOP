@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -12,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
  *
  * @param <T> any type
  */
-@SuppressWarnings("unused")
 public class Tree<T> implements Collection<T> {
     /**
      * Root node of a tree or a subtree.
@@ -34,23 +34,19 @@ public class Tree<T> implements Collection<T> {
      */
     @Override
     public boolean add(final T t) {
-        try {
-            if (this.root == null) {
-                this.root = new Node<>();
-                this.root.data = t;
-                this.root.parent = null;
-            } else {
-                Node<T> node = new Node<>();
-                node.data = t;
-                node.parent = this;
-                Tree<T> element = new Tree<>();
-                element.root = node;
-                this.root.children.add(element);
-            }
-            return true;
-        } catch (Exception exception) {
-            return false;
+        if (this.root == null) {
+            this.root = new Node<>();
+            this.root.data = t;
+            this.root.parent = null;
+        } else {
+            Node<T> node = new Node<>();
+            node.data = t;
+            node.parent = this;
+            Tree<T> element = new Tree<>();
+            element.root = node;
+            this.root.children.add(element);
         }
+        return true;
     }
 
     /**
