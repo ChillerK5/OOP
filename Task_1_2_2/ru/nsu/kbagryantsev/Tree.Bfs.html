@@ -255,13 +255,16 @@ implements java.util.Iterator&lt;T&gt;</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>hasNext</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;hasNext()</pre>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;hasNext()
+                throws java.util.ConcurrentModificationException</pre>
 <div class="block">Checks whether a node has next node or not.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>hasNext</code>&nbsp;in interface&nbsp;<code>java.util.Iterator&lt;<a href="Tree.html" title="type parameter in Tree">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if it does</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.util.ConcurrentModificationException</code></dd>
 </dl>
 </li>
 </ul>
