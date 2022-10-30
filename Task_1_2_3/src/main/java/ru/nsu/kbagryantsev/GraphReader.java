@@ -188,11 +188,11 @@ public final class GraphReader {
         for (int i = 0; i < edges; i++) {
             line = bufferedReader.readLine();
             separatedLine = line.split(" ");
-            int uData = Integer.parseInt(separatedLine[0]);
-            int vData = Integer.parseInt(separatedLine[1]);
+            int initData = Integer.parseInt(separatedLine[0]);
+            int termData = Integer.parseInt(separatedLine[1]);
             int weight = Integer.parseInt(separatedLine[2]);
-            Vertex<Integer> u = verticesList.get(uData);
-            Vertex<Integer> v = verticesList.get(vData);
+            Vertex<Integer> u = verticesList.get(initData);
+            Vertex<Integer> v = verticesList.get(termData);
             graph.addEdge(u, v, weight);
         }
 
