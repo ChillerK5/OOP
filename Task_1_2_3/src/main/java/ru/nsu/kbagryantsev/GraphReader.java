@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Instantiating graph by its file representation.
  */
-public class GraphReader {
+public final class GraphReader {
     /**
      * Prints a graph in <i>vertex1 - vertex2: edge</i> format.
      *
@@ -28,6 +28,14 @@ public class GraphReader {
         System.out.print("\n");
     }
 
+    /**
+     * Reads all graph representations. Calls needed graph parsing methods to
+     * instantiate a certain graph.
+     *
+     * @param fileName file containing a graph
+     * @return graph instance
+     * @throws IOException file may be not found
+     */
     public Graph<Integer, Integer> readGraph(final String fileName)
             throws IOException {
         FileReader fileReader = new FileReader(fileName);
@@ -36,9 +44,9 @@ public class GraphReader {
         String line = bufferedReader.readLine();
         if (Objects.equals(line, "AM")) {
             return adjacencyMatrix(fileName);
-        } else if (Objects.equals(line, "AL")){
+        } else if (Objects.equals(line, "AL")) {
             return adjacencyList(fileName);
-        } else if (Objects.equals(line, "IM")){
+        } else if (Objects.equals(line, "IM")) {
             return incidenceMatrix(fileName);
         } else {
             throw new IllegalStateException("Invalid graph representation");

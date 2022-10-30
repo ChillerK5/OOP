@@ -5,18 +5,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+/**
+ * Class implementing different graphs algorithms. Mostly all require graph with
+ * numerical values.
+ */
 public class GraphUtils {
     /**
      * Finds all shortest paths from a single-source vertex.
      *
+     * @param <V> vertex data
+     * @param <E> edge data
      * @param graph graph to be operated
      * @param init source vertex
      * @return map from vertices onto distances from the source
-     * @param <V> vertex data
-     * @param <E> edge data
      */
     public static <V, E extends Number>
-    Map<Vertex<V>, Double> dijkstra(Graph<V, E> graph, final Vertex<V> init) {
+        Map<Vertex<V>, Double> dijkstra(final Graph<V, E> graph,
+                                        final Vertex<V> init) {
         //Initialising graph's shortest paths collection and its comparator
         Map<Vertex<V>, Double> shortest = new HashMap<>();
         Comparator<Vertex<V>> comparator = Comparator.comparing(shortest::get);

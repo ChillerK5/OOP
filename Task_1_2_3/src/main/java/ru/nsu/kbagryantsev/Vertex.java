@@ -5,7 +5,7 @@ package ru.nsu.kbagryantsev;
  *
  * @param <V> vertex data
  */
-public class Vertex<V>{
+public class Vertex<V> {
     /**
      * Data stored in a vertex.
      */
@@ -16,7 +16,7 @@ public class Vertex<V>{
      *
      * @param data vertex data
      */
-    public Vertex(V data) {
+    public Vertex(final V data) {
         this.data = data;
     }
 
@@ -25,7 +25,7 @@ public class Vertex<V>{
      *
      * @param data new vertex value
      */
-    public void setData(V data) {
+    public void setData(final V data) {
         this.data = data;
     }
 
