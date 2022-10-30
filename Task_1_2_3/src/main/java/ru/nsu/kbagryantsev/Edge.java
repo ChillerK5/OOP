@@ -6,7 +6,7 @@ package ru.nsu.kbagryantsev;
  * @param <V> vertex data
  * @param <E> edge data
  */
-public class Edge<V,E extends Number> {
+public class Edge<V, E extends Number> {
     /**
      * Initial vertex of an edge.
      */
@@ -27,7 +27,7 @@ public class Edge<V,E extends Number> {
      * @param end terminal vertex
      * @param weight data stored on an edge
      */
-    public Edge(Vertex<V> start, Vertex<V> end, E weight) {
+    public Edge(final Vertex<V> start, final Vertex<V> end, final E weight) {
         this.start = start;
         this.end = end;
         this.weight = weight;
@@ -38,7 +38,7 @@ public class Edge<V,E extends Number> {
      *
      * @param weight new weight
      */
-    public void setWeight(E weight) {
+    public void setWeight(final E weight) {
         this.weight = weight;
     }
 
