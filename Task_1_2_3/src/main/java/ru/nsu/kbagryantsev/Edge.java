@@ -38,7 +38,7 @@ public class Edge<V,E extends Number> {
      *
      * @param weight new weight
      */
-    public void setEdge(E weight) {
+    public void setWeight(E weight) {
         this.weight = weight;
     }
 
@@ -47,7 +47,7 @@ public class Edge<V,E extends Number> {
      *
      * @return edge's weight
      */
-    public E getEdge() {
+    public E getWeight() {
         return weight;
     }
 
