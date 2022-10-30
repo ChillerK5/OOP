@@ -25,7 +25,7 @@ public class Vertex<V>{
      *
      * @param data new vertex value
      */
-    public void setVertex(V data) {
+    public void setData(V data) {
         this.data = data;
     }
 
@@ -34,7 +34,7 @@ public class Vertex<V>{
      *
      * @return vertex data
      */
-    public V getVertex() {
+    public V getData() {
         return data;
     }
 }
