@@ -129,7 +129,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <hr>
-<pre>public class <span class="typeNameLabel">GraphReader</span>
+<pre>public final class <span class="typeNameLabel">GraphReader</span>
 extends java.lang.Object</pre>
 <div class="block">Instantiating graph by its file representation.</div>
 </li>
@@ -204,7 +204,9 @@ extends java.lang.Object</pre>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readGraph(java.lang.String)">readGraph</a></span>&#8203;(java.lang.String&nbsp;fileName)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Reads all graph representations.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -271,9 +273,15 @@ extends java.lang.Object</pre>
 <h4>readGraph</h4>
 <pre class="methodSignature">public&nbsp;<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;readGraph&#8203;(java.lang.String&nbsp;fileName)
                                                            throws java.io.IOException</pre>
+<div class="block">Reads all graph representations. Calls needed graph parsing methods to
+ instantiate a certain graph.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fileName</code> - file containing a graph</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>graph instance</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - file may be not found</dd>
 </dl>
 </li>
 </ul>
