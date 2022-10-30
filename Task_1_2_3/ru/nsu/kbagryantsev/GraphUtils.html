@@ -176,7 +176,9 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>static &lt;V,&#8203;E extends java.lang.Number&gt;<br>java.util.Map&lt;<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;V&gt;,&#8203;java.lang.Double&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dijkstra(ru.nsu.kbagryantsev.Graph,ru.nsu.kbagryantsev.Vertex)">dijkstra</a></span>&#8203;(<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;V,&#8203;E&gt;&nbsp;graph,
         <a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;V&gt;&nbsp;init)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Finds all shortest paths from a single-source vertex.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -229,6 +231,17 @@ extends java.lang.Object</pre>
 <h4>dijkstra</h4>
 <pre class="methodSignature">public static&nbsp;&lt;V,&#8203;E extends java.lang.Number&gt;&nbsp;java.util.Map&lt;<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;V&gt;,&#8203;java.lang.Double&gt;&nbsp;dijkstra&#8203;(<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;V,&#8203;E&gt;&nbsp;graph,
                                                                                                             <a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;V&gt;&nbsp;init)</pre>
+<div class="block">Finds all shortest paths from a single-source vertex.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>V</code> - vertex data</dd>
+<dd><code>E</code> - edge data</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>graph</code> - graph to be operated</dd>
+<dd><code>init</code> - source vertex</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>map from vertices onto distances from the source</dd>
+</dl>
 </li>
 </ul>
 </li>

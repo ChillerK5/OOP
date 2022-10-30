@@ -26,8 +26,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -114,14 +114,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <main role="main">
 <div class="header">
 <div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.kbagryantsev</a></div>
-<h2 title="Class GraphReader" class="title">Class GraphReader&lt;V,&#8203;E extends java.lang.Number&gt;</h2>
+<h2 title="Class GraphReader" class="title">Class GraphReader</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>ru.nsu.kbagryantsev.GraphReader&lt;V,&#8203;E&gt;</li>
+<li>ru.nsu.kbagryantsev.GraphReader</li>
 </ul>
 </li>
 </ul>
@@ -129,7 +129,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <hr>
-<pre>public class <span class="typeNameLabel">GraphReader&lt;V,&#8203;E extends java.lang.Number&gt;</span>
+<pre>public class <span class="typeNameLabel">GraphReader</span>
 extends java.lang.Object</pre>
 <div class="block">Instantiating graph by its file representation.</div>
 </li>
@@ -167,15 +167,43 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;<a href="GraphReader.html" title="type parameter in GraphReader">V</a>,&#8203;<a href="GraphReader.html" title="type parameter in GraphReader">E</a>&gt;</code></td>
+<td class="colFirst"><code><a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#adjacencyList(java.lang.String)">adjacencyList</a></span>&#8203;(java.lang.String&nbsp;fileName)</code></th>
+<td class="colLast">
+<div class="block">Builds a graph based on its file description.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#adjacencyMatrix(java.lang.String)">adjacencyMatrix</a></span>&#8203;(java.lang.String&nbsp;fileName)</code></th>
+<td class="colLast">
+<div class="block">Builds a graph based on its file description.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#incidenceMatrix(java.lang.String)">incidenceMatrix</a></span>&#8203;(java.lang.String&nbsp;fileName)</code></th>
+<td class="colLast">
+<div class="block">Builds a graph based on its file description.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#printGraph(ru.nsu.kbagryantsev.Graph)">printGraph</a></span>&#8203;(<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;graph)</code></th>
+<td class="colLast">
+<div class="block">Prints a graph in <i>vertex1 - vertex2: edge</i> format.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readGraph(java.lang.String)">readGraph</a></span>&#8203;(java.lang.String&nbsp;fileName)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -221,17 +249,99 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="printGraph(ru.nsu.kbagryantsev.Graph)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>printGraph</h4>
+<pre class="methodSignature">public static&nbsp;void&nbsp;printGraph&#8203;(<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;graph)</pre>
+<div class="block">Prints a graph in <i>vertex1 - vertex2: edge</i> format.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>graph</code> - graph to be printed</dd>
+</dl>
+</li>
+</ul>
+<a id="readGraph(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>readGraph</h4>
+<pre class="methodSignature">public&nbsp;<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;readGraph&#8203;(java.lang.String&nbsp;fileName)
+                                                           throws java.io.IOException</pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.io.IOException</code></dd>
+</dl>
+</li>
+</ul>
 <a id="incidenceMatrix(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>incidenceMatrix</h4>
+<pre class="methodSignature">public&nbsp;<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;incidenceMatrix&#8203;(java.lang.String&nbsp;fileName)
+                                                                 throws java.io.IOException</pre>
+<div class="block">Builds a graph based on its file description.
+ File contains an incidence matrix.
+ All the weights are integer and equal to 1.
+ All the vertices contain a number of a string, which describes it</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fileName</code> - file containing incidence matrix</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>graph instance</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.io.IOException</code> - file may be not found</dd>
+</dl>
+</li>
+</ul>
+<a id="adjacencyMatrix(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>adjacencyMatrix</h4>
+<pre class="methodSignature">public&nbsp;<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;adjacencyMatrix&#8203;(java.lang.String&nbsp;fileName)
+                                                                 throws java.io.IOException</pre>
+<div class="block">Builds a graph based on its file description.
+ File contains an adjacency matrix.
+ All vertices are assigned with number of the row of their occurrence.
+ Single matrix cell represents a direct edge from i vertex to j vertex
+ with some numerical weight on it.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fileName</code> - file containing adjacency matrix</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>graph instance</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.io.IOException</code> - file may be not found</dd>
+</dl>
+</li>
+</ul>
+<a id="adjacencyList(java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>incidenceMatrix</h4>
-<pre class="methodSignature">public&nbsp;<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;<a href="GraphReader.html" title="type parameter in GraphReader">V</a>,&#8203;<a href="GraphReader.html" title="type parameter in GraphReader">E</a>&gt;&nbsp;incidenceMatrix&#8203;(java.lang.String&nbsp;fileName)
-                                 throws java.io.IOException</pre>
+<h4>adjacencyList</h4>
+<pre class="methodSignature">public&nbsp;<a href="Graph.html" title="class in ru.nsu.kbagryantsev">Graph</a>&lt;java.lang.Integer,&#8203;java.lang.Integer&gt;&nbsp;adjacencyList&#8203;(java.lang.String&nbsp;fileName)
+                                                               throws java.io.IOException</pre>
+<div class="block">Builds a graph based on its file description.
+ File contains an adjacency list.
+ All vertices are assigned with integers in an arbitrary order.
+ All edges are numerical and come after the initial and terminal vertices'
+ description.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fileName</code> - file containing adjacency list</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>graph instance</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - file may be not found</dd>
 </dl>
 </li>
 </ul>

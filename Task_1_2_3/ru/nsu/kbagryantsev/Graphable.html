@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6};
+var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -186,13 +186,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cutEdge(ru.nsu.kbagryantsev.Vertex,ru.nsu.kbagryantsev.Vertex)">cutEdge</a></span>&#8203;(<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&nbsp;u,
        <a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&nbsp;v)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Removes an edge by its terminations.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cutVertex(ru.nsu.kbagryantsev.Vertex)">cutVertex</a></span>&#8203;(<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&nbsp;v)</code></th>
 <td class="colLast">
 <div class="block">Removes a vertex from the graph.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.Collection&lt;<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVertices()">getVertices</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Gets a collection of vertices in a graph.</div>
 </td>
 </tr>
 </table>
@@ -261,6 +270,20 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 </li>
 </ul>
+<a id="getVertices()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getVertices</h4>
+<pre class="methodSignature">java.util.Collection&lt;<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&gt;&nbsp;getVertices()</pre>
+<div class="block">Gets a collection of vertices in a graph.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>collection of vertices</dd>
+</dl>
+</li>
+</ul>
 <a id="addEdge(ru.nsu.kbagryantsev.Vertex,ru.nsu.kbagryantsev.Vertex,java.lang.Number)">
 <!--   -->
 </a><a id="addEdge(ru.nsu.kbagryantsev.Vertex,ru.nsu.kbagryantsev.Vertex,E)">
@@ -305,6 +328,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <h4>cutEdge</h4>
 <pre class="methodSignature">void&nbsp;cutEdge&#8203;(<a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&nbsp;u,
              <a href="Vertex.html" title="class in ru.nsu.kbagryantsev">Vertex</a>&lt;<a href="Graphable.html" title="type parameter in Graphable">V</a>&gt;&nbsp;v)</pre>
+<div class="block">Removes an edge by its terminations.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>u</code> - from-vertex</dd>
+<dd><code>v</code> - to-vertex</dd>
+</dl>
 </li>
 </ul>
 </li>
