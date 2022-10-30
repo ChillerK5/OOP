@@ -51,6 +51,7 @@ class PackageTest {
             Assertions.assertEquals(e.getWeight(), 1);
         }
     }
+
     @Nested
     @DisplayName("Graph")
     class GraphTest {
@@ -64,7 +65,7 @@ class PackageTest {
                 HashSet<Vertex<Character>> modelSet = new HashSet<>();
                 modelSet.add(v);
                 Set<Vertex<Character>> testSet = graph.getVertices();
-                Assertions.assertEquals(modelSet,testSet);
+                Assertions.assertEquals(modelSet, testSet);
             }
         }
 
@@ -79,7 +80,7 @@ class PackageTest {
                 HashSet<Vertex<Character>> modelSet = new HashSet<>();
                 modelSet.add(v);
                 Set<Vertex<Character>> testSet = graph.getVertices();
-                Assertions.assertEquals(modelSet,testSet);
+                Assertions.assertEquals(modelSet, testSet);
             }
         }
 
@@ -93,7 +94,7 @@ class PackageTest {
                 HashSet<Vertex<Character>> modelSet = new HashSet<>();
                 graph.cutVertex(v);
                 Set<Vertex<Character>> testSet = graph.getVertices();
-                Assertions.assertEquals(modelSet,testSet);
+                Assertions.assertEquals(modelSet, testSet);
             }
         }
 
@@ -135,6 +136,7 @@ class PackageTest {
             }
         }
     }
+
     @Nested
     @DisplayName("GraphReader")
     class GraphReaderTest {
