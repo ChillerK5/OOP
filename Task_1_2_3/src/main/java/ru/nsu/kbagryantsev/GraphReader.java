@@ -76,8 +76,8 @@ public final class GraphReader {
         //Getting amount of vertices and edges
         String[] separatedLine;
         separatedLine = bufferedReader.readLine().split(" ");
-        int vertices    = Integer.parseInt(separatedLine[0]);
-        int edges       = Integer.parseInt(separatedLine[1]);
+        int vertices = Integer.parseInt(separatedLine[0]);
+        int edges = Integer.parseInt(separatedLine[1]);
 
         //Completion of a graph's incidence matrix
         int[][] matrix = new int[vertices][edges];
@@ -94,8 +94,8 @@ public final class GraphReader {
         verticesArray = new ArrayList<>(graph.getVertices());
         verticesArray.sort(Comparator.comparing(Vertex::getData));
         for (int j = 0; j < edges; j++) {
-            int start   = 0;
-            int end     = 0;
+            int start = 0;
+            int end = 0;
             for (int i = 0; i < vertices; i++) {
                 if (matrix[i][j] == 1) {
                     start = i;
