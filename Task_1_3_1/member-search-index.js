@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ru.nsu.kbagryantsev","c":"SubstringSearcher","l":"constructZetArray()"},{"p":"ru.nsu.kbagryantsev","c":"SubstringSearcher","l":"SubstringSearcher(String, char[])","url":"%3Cinit%3E(java.lang.String,char[])"},{"p":"ru.nsu.kbagryantsev","c":"SubstringSearcher","l":"zetFunction()"}]
