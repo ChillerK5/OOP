@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Searches a relatively small pattern in a large data scope using Z function
  * algorithm.
  */
-public class SubstringSearcher {
+public final class SubstringSearcher {
     /**
      * BufferedReader instance.
      */
@@ -32,7 +32,7 @@ public class SubstringSearcher {
      * @param substring pattern to be found
      * @throws FileNotFoundException is thrown, if a file does not exist
      */
-    public SubstringSearcher(String fileName, char[] substring)
+    public SubstringSearcher(final String fileName, final char[] substring)
             throws FileNotFoundException {
         //Initializing a pattern and definition of a buffer size
         pattern = substring;
@@ -58,7 +58,7 @@ public class SubstringSearcher {
         }
     }
 
-    private int getNextChar(int i) throws IOException {
+    private int getNextChar(final int i) throws IOException {
         if (cache.get(i) == null) {
             int inputChar = bufferedReader.read();
             cache.put(i, (char) inputChar);
@@ -75,40 +75,43 @@ public class SubstringSearcher {
             cache.put(i, stringConcat.get(i));
         }
 
-        int L = 0, R = 0;
+        int left = 0;
+        int right = 0;
 
         int symbol = 0;
         char symChar = (char) symbol;
         for (int i = 1; symbol != -1; ++i) {
-            if (i > R) {
+            if (i > right) {
 
-                L = R = i;
+                left = right = i;
 
                 symbol = getNextChar(i);
                 symChar = (char) symbol;
-                while (symbol != -1 && stringConcat.get(R - L) == symbol) {
-                    R++;
-                    symbol = getNextChar(R);
+                while (symbol != -1
+                        && stringConcat.get(right - left) == symbol) {
+                    right++;
+                    symbol = getNextChar(right);
                     symChar = (char) symbol;
                 }
 
-                zetArray.add(i, R - L);
-                R--;
+                zetArray.add(i, right - left);
+                right--;
             } else {
-                int k = i - L;
+                int k = i - left;
 
-                if (zetArray.get(k) < R - i + 1) {
+                if (zetArray.get(k) < right - i + 1) {
                     zetArray.add(i, zetArray.get(k));
                 } else {
-                    L = i;
+                    left = i;
                     symbol = getNextChar(i);
                     symChar = (char) symbol;
-                    while (symbol != -1 && stringConcat.get(R - L) == symbol) {
-                        R++;
+                    while (symbol != -1
+                            && stringConcat.get(right - left) == symbol) {
+                        right++;
                     }
 
-                    zetArray.add(i, R - L);
-                    R--;
+                    zetArray.add(i, right - left);
+                    right--;
                 }
             }
         }
