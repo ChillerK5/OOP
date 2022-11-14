@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10};
+var data = {"i0":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -153,10 +153,10 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,char%5B%5D)">SubstringSearcher</a></span>&#8203;(java.lang.String&nbsp;fileName,
-                 char[]&nbsp;substring)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)">SubstringSearcher</a></span>&#8203;(java.io.InputStream&nbsp;source,
+                 java.lang.String&nbsp;substring)</code></th>
 <td class="colLast">
-<div class="block">Initialises a buffered reader and a pattern related fields.</div>
+<div class="block">Initialises a buffered reader and pattern related fields.</div>
 </td>
 </tr>
 </table>
@@ -178,14 +178,11 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;java.lang.Integer&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#constructZetArray()">constructZetArray</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#zetFunction()">zetFunction</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>java.util.List&lt;java.lang.Integer&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#search()">search</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Finds all entries of a given pattern in a string.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -211,22 +208,19 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(java.lang.String,char[])">
+<a id="&lt;init&gt;(java.io.InputStream,java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>SubstringSearcher</h4>
-<pre>public&nbsp;SubstringSearcher&#8203;(java.lang.String&nbsp;fileName,
-                         char[]&nbsp;substring)
-                  throws java.io.FileNotFoundException</pre>
-<div class="block">Initialises a buffered reader and a pattern related fields.</div>
+<pre>public&nbsp;SubstringSearcher&#8203;(java.io.InputStream&nbsp;source,
+                         java.lang.String&nbsp;substring)</pre>
+<div class="block">Initialises a buffered reader and pattern related fields.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>fileName</code> - data file name</dd>
+<dd><code>source</code> - data file name</dd>
 <dd><code>substring</code> - pattern to be found</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.FileNotFoundException</code> - is thrown, if a file does not exist</dd>
 </dl>
 </li>
 </ul>
@@ -240,31 +234,20 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="zetFunction()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>zetFunction</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;zetFunction()
-                 throws java.io.IOException</pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
-</dl>
-</li>
-</ul>
-<a id="constructZetArray()">
+<a id="search()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>constructZetArray</h4>
-<pre class="methodSignature">public&nbsp;java.util.ArrayList&lt;java.lang.Integer&gt;&nbsp;constructZetArray()
-                                                         throws java.io.IOException</pre>
+<h4>search</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.Integer&gt;&nbsp;search()
+                                         throws java.io.IOException</pre>
+<div class="block">Finds all entries of a given pattern in a string.</div>
 <dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>list of found substrings' indices</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
+<dd><code>java.io.IOException</code> - buffered reader crashed</dd>
 </dl>
 </li>
 </ul>
