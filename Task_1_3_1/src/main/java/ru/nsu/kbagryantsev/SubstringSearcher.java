@@ -1,11 +1,10 @@
 package ru.nsu.kbagryantsev;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Searches a relatively small pattern in a large data scope using Z function
@@ -15,52 +14,145 @@ public final class SubstringSearcher {
     /**
      * BufferedReader instance.
      */
-    private final BufferedReader bufferedReader;
+    private final InputStream inputStream;
     /**
-     * String to be found in data.
+     * Substring, which needs to be found.
      */
-    private final char[] pattern;
-
-    private final ArrayList<Character> stringConcat;
-
-    private final HashMap<Integer, Character> cache;
+    private String pattern;
+    /**
+     * Stores essential amount of read characters.
+     */
+    private HashMap<Integer, Character> cache;
+    /**
+     * Contains a number of pattern matched chars from each position.
+     */
+    private final List<Integer> zetArray;
+    /**
+     * Left border of a substring matching a pattern.
+     */
+    private int left;
+    /**
+     * Rightmost border of a substring matching a pattern.
+     */
+    private int right;
 
     /**
-     * Initialises a buffered reader and a pattern related fields.
+     * Initialises a buffered reader and pattern related fields.
      *
-     * @param fileName  data file name
-     * @param substring pattern to be found
-     * @throws FileNotFoundException is thrown, if a file does not exist
+     * @param source        data file name
+     * @param substring     pattern to be found
      */
-    public SubstringSearcher(final String fileName, final char[] substring)
-            throws FileNotFoundException {
-        //Initializing a pattern and definition of a buffer size
+    public SubstringSearcher(final InputStream source, final String substring) {
+        inputStream = source;
         pattern = substring;
-        stringConcat = new ArrayList<>();
-        for (char c : substring) {
-            stringConcat.add(c);
-        }
-        stringConcat.add('#');
+        zetArray = new ArrayList<>(List.of(0));
         cache = new HashMap<>();
-        //Instantiating a buffered reader
-        FileReader fileReader = new FileReader(fileName);
-        bufferedReader = new BufferedReader(fileReader);
     }
 
-    public void zetFunction() throws IOException {
-        ArrayList<Integer> zetArray = constructZetArray();
-        int length = zetArray.size();
-        for (int i = 0; i < length; ++i) {
-            if (zetArray.get(i) == pattern.length) {
-                System.out.println("Pattern found at index "
-                        + (i - pattern.length - 1));
+    /**
+     * Finds all entries of a given pattern in a string.
+     *
+     * @return              list of found substrings' indices
+     * @throws IOException  buffered reader crashed
+     */
+    public List<Integer> search() throws IOException {
+        ArrayList<Integer> entryIndices = new ArrayList<>();
+        pattern = pattern.concat("\0");
+        for (int i = 0; i < pattern.length(); i++) {
+            cache.put(i, pattern.charAt(i));
+        }
+        left = 0;
+        right = 0;
+        constructArrayPrefix();
+        constructArraySuffix();
+        for (int i = 0; i < zetArray.size(); i++) {
+            if (zetArray.get(i) == pattern.length() - 1) {
+                entryIndices.add(i - pattern.length());
+            }
+        }
+        inputStream.close();
+        return entryIndices;
+    }
+
+    private void clearCache(final int i) {
+        if (cache.get(i) == null) {
+            cache = new HashMap<>();
+        } else {
+            char c = cache.get(i);
+            cache = new HashMap<>();
+            cache.put(i, c);
+        }
+    }
+
+    /**
+     * Processing Z array values for a zero-terminating pattern.
+     */
+    private void constructArrayPrefix() {
+        for (int i = 1; i < pattern.length(); i++) {
+            if (i > right) {
+                left = i;
+                right = i;
+                int symbol = cache.get(right);
+                while (pattern.charAt(right - left) == symbol) {
+                    right++;
+                    symbol = cache.get(right);
+                }
+                zetArray.add(i, right - left);
+                right--;
+            } else {
+                int k = i - left;
+                if (zetArray.get(k) < right - i + 1) {
+                    zetArray.add(i, zetArray.get(k));
+                } else {
+                    left = i;
+                    int symbol = cache.get(right);
+                    while (pattern.charAt(right - left) == symbol) {
+                        right++;
+                        symbol = cache.get(right);
+                    }
+                    zetArray.add(i, right - left);
+                    right--;
+                }
             }
         }
     }
 
-    private int getNextChar(final int i) throws IOException {
+    /**
+     * Constructs the rest of a Z array.
+     *
+     * @throws IOException input stream corruption
+     */
+    private void constructArraySuffix() throws IOException {
+        for (int i = pattern.length(); inputStream.available() != 0; i++) {
+            if (i > right) {
+                left = i;
+                right = i;
+                clearCache(right);
+                zetArray.add(i, sequenceSize());
+                right--;
+            } else {
+                int k = i - left;
+                if (zetArray.get(k) < right - i + 1) {
+                    zetArray.add(i, zetArray.get(k));
+                } else {
+                    left = i;
+                    zetArray.add(i, sequenceSize());
+                    right--;
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the next char either from cache or input stream.
+     *
+     * @param i             char index
+     * @return              next char integer value
+     * @throws IOException  input stream corruption
+     */
+    private int nextChar(final int i) throws IOException {
         if (cache.get(i) == null) {
-            int inputChar = bufferedReader.read();
+            int inputChar = inputStream.read();
             cache.put(i, (char) inputChar);
             return inputChar;
         } else {
@@ -68,53 +160,12 @@ public final class SubstringSearcher {
         }
     }
 
-    public ArrayList<Integer> constructZetArray() throws IOException {
-        ArrayList<Integer> zetArray = new ArrayList<>();
-        zetArray.add(0);
-        for (int i = 0; i < pattern.length + 1; i++) {
-            cache.put(i, stringConcat.get(i));
+    private int sequenceSize() throws IOException {
+        int symbol = nextChar(right);
+        while (symbol != -1 && pattern.charAt(right - left) == symbol) {
+            right++;
+            symbol = nextChar(right);
         }
-
-        int left = 0;
-        int right = 0;
-
-        int symbol = 0;
-        char symChar = (char) symbol;
-        for (int i = 1; symbol != -1; ++i) {
-            if (i > right) {
-
-                left = right = i;
-
-                symbol = getNextChar(i);
-                symChar = (char) symbol;
-                while (symbol != -1
-                        && stringConcat.get(right - left) == symbol) {
-                    right++;
-                    symbol = getNextChar(right);
-                    symChar = (char) symbol;
-                }
-
-                zetArray.add(i, right - left);
-                right--;
-            } else {
-                int k = i - left;
-
-                if (zetArray.get(k) < right - i + 1) {
-                    zetArray.add(i, zetArray.get(k));
-                } else {
-                    left = i;
-                    symbol = getNextChar(i);
-                    symChar = (char) symbol;
-                    while (symbol != -1
-                            && stringConcat.get(right - left) == symbol) {
-                        right++;
-                    }
-
-                    zetArray.add(i, right - left);
-                    right--;
-                }
-            }
-        }
-        return zetArray;
+        return right - left;
     }
 }
