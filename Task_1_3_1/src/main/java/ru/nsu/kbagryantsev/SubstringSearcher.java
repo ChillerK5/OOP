@@ -1,9 +1,10 @@
 package ru.nsu.kbagryantsev;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.SequenceInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,21 +13,25 @@ import java.util.List;
  */
 public final class SubstringSearcher {
     /**
-     * BufferedReader instance.
+     * Input stream of a text to search substring in.
      */
     private final InputStream inputStream;
     /**
-     * Substring, which needs to be found.
+     * Searched substring.
      */
-    private String pattern;
+    private final String pattern;
     /**
      * Stores essential amount of read characters.
      */
-    private HashMap<Integer, Character> cache;
+    private final List<Character> cache;
     /**
-     * Contains a number of pattern matched chars from each position.
+     * Stores the position at which the cache started to expand.
      */
-    private final List<Integer> zetArray;
+    private int cacheMark;
+    /**
+     * Last read input stream symbol.
+     */
+    private int symbol;
     /**
      * Left border of a substring matching a pattern.
      */
@@ -39,132 +44,136 @@ public final class SubstringSearcher {
     /**
      * Initialises a buffered reader and pattern related fields.
      *
-     * @param source        data file name
-     * @param substring     pattern to be found
+     * @param text      data file name
+     * @param substring pattern to be found
      */
-    public SubstringSearcher(final InputStream source, final String substring) {
-        inputStream = source;
-        pattern = substring;
-        zetArray = new ArrayList<>(List.of(0));
-        cache = new HashMap<>();
+    public SubstringSearcher(final InputStream text, final String substring) {
+        //Terminate a pattern with a symbol which will never be met in text
+        pattern = substring.concat("#");
+        //Construct a sequence stream from both pattern and given text
+        ByteArrayInputStream patternStream;
+        patternStream = new ByteArrayInputStream(pattern.getBytes());
+        inputStream = new SequenceInputStream(patternStream, text);
+        //Init cache
+        cache = new ArrayList<>();
+        cacheMark = 0;
     }
 
     /**
      * Finds all entries of a given pattern in a string.
      *
-     * @return              list of found substrings' indices
-     * @throws IOException  buffered reader crashed
+     * @return list of found substrings' entryIndices
+     * @throws IOException buffered reader crashed
      */
     public List<Integer> search() throws IOException {
-        ArrayList<Integer> entryIndices = new ArrayList<>();
-        pattern = pattern.concat("\0");
-        for (int i = 0; i < pattern.length(); i++) {
-            cache.put(i, pattern.charAt(i));
-        }
         left = 0;
         right = 0;
-        constructArrayPrefix();
-        constructArraySuffix();
-        for (int i = 0; i < zetArray.size(); i++) {
-            if (zetArray.get(i) == pattern.length() - 1) {
-                entryIndices.add(i - pattern.length());
-            }
-        }
+        List<Integer> entryIndices = zetFunction();
         inputStream.close();
         return entryIndices;
     }
 
-    private void clearCache(final int i) {
-        if (cache.get(i) == null) {
-            cache = new HashMap<>();
-        } else {
-            char c = cache.get(i);
-            cache = new HashMap<>();
-            cache.put(i, c);
-        }
-    }
-
     /**
-     * Processing Z array values for a zero-terminating pattern.
-     */
-    private void constructArrayPrefix() {
-        for (int i = 1; i < pattern.length(); i++) {
-            if (i > right) {
-                left = i;
-                right = i;
-                int symbol = cache.get(right);
-                while (pattern.charAt(right - left) == symbol) {
-                    right++;
-                    symbol = cache.get(right);
-                }
-                zetArray.add(i, right - left);
-                right--;
-            } else {
-                int k = i - left;
-                if (zetArray.get(k) < right - i + 1) {
-                    zetArray.add(i, zetArray.get(k));
-                } else {
-                    left = i;
-                    int symbol = cache.get(right);
-                    while (pattern.charAt(right - left) == symbol) {
-                        right++;
-                        symbol = cache.get(right);
-                    }
-                    zetArray.add(i, right - left);
-                    right--;
-                }
-            }
-        }
-    }
-
-    /**
-     * Constructs the rest of a Z array.
+     * Converts a global sequence cell index into a respective cache cell index.
      *
-     * @throws IOException input stream corruption
+     * @param i sequence stream index
+     * @return index of a cache data cell
      */
-    private void constructArraySuffix() throws IOException {
-        for (int i = pattern.length(); inputStream.available() != 0; i++) {
+    private int cacheIndex(final int i) {
+        return i - cacheMark;
+    }
+
+    /**
+     * Clears cache to prevent memory limit exceedings.
+     * Also stores last read symbol, so that it could be accessed again.
+     *
+     * @param i index of a last read character
+     */
+    private void clearCache(final int i) {
+        if (cacheIndex(i) >= cache.size()) {
+            cache.clear();
+        } else {
+            char c = cache.get(cacheIndex(i));
+            cache.clear();
+            cache.add(0, c);
+        }
+        cacheMark = i;
+    }
+
+    /**
+     * Searches a substring in a text stream. No text related data is stored, so
+     * this method does not rely on input data size.
+     *
+     * @return list of substring occurences' indices
+     * @throws IOException input stream is corrupted
+     */
+    private List<Integer> zetFunction() throws IOException {
+        List<Integer> entryIndices = new ArrayList<>();
+        List<Integer> zetArray = new ArrayList<>();
+        zetArray.add(0);
+        inputStream.skipNBytes(1);
+        for (int i = 1; symbol != -1; i++) {
             if (i > right) {
                 left = i;
                 right = i;
                 clearCache(right);
-                zetArray.add(i, sequenceSize());
+                int sequenceSize = sequenceSize();
+                if (i < pattern.length()) {
+                    zetArray.add(i, sequenceSize);
+                } else if (sequenceSize == pattern.length() - 1) {
+                    entryIndices.add(i - pattern.length());
+                }
                 right--;
             } else {
                 int k = i - left;
                 if (zetArray.get(k) < right - i + 1) {
-                    zetArray.add(i, zetArray.get(k));
+                    if (i < pattern.length()) {
+                        zetArray.add(i, zetArray.get(k));
+                    }
                 } else {
                     left = i;
-                    zetArray.add(i, sequenceSize());
+                    int sequenceSize = sequenceSize();
+                    if (i < pattern.length()) {
+                        zetArray.add(i, sequenceSize);
+                    } else if (sequenceSize == pattern.length() - 1) {
+                        entryIndices.add(i - pattern.length());
+                    }
                     right--;
                 }
             }
         }
+        return entryIndices;
     }
 
     /**
-     * Gets the next char either from cache or input stream.
+     * Gets the next character. If there is cached one returns it,
+     * otherwise reads the next character from an input stream.
      *
-     * @param i             char index
-     * @return              next char integer value
-     * @throws IOException  input stream corruption
+     * @param i char index
+     * @return next char integer value
+     * @throws IOException unable to read from a stream
      */
     private int nextChar(final int i) throws IOException {
-        if (cache.get(i) == null) {
+        if (i >= cache.size()) {
             int inputChar = inputStream.read();
-            cache.put(i, (char) inputChar);
+            cache.add(i, (char) inputChar);
             return inputChar;
         } else {
             return cache.get(i);
         }
     }
 
+    /**
+     * Gets the amount of characters next to the current matching the pattern.
+     *
+     * @return amount of characters met
+     * @throws IOException unable to read from a stream
+     */
     private int sequenceSize() throws IOException {
-        int symbol = nextChar(right);
+        symbol = nextChar(cacheIndex(right));
         while (symbol != -1 && pattern.charAt(right - left) == symbol) {
             right++;
-            symbol = nextChar(right);
+            symbol = nextChar(cacheIndex(right));
         }
         return right - left;
     }
