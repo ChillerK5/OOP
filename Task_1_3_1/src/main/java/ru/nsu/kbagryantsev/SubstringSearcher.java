@@ -111,7 +111,7 @@ public final class SubstringSearcher {
         List<Integer> entryIndices = new ArrayList<>();
         List<Integer> zetArray = new ArrayList<>();
         zetArray.add(0);
-        inputStream.skipNBytes(1);
+        symbol = inputStream.read();
         for (int i = 1; symbol != -1; i++) {
             if (i > right) {
                 left = i;
