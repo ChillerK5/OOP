@@ -153,7 +153,7 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)">SubstringSearcher</a></span>&#8203;(java.io.InputStream&nbsp;source,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)">SubstringSearcher</a></span>&#8203;(java.io.InputStream&nbsp;text,
                  java.lang.String&nbsp;substring)</code></th>
 <td class="colLast">
 <div class="block">Initialises a buffered reader and pattern related fields.</div>
@@ -214,12 +214,12 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>SubstringSearcher</h4>
-<pre>public&nbsp;SubstringSearcher&#8203;(java.io.InputStream&nbsp;source,
+<pre>public&nbsp;SubstringSearcher&#8203;(java.io.InputStream&nbsp;text,
                          java.lang.String&nbsp;substring)</pre>
 <div class="block">Initialises a buffered reader and pattern related fields.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>source</code> - data file name</dd>
+<dd><code>text</code> - data file name</dd>
 <dd><code>substring</code> - pattern to be found</dd>
 </dl>
 </li>
@@ -245,7 +245,7 @@ extends java.lang.Object</pre>
 <div class="block">Finds all entries of a given pattern in a string.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>list of found substrings' indices</dd>
+<dd>list of found substrings' entryIndices</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.io.IOException</code> - buffered reader crashed</dd>
 </dl>
