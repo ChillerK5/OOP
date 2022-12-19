@@ -1,5 +1,11 @@
 package ru.nsu.kbagryantsev;
 
-public record Record(Subject subject, Teacher teacher, Grade grade) {
-    
-}
+/**
+ * Single credit book record. Contains a subject, a teacher tutoring it and a
+ * received grade.
+ *
+ * @param subject subject
+ * @param teacher teacher
+ * @param grade grade
+ */
+record Record(Subject subject, Teacher teacher, int grade) { }
