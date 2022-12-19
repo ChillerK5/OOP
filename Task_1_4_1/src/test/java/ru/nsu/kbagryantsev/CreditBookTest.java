@@ -1,5 +1,7 @@
 package ru.nsu.kbagryantsev;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,8 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CreditBookTest {
     @Nested
