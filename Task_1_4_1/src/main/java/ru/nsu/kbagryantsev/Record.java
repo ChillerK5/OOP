@@ -12,6 +12,8 @@ public final class Record {
     private final int grade;
 
     /**
+     * Instantiates a record with given data.
+     *
      * @param subject subject
      * @param teacher teacher
      * @param grade   grade
@@ -24,19 +26,26 @@ public final class Record {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
         var that = (Record) obj;
-        return Objects.equals(this.subject, that.subject) &&
-                Objects.equals(this.teacher, that.teacher) &&
-                this.grade == that.grade;
+        return Objects.equals(this.subject, that.subject)
+                && Objects.equals(this.teacher, that.teacher)
+                && this.grade == that.grade;
     }
 
     @Override
     public String toString() {
-        return "Record[" +
-                "subject=" + subject + ", " +
-                "teacher=" + teacher + ", " +
+        return "Record["
+                +
+                "subject=" + subject + ", "
+                +
+                "teacher=" + teacher + ", "
+                +
                 "grade=" + grade + ']';
     }
 

@@ -11,12 +11,13 @@ public final class Teacher {
     private final String patronymic;
 
     /**
+     * Instantiates the teacher by his names.
+     *
      * @param firstName  firstName
      * @param lastName   lastName
      * @param patronymic patronymic
      */
     public Teacher(String firstName, String lastName, String patronymic) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -46,12 +47,16 @@ public final class Teacher {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
         var that = (Teacher) obj;
-        return Objects.equals(this.firstName, that.firstName) &&
-                Objects.equals(this.lastName, that.lastName) &&
-                Objects.equals(this.patronymic, that.patronymic);
+        return Objects.equals(this.firstName, that.firstName)
+                && Objects.equals(this.lastName, that.lastName)
+                && Objects.equals(this.patronymic, that.patronymic);
     }
 
     @Override
@@ -61,9 +66,12 @@ public final class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher[" +
-                "firstName=" + firstName + ", " +
-                "lastName=" + lastName + ", " +
+        return "Teacher["
+                +
+                "firstName=" + firstName + ", "
+                +
+                "lastName=" + lastName + ", "
+                +
                 "patronymic=" + patronymic + ']';
     }
 
