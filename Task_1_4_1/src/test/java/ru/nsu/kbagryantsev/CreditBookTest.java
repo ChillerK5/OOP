@@ -16,8 +16,8 @@ class CreditBookTest {
     @Nested
     @DisplayName("Subject test")
     class SubjectTest {
-        static Teacher seminarian = new Teacher("Alexander", "Raish", "Vladimirovich");
-        static Teacher anonymous = new Teacher("John", "Galt");
+        Teacher seminarian = new Teacher("Alexander", "Raish", "Vladimirovich");
+        Teacher anonymous = new Teacher("John", "Galt");
         Subject successiveAdding;
         Subject listAdding;
 
@@ -91,10 +91,8 @@ class CreditBookTest {
     @Nested
     @DisplayName("Term test")
     class TermTest {
-        static Teacher lecturer = new Teacher("Dmitriy", "Irtegov",
-                "Valentinovich");
-        static Teacher seminarian = new Teacher("Ivan", "Bukshev",
-                "Evgenievich");
+        Teacher lecturer = new Teacher("Dmitriy", "Irtegov", "Valentinovich");
+        Teacher seminarian = new Teacher("Ivan", "Bukshev", "Evgenievich");
         Subject operationalSystems = new Subject("Operational systems")
                 .addTeacher(lecturer)
                 .addTeacher(seminarian);
@@ -155,10 +153,8 @@ class CreditBookTest {
     @Nested
     @DisplayName("Credit book test")
     class MainTest {
-        static Teacher lecturer = new Teacher("Dmitriy", "Irtegov",
-                "Valentinovich");
-        static Teacher seminarian = new Teacher("Ivan", "Bukshev",
-                "Evgenievich");
+        Teacher lecturer = new Teacher("Dmitriy", "Irtegov", "Valentinovich");
+        Teacher seminarian = new Teacher("Ivan", "Bukshev", "Evgenievich");
         Subject operationalSystems = new Subject("Operational systems")
                 .addTeacher(lecturer)
                 .addTeacher(seminarian);
