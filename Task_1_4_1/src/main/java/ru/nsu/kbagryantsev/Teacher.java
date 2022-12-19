@@ -1,26 +1,20 @@
 package ru.nsu.kbagryantsev;
 
-public record Teacher(String firstName, String lastName, String patronymic,
-                      Integer signature) {
+/**
+ * Record class teacher assigned with teacher's ids and his signature.
+ *
+ * @param firstName first name
+ * @param lastName last name
+ * @param patronymic patronymic if present
+ */
+record Teacher(String firstName, String lastName, String patronymic) {
     /**
-     * Creates Teacher instance by full name in case of no patronymic.
+     * Support for a case of patromynic absense.
      *
-     * @param pFirstName first name
-     * @param pLastName last name
-     * @param pSignature signature
+     * @param firstName first name
+     * @param lastName last name
      */
-    public Teacher(final String pFirstName, final String pLastName,
-                   final int pSignature) {
-        this(pFirstName, pLastName, null, pSignature);
-    }
-
-    /**
-     * Verifies given signature with model one.
-     *
-     * @param s asserted signature
-     * @return true if equal
-     */
-    public boolean verifySignature(final Integer s) {
-        return signature.equals(s);
+    Teacher(final String firstName, final String lastName) {
+        this(firstName, lastName, null);
     }
 }
