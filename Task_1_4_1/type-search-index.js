@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.kbagryantsev","l":"CreditBook"},{"p":"ru.nsu.kbagryantsev","l":"Record"},{"p":"ru.nsu.kbagryantsev","l":"Subject"},{"p":"ru.nsu.kbagryantsev","l":"Teacher"},{"p":"ru.nsu.kbagryantsev","l":"Term"}]
