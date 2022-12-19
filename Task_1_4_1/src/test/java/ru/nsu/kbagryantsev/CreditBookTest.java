@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CreditBookTest {
@@ -163,7 +164,7 @@ class CreditBookTest {
                 .addTeacher(seminarian);
         Subject pythonBasics = new Subject("Python basics")
                 .addTeacher(lecturer);
-        Subject iOsDevelopment = new Subject("iOs development")
+        Subject iosDevelopment = new Subject("iOs development")
                 .addTeacher(seminarian);
         CreditBook creditBook = new CreditBook();
 
@@ -193,7 +194,7 @@ class CreditBookTest {
 
         @Test
         @DisplayName("Adding several records")
-        void addingRecord(){
+        void addingRecord() {
             Record osMark = new Record(operationalSystems, lecturer, 3);
             creditBook.addRecord(osMark);
             creditBook.addRecord(pythonBasics, lecturer, 5);
@@ -227,7 +228,7 @@ class CreditBookTest {
             creditBook.addRecord(operationalSystems, lecturer, 3);
             creditBook.addRecord(pythonBasics, lecturer, 4);
             creditBook.addTerm();
-            creditBook.addRecord(iOsDevelopment, seminarian, 4);
+            creditBook.addRecord(iosDevelopment, seminarian, 4);
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 3);
             double model = 3.8;
@@ -246,7 +247,7 @@ class CreditBookTest {
         @DisplayName("Extra grant for several semesters")
         void extraGrant() {
             creditBook.addRecord(operationalSystems, lecturer, 3);
-            creditBook.addRecord(iOsDevelopment, seminarian, 5);
+            creditBook.addRecord(iosDevelopment, seminarian, 5);
             Term current = creditBook.getCurrentTerm();
             Assertions.assertFalse(creditBook.extraGrant(current));
             creditBook.addTerm();
@@ -262,7 +263,7 @@ class CreditBookTest {
             creditBook.addRecord(operationalSystems, lecturer, 3);
             creditBook.addRecord(pythonBasics, lecturer, 5);
             creditBook.addTerm();
-            creditBook.addRecord(iOsDevelopment, seminarian, 5);
+            creditBook.addRecord(iosDevelopment, seminarian, 5);
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 5);
             creditBook.setQualifyingWork(5);
@@ -275,7 +276,7 @@ class CreditBookTest {
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 5);
             creditBook.addTerm();
-            creditBook.addRecord(iOsDevelopment, seminarian, 5);
+            creditBook.addRecord(iosDevelopment, seminarian, 5);
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 5);
             creditBook.setQualifyingWork(3);
@@ -288,7 +289,7 @@ class CreditBookTest {
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 4);
             creditBook.addTerm();
-            creditBook.addRecord(iOsDevelopment, seminarian, 4);
+            creditBook.addRecord(iosDevelopment, seminarian, 4);
             creditBook.addRecord(operationalSystems, lecturer, 4);
             creditBook.addRecord(pythonBasics, lecturer, 4);
             creditBook.setQualifyingWork(5);
@@ -301,7 +302,7 @@ class CreditBookTest {
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 5);
             creditBook.addTerm();
-            creditBook.addRecord(iOsDevelopment, seminarian, 5);
+            creditBook.addRecord(iosDevelopment, seminarian, 5);
             creditBook.addRecord(operationalSystems, lecturer, 5);
             creditBook.addRecord(pythonBasics, lecturer, 5);
             creditBook.setQualifyingWork(5);
