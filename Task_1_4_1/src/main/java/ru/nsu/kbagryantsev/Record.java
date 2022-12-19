@@ -6,13 +6,20 @@ import java.util.Objects;
  * Single credit book record. Contains a subject, a teacher tutoring it and a
  * received grade.
  */
-public record Record(Subject subject, Teacher teacher, int grade) {
+public final class Record {
+    private final Subject subject;
+    private final Teacher teacher;
+    private final int grade;
+
     /**
      * @param subject subject
      * @param teacher teacher
      * @param grade   grade
      */
-    public Record {
+    public Record(Subject subject, Teacher teacher, int grade) {
+        this.subject = subject;
+        this.teacher = teacher;
+        this.grade = grade;
     }
 
     @Override
@@ -31,5 +38,22 @@ public record Record(Subject subject, Teacher teacher, int grade) {
                 "subject=" + subject + ", " +
                 "teacher=" + teacher + ", " +
                 "grade=" + grade + ']';
+    }
+
+    public Subject subject() {
+        return subject;
+    }
+
+    public Teacher teacher() {
+        return teacher;
+    }
+
+    public int grade() {
+        return grade;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subject, teacher, grade);
     }
 }
