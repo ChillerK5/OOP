@@ -2,12 +2,16 @@ package ru.nsu.kbagryantsev;
 
 /**
  * Record class teacher assigned with teacher's ids and his signature.
- *
- * @param firstName first name
- * @param lastName last name
- * @param patronymic patronymic if present
  */
 public record Teacher(String firstName, String lastName, String patronymic) {
+    /**
+     * @param firstName firstName
+     * @param lastName lastName
+     * @param patronymic patronymic
+     */
+    public Teacher {
+
+    }
     /**
      * Support for a case of patromynic absense.
      *
