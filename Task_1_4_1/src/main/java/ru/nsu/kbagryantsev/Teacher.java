@@ -7,7 +7,7 @@ package ru.nsu.kbagryantsev;
  * @param lastName last name
  * @param patronymic patronymic if present
  */
-record Teacher(String firstName, String lastName, String patronymic) {
+public record Teacher(String firstName, String lastName, String patronymic) {
     /**
      * Support for a case of patromynic absense.
      *

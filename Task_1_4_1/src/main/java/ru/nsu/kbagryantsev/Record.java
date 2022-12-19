@@ -8,4 +8,4 @@ package ru.nsu.kbagryantsev;
  * @param teacher teacher
  * @param grade grade
  */
-record Record(Subject subject, Teacher teacher, int grade) { }
+public record Record(Subject subject, Teacher teacher, int grade) { }
