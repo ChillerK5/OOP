@@ -5,12 +5,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Notebook class.
  */
 public class Notebook {
-    Collection<Record> records;
+    /**
+     * Collection of Record records containing title, text and creation date.
+     */
+    private final Collection<Record> records;
 
     /**
      * Initializes a notebook.
@@ -25,7 +29,7 @@ public class Notebook {
      * @param title title
      * @param text text
      */
-    public void addRecord(String title, String text) {
+    public void addRecord(final String title, final String text) {
         records.add(new Record(title, text));
     }
 
@@ -40,10 +44,13 @@ public class Notebook {
 
     /**
      * Shows all records sorted by creation date in ascending order.
+     *
+     * @return collection of records
      */
-    public void showRecords() {
+    public Collection<Record> showRecords() {
         Comparator<Record> compareDates = Comparator.comparing(Record::date);
-        records.stream().sorted(compareDates).forEach(System.out::println);
+        return records
+                .stream().sorted(compareDates).collect(Collectors.toList());
     }
 
     /**
@@ -54,7 +61,8 @@ public class Notebook {
      * @param end period end timestamp
      * @param keywords keywords to be checked
      */
-    public void showRecords(Date start, Date end, String[] keywords) {
+    public void showRecords(final Date start, final Date end,
+                            final String[] keywords) {
         Comparator<Record> compareDates = Comparator.comparing(Record::date);
         records.stream()
                 .filter(r -> Arrays.stream(keywords)

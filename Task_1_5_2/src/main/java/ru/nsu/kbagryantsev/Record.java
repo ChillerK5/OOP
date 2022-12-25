@@ -16,7 +16,7 @@ public record Record(String title, String text, Date date) {
      * @param title title
      * @param text text
      */
-    public Record(String title, String text) {
+    public Record(final String title, final String text) {
         this(title, text, new Date());
     }
 }
