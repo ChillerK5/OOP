@@ -3,6 +3,9 @@ package ru.nsu.kbagryantsev.operations;
 import ru.nsu.kbagryantsev.Complex;
 import ru.nsu.kbagryantsev.Operator;
 
+/**
+ * {@link Operator}.
+ */
 public class NaturalLogarithm extends Operator {
     /**
      * {@link Operator#arity}.

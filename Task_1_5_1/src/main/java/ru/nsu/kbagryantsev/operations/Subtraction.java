@@ -1,10 +1,12 @@
 package ru.nsu.kbagryantsev.operations;
 
+import java.math.BigDecimal;
 import ru.nsu.kbagryantsev.Complex;
 import ru.nsu.kbagryantsev.Operator;
 
-import java.math.BigDecimal;
-
+/**
+ * {@link Operator}.
+ */
 public class Subtraction extends Operator {
     /**
      * {@link Operator#arity}.

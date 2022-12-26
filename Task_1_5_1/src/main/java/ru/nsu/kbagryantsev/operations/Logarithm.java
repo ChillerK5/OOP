@@ -1,11 +1,13 @@
 package ru.nsu.kbagryantsev.operations;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import ru.nsu.kbagryantsev.Complex;
 import ru.nsu.kbagryantsev.Operator;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
+/**
+ * {@link Operator}.
+ */
 public class Logarithm extends Operator {
     /**
      * {@link Operator#arity}.

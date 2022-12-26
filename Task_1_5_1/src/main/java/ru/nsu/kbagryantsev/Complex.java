@@ -1,8 +1,7 @@
 package ru.nsu.kbagryantsev;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.math.BigDecimal;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Complex numbers representation. Contains real and imaginary parts as Double
