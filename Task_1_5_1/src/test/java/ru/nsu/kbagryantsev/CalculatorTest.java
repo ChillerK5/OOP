@@ -390,8 +390,8 @@ class CalculatorTest {
     void simpleRealArithmetics() throws IOException {
         String s = "+ - / * 7.8 9.1 * 3.6 5.4 0.7 0.65\0";
 
-        InputStream systemInput = System.in;
-        PrintStream systemOutput = System.out;
+        final InputStream systemInput = System.in;
+        final PrintStream systemOutput = System.out;
         ByteArrayInputStream testInput = new ByteArrayInputStream(s.getBytes());
         ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
         System.setIn(testInput);
