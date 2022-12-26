@@ -1,14 +1,23 @@
 package ru.nsu.kbagryantsev;
 
+/**
+ * Signum function for real number in complex form.
+ */
 public class Signum extends Operator {
+    /**
+     * {@link Operator#arity}.
+     */
     private static final int ARITY = 1;
 
+    /**
+     * Default constructor.
+     */
     public Signum() {
         arity = ARITY;
     }
 
     @Override
-    public Complex compute(Complex... argv) {
+    public final Complex compute(final Complex... argv) {
         int argc = argv.length;
         if (argc != ARITY) {
             throw new IllegalArgumentException();
