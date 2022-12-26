@@ -1,17 +1,33 @@
 package ru.nsu.kbagryantsev;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import ru.nsu.kbagryantsev.operations.*;
-
-import java.io.*;
-import java.util.Optional;
+import ru.nsu.kbagryantsev.operations.Addition;
+import ru.nsu.kbagryantsev.operations.Cosine;
+import ru.nsu.kbagryantsev.operations.Division;
+import ru.nsu.kbagryantsev.operations.Logarithm;
+import ru.nsu.kbagryantsev.operations.Multiplication;
+import ru.nsu.kbagryantsev.operations.NaturalLogarithm;
+import ru.nsu.kbagryantsev.operations.Power;
+import ru.nsu.kbagryantsev.operations.Root;
+import ru.nsu.kbagryantsev.operations.Sine;
+import ru.nsu.kbagryantsev.operations.Subtraction;
 
 class CalculatorTest {
+    /**
+     * Complex comparison accuracy.
+     */
     static final Double ULP = 0.0001;
-    static boolean equals(Complex expected, Complex actual) {
+
+    static boolean equals(final Complex expected, final Complex actual) {
         return Math.abs(actual.real() - expected.real()) < ULP
                 && Math.abs(actual.imaginary() - expected.imaginary()) < ULP;
     }
@@ -351,22 +367,22 @@ class CalculatorTest {
         Complex b = new Complex.ComplexBuilder().real(0.0).build();
         Complex z = new Complex.ComplexBuilder().imaginary(1.0).build();
 
-        Class<? extends Throwable> Argument = IllegalArgumentException.class;
-        Class<? extends Throwable> Arithmetic = ArithmeticException.class;
-        Assertions.assertThrows(Argument, () -> Addition.apply(a));
-        Assertions.assertThrows(Argument, () -> Cosine.apply(a, b));
-        Assertions.assertThrows(Argument, () -> Division.apply(a));
-        Assertions.assertThrows(Arithmetic, () -> Division.apply(a, b));
-        Assertions.assertThrows(Argument, () -> Logarithm.apply(a));
-        Assertions.assertThrows(Argument, () -> Logarithm.apply(z, z));
-        Assertions.assertThrows(Argument, () -> Multiplication.apply(a));
-        Assertions.assertThrows(Argument, () -> NaturalLogarithm.apply(a, b));
-        Assertions.assertThrows(Arithmetic, () -> NaturalLogarithm.apply(a));
-        Assertions.assertThrows(Argument, () -> Power.apply(a));
-        Assertions.assertThrows(Argument, () -> Power.apply(a, z));
-        Assertions.assertThrows(Argument, () -> Root.apply(a));
-        Assertions.assertThrows(Argument, () -> Sine.apply(a, b));
-        Assertions.assertThrows(Argument, () -> Subtraction.apply(a));
+        Class<? extends Throwable> argument = IllegalArgumentException.class;
+        Class<? extends Throwable> arithmetic = ArithmeticException.class;
+        Assertions.assertThrows(argument, () -> Addition.apply(a));
+        Assertions.assertThrows(argument, () -> Cosine.apply(a, b));
+        Assertions.assertThrows(argument, () -> Division.apply(a));
+        Assertions.assertThrows(arithmetic, () -> Division.apply(a, b));
+        Assertions.assertThrows(argument, () -> Logarithm.apply(a));
+        Assertions.assertThrows(argument, () -> Logarithm.apply(z, z));
+        Assertions.assertThrows(argument, () -> Multiplication.apply(a));
+        Assertions.assertThrows(argument, () -> NaturalLogarithm.apply(a, b));
+        Assertions.assertThrows(arithmetic, () -> NaturalLogarithm.apply(a));
+        Assertions.assertThrows(argument, () -> Power.apply(a));
+        Assertions.assertThrows(argument, () -> Power.apply(a, z));
+        Assertions.assertThrows(argument, () -> Root.apply(a));
+        Assertions.assertThrows(argument, () -> Sine.apply(a, b));
+        Assertions.assertThrows(argument, () -> Subtraction.apply(a));
     }
 
     @Test
@@ -438,9 +454,9 @@ class CalculatorTest {
     void illegalExpression() {
         String expression = "+ - / * 7.8 9.1 * 3.6 5.4 0.7";
 
-        Class<? extends Throwable> Arg = IllegalArgumentException.class;
-        Assertions.assertThrows(Arg, () -> Calculator.calculate(expression));
-        Assertions.assertThrows(Arg, () -> Calculator.calculate(" "));
+        Class<? extends Throwable> arg = IllegalArgumentException.class;
+        Assertions.assertThrows(arg, () -> Calculator.calculate(expression));
+        Assertions.assertThrows(arg, () -> Calculator.calculate(" "));
     }
 
     @Test
@@ -448,17 +464,17 @@ class CalculatorTest {
     void complexTests() {
         Complex.ComplexBuilder builder =  new Complex.ComplexBuilder();
 
-        Class<? extends Throwable> Argument = IllegalArgumentException.class;
-        Assertions.assertThrows(Argument, () -> new Complex(builder));
+        Class<? extends Throwable> argument = IllegalArgumentException.class;
+        Assertions.assertThrows(argument, () -> new Complex(builder));
 
         Complex a = new Complex.ComplexBuilder().real(5.0).build();
         Complex b = new Complex.ComplexBuilder().real(5.0).build();
         Assertions.assertEquals(a, b);
 
         Character c = '$';
-        Class<? extends Throwable> Cast = ClassCastException.class;
+        Class<? extends Throwable> cast = ClassCastException.class;
         //noinspection ResultOfMethodCallIgnored,EqualsBetweenInconvertibleTypes
-        Assertions.assertThrows(Cast, () -> a.equals(c));
+        Assertions.assertThrows(cast, () -> a.equals(c));
 
         Complex z = new Complex.ComplexBuilder()
                 .real(1.0)
@@ -474,16 +490,16 @@ class CalculatorTest {
                 .build();
         Assertions.assertEquals("1.0i", i.toString());
 
-        Class<? extends Throwable> Unsopported;
-        Unsopported = UnsupportedOperationException.class;
+        Class<? extends Throwable> unsupported;
+        unsupported = UnsupportedOperationException.class;
         Assertions.assertEquals(1, r.intValue());
         Assertions.assertEquals(1, r.longValue());
         Assertions.assertEquals(1.0, r.floatValue());
         Assertions.assertEquals(1.0, r.doubleValue());
-        Assertions.assertThrows(Unsopported, i::intValue);
-        Assertions.assertThrows(Unsopported, i::longValue);
-        Assertions.assertThrows(Unsopported, i::floatValue);
-        Assertions.assertThrows(Unsopported, i::doubleValue);
+        Assertions.assertThrows(unsupported, i::intValue);
+        Assertions.assertThrows(unsupported, i::longValue);
+        Assertions.assertThrows(unsupported, i::floatValue);
+        Assertions.assertThrows(unsupported, i::doubleValue);
     }
 
     @Test
