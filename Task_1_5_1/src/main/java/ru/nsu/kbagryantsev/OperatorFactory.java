@@ -10,10 +10,13 @@ import ru.nsu.kbagryantsev.operations.Logarithm;
 import ru.nsu.kbagryantsev.operations.Multiplication;
 import ru.nsu.kbagryantsev.operations.NaturalLogarithm;
 import ru.nsu.kbagryantsev.operations.Power;
-import ru.nsu.kbagryantsev.operations.Sine;
 import ru.nsu.kbagryantsev.operations.Root;
+import ru.nsu.kbagryantsev.operations.Sine;
 import ru.nsu.kbagryantsev.operations.Subtraction;
 
+/**
+ * Operators factory. Returns an operator instance by given synonym.
+ */
 public class OperatorFactory {
     /**
      * Maps operator name to an {@link Operator} instance.

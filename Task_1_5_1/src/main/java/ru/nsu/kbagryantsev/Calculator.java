@@ -26,7 +26,7 @@ public class Calculator {
         //Instantiating an operator factory
         OperatorFactory factory = new OperatorFactory();
         //Operating parsed Strings
-        for (String string: operands) {
+        for (String string : operands) {
             Optional<Operator> operator = factory.get(string);
             //Appliying necessary operator
             if (operator.isPresent()) {
@@ -42,7 +42,7 @@ public class Calculator {
                 }
                 //Pushing parsed Complex value onto the stack
             } else {
-                    stack.push(Complex.parseComplex(string));
+                stack.push(Complex.parseComplex(string));
             }
         }
         if (stack.isEmpty()) {
