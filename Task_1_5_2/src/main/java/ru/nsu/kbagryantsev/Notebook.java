@@ -60,16 +60,17 @@ public class Notebook {
      * @param start period start timestamp
      * @param end period end timestamp
      * @param keywords keywords to be checked
+     * @return collection of records
      */
-    public void showRecords(final Date start, final Date end,
+    public Collection<Record> showRecords(final Date start, final Date end,
                             final String[] keywords) {
         Comparator<Record> compareDates = Comparator.comparing(Record::date);
-        records.stream()
+        return records.stream()
                 .filter(r -> Arrays.stream(keywords)
-                        .allMatch(k -> r.title().contains(k)))
+                        .anyMatch(k -> r.title().contains(k)))
                 .filter(r -> r.date().after(start))
                 .filter(r -> r.date().before(end))
                 .sorted(compareDates)
-                .forEach(System.out::println);
+                .collect(Collectors.toList());
     }
 }
