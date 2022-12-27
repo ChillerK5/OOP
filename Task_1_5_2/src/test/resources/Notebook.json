@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "title": "Record #1",
+      "text": "Road to the Heap sort",
+      "date": 1672175829002
+    },
+    {
+      "title": "Record #2",
+      "text": "Road to the Stack",
+      "date": 1672175829002
+    }
+  ]
+}

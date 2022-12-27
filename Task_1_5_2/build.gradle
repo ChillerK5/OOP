@@ -11,6 +11,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     implementation 'com.google.googlejavaformat:google-java-format:1.15.0'
