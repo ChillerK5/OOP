@@ -1,16 +1,22 @@
 package ru.nsu.kbagryantsev;
 
+import java.util.List;
+
 /**
  * Checks the number for being prime.
  */
-public class PrimeChecker {
+public final class PrimeNumbersUtils {
+    private PrimeNumbersUtils() {
+
+    }
+
     /**
      * Performs the simplest check for a number using trivial algorithm.
      *
      * @param number checked number
      * @return true if prime
      */
-    public static boolean isPrime(Integer number) {
+    public static boolean isPrime(final Integer number) {
         if (number == 0 || number == 1) {
             return false;
         }
@@ -20,5 +26,15 @@ public class PrimeChecker {
             }
         }
         return true;
+    }
+
+    /**
+     * Checks a collection for containing any composite number.
+     *
+     * @param numbers collection to be checked
+     * @return true if contains a composite
+     */
+    public static boolean anyComposite(final List<Integer> numbers) {
+        return numbers.stream().anyMatch(PrimeNumbersUtils::isPrime);
     }
 }
