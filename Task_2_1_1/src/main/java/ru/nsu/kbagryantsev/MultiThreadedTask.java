@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Executes given task via creating several new threads.
+ * Executes benchmark task via creating several new threads.
  */
 public final class MultiThreadedTask {
     private MultiThreadedTask() {

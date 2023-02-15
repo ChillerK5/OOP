@@ -4,7 +4,7 @@ public final class Main {
     private Main() { }
 
     /**
-     * ???
+     * ???.
      *
      * @param args ???
      */
