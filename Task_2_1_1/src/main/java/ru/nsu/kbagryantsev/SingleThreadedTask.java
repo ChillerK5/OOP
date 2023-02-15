@@ -3,12 +3,13 @@ package ru.nsu.kbagryantsev;
 import java.util.List;
 
 /**
- * Executes given task consecutively.
+ * Executes benchmark task consecutively.
  */
 public final class SingleThreadedTask {
     private SingleThreadedTask() {
 
     }
+
     /**
      * Executes anyComposite in a consecutive way.
      *
