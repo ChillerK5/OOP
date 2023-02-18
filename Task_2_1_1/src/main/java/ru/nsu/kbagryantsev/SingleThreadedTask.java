@@ -6,9 +6,7 @@ import java.util.List;
  * Executes benchmark task consecutively.
  */
 public final class SingleThreadedTask {
-    private SingleThreadedTask() {
-
-    }
+    private SingleThreadedTask() { }
 
     /**
      * Executes anyComposite in a consecutive way.
@@ -16,7 +14,7 @@ public final class SingleThreadedTask {
      * @param numbers list of numbers to check
      * @return result of anyComposite
      */
-    public static boolean main(final List<Integer> numbers) {
+    public static boolean call(final List<Integer> numbers) {
         return PrimeNumbersUtils.anyComposite(numbers);
     }
 }

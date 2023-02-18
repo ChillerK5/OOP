@@ -1,14 +1,13 @@
 package ru.nsu.kbagryantsev;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Executes benchmark task using ParallelStream.
  */
 public final class ParallelStreamTask {
-    private ParallelStreamTask() {
-
-    }
+    private ParallelStreamTask() { }
 
     /**
      * Executes isPrime check for all members of a collection
@@ -17,7 +16,8 @@ public final class ParallelStreamTask {
      * @param numbers numbers to check
      * @return result of anyComposite
      */
-    public static boolean main(final List<Integer> numbers) {
-        return numbers.parallelStream().anyMatch(PrimeNumbersUtils::isPrime);
+    public static boolean call(final List<Integer> numbers) {
+        Predicate<Integer> isComposite = n -> !PrimeNumbersUtils.isPrime(n);
+        return numbers.parallelStream().anyMatch(isComposite);
     }
 }

@@ -6,9 +6,7 @@ import java.util.List;
  * Checks the number for being prime.
  */
 public final class PrimeNumbersUtils {
-    private PrimeNumbersUtils() {
-
-    }
+    private PrimeNumbersUtils() { }
 
     /**
      * Performs the simplest check for a number using trivial algorithm.
@@ -29,12 +27,13 @@ public final class PrimeNumbersUtils {
     }
 
     /**
-     * Checks a collection for containing any composite number.
+     * Checks a collection for containing any composite number. Naive and
+     * dull implementation.
      *
      * @param numbers collection to be checked
      * @return true if contains a composite
      */
     public static boolean anyComposite(final List<Integer> numbers) {
-        return numbers.stream().anyMatch(PrimeNumbersUtils::isPrime);
+        return numbers.stream().anyMatch(number -> !isPrime(number));
     }
 }
