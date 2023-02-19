@@ -1,6 +1,7 @@
 package ru.nsu.kbagryantsev;
 
 import java.io.FileNotFoundException;
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
@@ -9,17 +10,20 @@ import org.openjdk.jmh.infra.Blackhole;
  * See {@link ConcurrencyBenchmark}.
  */
 @State(Scope.Benchmark)
-public final class ParallelStreamBenchmark extends ConcurrencyBenchmark {
+public class ParallelStreamBenchmark extends ConcurrencyBenchmark {
     /**
-     * See {@link ConcurrencyBenchmark#ConcurrencyBenchmark()}.
+     * Executes a benchmark using {@link ParallelStreamTask}.
      *
-     * @throws FileNotFoundException JSON file may be missing
+     * @param blackhole Blackhole instance
      */
-    public ParallelStreamBenchmark() throws FileNotFoundException {
-    }
-
-    @Override
+    @Benchmark
     public void benchmark(final Blackhole blackhole) {
+        try {
+            this.readData();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         blackhole.consume(ParallelStreamTask.call(dataset));
     }
 }
