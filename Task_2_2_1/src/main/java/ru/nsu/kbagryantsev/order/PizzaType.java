@@ -5,7 +5,7 @@ package ru.nsu.kbagryantsev.order;
  */
 public enum PizzaType {
     /**
-     * Tikka masala sauce, chicken, yoghurt & mint sauce, chilli pepper,
+     * Tikka masala sauce, chicken, yoghurt and mint sauce, chilli pepper,
      * onion red, pepper bell, mozzarella cheese.
      */
     CHICKEN_TIKKA,
