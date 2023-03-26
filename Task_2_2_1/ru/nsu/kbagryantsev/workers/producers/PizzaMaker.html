@@ -95,12 +95,12 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Producer.html" title="interface in ru.nsu.kbagryantsev.workers.producers">Producer</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzaMaker</span>
+<div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">PizzaMaker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="Producer.html" title="interface in ru.nsu.kbagryantsev.workers.producers">Producer</a></span></div>
+implements <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -112,9 +112,11 @@ implements <a href="Producer.html" title="interface in ru.nsu.kbagryantsev.worke
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">PizzaMaker</a><wbr>(int&nbsp;qualification)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.kbagryantsev.utils.ProductionQueue,ru.nsu.kbagryantsev.utils.ProductionQueue,ru.nsu.kbagryantsev.workers.WorkerQualification)" class="member-name-link">PizzaMaker</a><wbr>(<a href="../../utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a>&lt;<a href="../../order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a>&gt;&nbsp;sourceQueue,
+ <a href="../../utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a>&lt;<a href="../../order/CompletedOrder.html" title="class in ru.nsu.kbagryantsev.order">CompletedOrder</a>&gt;&nbsp;productQueue,
+ <a href="../WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a>&nbsp;qualification)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Initialises a pizza maker by his/her qualification.</div>
+<div class="block">Initializes a pizza maker.</div>
 </div>
 </div>
 </section>
@@ -130,17 +132,27 @@ implements <a href="Producer.html" title="interface in ru.nsu.kbagryantsev.worke
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#consume()" class="member-name-link">consume</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../order/CompletedOrder.html" title="class in ru.nsu.kbagryantsev.order">CompletedOrder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#produce(ru.nsu.kbagryantsev.order.Order)" class="member-name-link">produce</a><wbr>(<a href="../../order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a>&nbsp;order)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#produce()" class="member-name-link">produce</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Produces a single product.</div>
-</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -153,12 +165,16 @@ implements <a href="Producer.html" title="interface in ru.nsu.kbagryantsev.worke
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.kbagryantsev.utils.ProductionQueue,ru.nsu.kbagryantsev.utils.ProductionQueue,ru.nsu.kbagryantsev.workers.WorkerQualification)">
 <h3>PizzaMaker</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PizzaMaker</span><wbr><span class="parameters">(int&nbsp;qualification)</span></div>
-<div class="block">Initialises a pizza maker by his/her qualification.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PizzaMaker</span><wbr><span class="parameters">(<a href="../../utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a>&lt;<a href="../../order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a>&gt;&nbsp;sourceQueue,
+ <a href="../../utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a>&lt;<a href="../../order/CompletedOrder.html" title="class in ru.nsu.kbagryantsev.order">CompletedOrder</a>&gt;&nbsp;productQueue,
+ <a href="../WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a>&nbsp;qualification)</span></div>
+<div class="block">Initializes a pizza maker.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
+<dd><code>sourceQueue</code> - incoming orders queue</dd>
+<dd><code>productQueue</code> - completed orders storage queue</dd>
 <dd><code>qualification</code> - int value in some set range</dd>
 </dl>
 </section>
@@ -172,14 +188,40 @@ implements <a href="Producer.html" title="interface in ru.nsu.kbagryantsev.worke
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="produce()">
-<h3>produce</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">produce</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="Producer.html#produce()">Producer</a></code></span></div>
-<div class="block">Produces a single product.</div>
+<section class="detail" id="run()">
+<h3>run</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Producer.html#produce()">produce</a></code>&nbsp;in interface&nbsp;<code><a href="Producer.html" title="interface in ru.nsu.kbagryantsev.workers.producers">Producer</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runnable.html#run()" title="class or interface in java.lang" class="external-link">run</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="produce(ru.nsu.kbagryantsev.order.Order)">
+<h3>produce</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../order/CompletedOrder.html" title="class in ru.nsu.kbagryantsev.order">CompletedOrder</a></span>&nbsp;<span class="element-name">produce</span><wbr><span class="parameters">(<a href="../../order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a>&nbsp;order)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="consume()">
+<h3>consume</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a></span>&nbsp;<span class="element-name">consume</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="stop()">
+<h3>stop</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="toString()">
+<h3>toString</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 </dl>
 </section>
 </li>

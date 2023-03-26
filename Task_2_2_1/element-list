@@ -1,4 +1,6 @@
 ru.nsu.kbagryantsev
-ru.nsu.kbagryantsev.enums
+ru.nsu.kbagryantsev.order
+ru.nsu.kbagryantsev.utils
+ru.nsu.kbagryantsev.workers
 ru.nsu.kbagryantsev.workers.producers
 ru.nsu.kbagryantsev.workers.transporters
