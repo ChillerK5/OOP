@@ -1,29 +1,61 @@
 package ru.nsu.kbagryantsev;
 
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.HashMap;
+import java.util.Map;
 
-import ru.nsu.kbagryantsev.enums.Pizza;
+import ru.nsu.kbagryantsev.utils.ProductionQueue;
+import ru.nsu.kbagryantsev.workers.WorkerQualification;
+import ru.nsu.kbagryantsev.order.CompletedOrder;
+import ru.nsu.kbagryantsev.order.Order;
+import ru.nsu.kbagryantsev.workers.producers.PizzaMaker;
+import ru.nsu.kbagryantsev.workers.transporters.Transporter;
 
-public class Pizzeria {
+public final class Pizzeria {
     /**
      * Queue of customers orders.
      */
-    private final Queue<Order> orders;
-    /**
-     * Queue maintaining product's transition from pizza makers to transporters.
-     */
-    private final Queue<Pizza> endProductStorage;
+    private final ProductionQueue<Order> orderStorage;
+    private final ProductionQueue<CompletedOrder> completedOrderStorage;
+    private final Map<PizzaMaker, Thread> pizzaMakers;
+    private final Map<Transporter, Thread> transporters;
 
-    /**
-     * Initialises a pizzeria by its ordering capacity and storage capacity.
-     * The definition responds to company's manufacturing parameters.
-     * @param orderingCapacity maximal amount of orders a pizzeria can fulfill
-     * @param storageCapacity maximal amount of orders a storage can maintain
-     *                       before they expire
-     */
-    public Pizzeria(final int orderingCapacity, final int storageCapacity) {
-        this.orders = new ArrayBlockingQueue<>(orderingCapacity);
-        this.endProductStorage = new ArrayBlockingQueue<>(storageCapacity);
+    public Pizzeria(final int orderStorageCapacity,
+                    final int completedOrderStorageCapacity) {
+        this.pizzaMakers = new HashMap<>();
+        this.orderStorage = new ProductionQueue<>(orderStorageCapacity);
+        this.completedOrderStorage = new ProductionQueue<>(completedOrderStorageCapacity);
+        this.transporters = new HashMap<>();
+    }
+
+    public void addPizzaMaker(WorkerQualification qualification) {
+        PizzaMaker pizzaMaker = new PizzaMaker(
+                orderStorage,
+                completedOrderStorage,
+                qualification);
+        Thread thread = new Thread(pizzaMaker);
+        pizzaMakers.put(pizzaMaker, thread);
+    }
+
+    public void addTransporter(int capacity) {
+        Transporter transporter = new Transporter(
+                completedOrderStorage,
+                capacity);
+        Thread thread = new Thread(transporter);
+        transporters.put(transporter, thread);
+    }
+
+    public void addOrder(Order order) {
+        orderStorage.add(order);
+    }
+
+    public void start() {
+        pizzaMakers.values().forEach(Thread::start);
+        transporters.values().forEach(Thread::start);
+    }
+
+    public void stop() {
+        //TODO wait for all workers termination
+        pizzaMakers.keySet().forEach(PizzaMaker::stop);
+        transporters.keySet().forEach(Transporter::stop);
     }
 }
