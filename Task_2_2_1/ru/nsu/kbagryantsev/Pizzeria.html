@@ -96,6 +96,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Pizzeria</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Pizzeria class. Aggregates pizza makers and transporters. Processes and
+ delivers incoming orders using concurrency and shared data structures.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -109,7 +111,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Pizzeria</a><wbr>(int&nbsp;orderStorageCapacity,
  int&nbsp;completedOrderStorageCapacity)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Intialises a pizzeria.</div>
+</div>
 </div>
 </section>
 </li>
@@ -126,19 +130,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOrder(ru.nsu.kbagryantsev.order.Order)" class="member-name-link">addOrder</a><wbr>(<a href="order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a>&nbsp;order)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds an unprocessed order.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addPizzaMaker(ru.nsu.kbagryantsev.workers.WorkerQualification)" class="member-name-link">addPizzaMaker</a><wbr>(<a href="workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a>&nbsp;qualification)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a pizza maker.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTransporter(int)" class="member-name-link">addTransporter</a><wbr>(int&nbsp;capacity)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Adds a transporter.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#start()" class="member-name-link">start</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Starts all workers.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stop()" class="member-name-link">stop</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Stops all workers.</div>
+</div>
 </div>
 </div>
 </div>
@@ -161,6 +175,12 @@ loadScripts(document, 'script');</script>
 <h3>Pizzeria</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Pizzeria</span><wbr><span class="parameters">(int&nbsp;orderStorageCapacity,
  int&nbsp;completedOrderStorageCapacity)</span></div>
+<div class="block">Intialises a pizzeria.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>orderStorageCapacity</code> - incoming orders storage capacity</dd>
+<dd><code>completedOrderStorageCapacity</code> - completed orders storage capacity</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -175,30 +195,47 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addPizzaMaker(ru.nsu.kbagryantsev.workers.WorkerQualification)">
 <h3>addPizzaMaker</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addPizzaMaker</span><wbr><span class="parameters">(<a href="workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a>&nbsp;qualification)</span></div>
+<div class="block">Adds a pizza maker. Initializes worker's thread.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>qualification</code> - pizza maker's qualification</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addTransporter(int)">
 <h3>addTransporter</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTransporter</span><wbr><span class="parameters">(int&nbsp;capacity)</span></div>
+<div class="block">Adds a transporter. Intializes a worker's thread.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>capacity</code> - transporter capacity</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addOrder(ru.nsu.kbagryantsev.order.Order)">
 <h3>addOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addOrder</span><wbr><span class="parameters">(<a href="order/Order.html" title="class in ru.nsu.kbagryantsev.order">Order</a>&nbsp;order)</span></div>
+<div class="block">Adds an unprocessed order.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - unprocessed order</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="start()">
 <h3>start</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">start</span>()</div>
+<div class="block">Starts all workers. Starts wokers threads in arbitrary order.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="stop()">
 <h3>stop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stop</span>()</div>
+<div class="block">Stops all workers. Invokes workers stop method.</div>
 </section>
 </li>
 </ul>

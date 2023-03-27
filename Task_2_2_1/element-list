@@ -1,5 +1,8 @@
 ru.nsu.kbagryantsev
 ru.nsu.kbagryantsev.order
+ru.nsu.kbagryantsev.order.drink
+ru.nsu.kbagryantsev.order.pizza
+ru.nsu.kbagryantsev.order.side
 ru.nsu.kbagryantsev.utils
 ru.nsu.kbagryantsev.workers
 ru.nsu.kbagryantsev.workers.producers
