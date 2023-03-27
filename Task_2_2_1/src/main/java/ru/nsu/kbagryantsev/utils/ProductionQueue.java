@@ -5,50 +5,103 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Queue;
 
-public final class ProductionQueue<E> {
-    private final Queue<E> data;
-    private final Object FULL_QUEUE = new Object();
-    private final Object EMPTY_QUEUE = new Object();
+/**
+ * Thread-safe queue.
+ *
+ * @param <T> any type
+ */
+public final class ProductionQueue<T> {
+    /**
+     * Queue.
+     */
+    private final Queue<T> data;
+    /**
+     * Full queue synchronization monitor.
+     */
+    private final Object fullQueue = new Object();
+    /**
+     * Empty queue synchronization monitor.
+     */
+    private final Object emptyQueue = new Object();
+    /**
+     * Maximal size of a queue.
+     */
     private final int maxSize;
 
+    /**
+     * Maximal size of the queue.
+     *
+     * @param maxSize integer size
+     */
     public ProductionQueue(final int maxSize) {
         this.maxSize = maxSize;
         this.data = new ArrayDeque<>(maxSize);
     }
 
+    /**
+     * Checks the queue is full.
+     *
+     * @return true if full
+     */
     public boolean isFull() {
         return maxSize == data.size();
     }
 
+    /**
+     * Checks the queue is empty.
+     *
+     * @return true if empty
+     */
     public boolean isEmpty() {
         return data.isEmpty();
     }
 
+    /**
+     * Waits on empty queue.
+     *
+     * @throws InterruptedException not handled
+     */
     public void waitOnEmpty() throws InterruptedException {
-        synchronized (EMPTY_QUEUE) {
-            EMPTY_QUEUE.wait();
+        synchronized (emptyQueue) {
+            emptyQueue.wait();
         }
     }
 
+    /**
+     * Waits on full queue.
+     *
+     * @throws InterruptedException not handled
+     */
     public void waitOnFull() throws InterruptedException {
-        synchronized (FULL_QUEUE) {
-            FULL_QUEUE.wait();
+        synchronized (fullQueue) {
+            fullQueue.wait();
         }
     }
 
+    /**
+     * Notifies all threads waiting on empty queue.
+     */
     public void notifyAllOnEmpty() {
-        synchronized (EMPTY_QUEUE) {
-            EMPTY_QUEUE.notifyAll();
+        synchronized (emptyQueue) {
+            emptyQueue.notifyAll();
         }
     }
 
+    /**
+     * Notifies all threads waiting on full queue.
+     */
     public void notifyAllOnFull() {
-        synchronized (FULL_QUEUE) {
-            FULL_QUEUE.notifyAll();
+        synchronized (fullQueue) {
+            fullQueue.notifyAll();
         }
     }
 
-    public void add(final E element) {
+    /**
+     * Adds a given element.
+     *
+     * @param element element
+     */
+    public void add(final T element) {
         while (isFull()) {
             try {
                 waitOnFull();
@@ -63,7 +116,12 @@ public final class ProductionQueue<E> {
         notifyAllOnEmpty();
     }
 
-    public E remove() {
+    /**
+     * Removes a single element.
+     *
+     * @return element
+     */
+    public T remove() {
         while (isEmpty()) {
             try {
                 waitOnEmpty();
@@ -72,7 +130,7 @@ public final class ProductionQueue<E> {
                 throw new RuntimeException();
             }
         }
-        E element;
+        T element;
         synchronized (data) {
             element = data.poll();
         }
@@ -80,7 +138,13 @@ public final class ProductionQueue<E> {
         return element;
     }
 
-    public Collection<E> removeSome(int n) {
+    /**
+     * Tries to remove as many elements as possible below the given bound.
+     *
+     * @param n elements bound
+     * @return collection of elements
+     */
+    public Collection<T> removeSome(final int n) {
         while (data.isEmpty()) {
             try {
                 waitOnEmpty();
@@ -89,7 +153,7 @@ public final class ProductionQueue<E> {
                 throw new RuntimeException();
             }
         }
-        Collection<E> elements = new ArrayList<>();
+        Collection<T> elements = new ArrayList<>();
         synchronized (data) {
             while (!data.isEmpty() && elements.size() < n) {
                 elements.add(data.poll());

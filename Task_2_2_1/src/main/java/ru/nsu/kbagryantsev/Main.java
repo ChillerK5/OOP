@@ -1,62 +1,51 @@
 package ru.nsu.kbagryantsev;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileReader;
 import java.util.concurrent.Future;
+import ru.nsu.kbagryantsev.order.Order;
+import ru.nsu.kbagryantsev.utils.PizzeriaDeserializer;
 
-import ru.nsu.kbagryantsev.order.*;
-import ru.nsu.kbagryantsev.utils.RandomEnumGenerator;
-import ru.nsu.kbagryantsev.workers.WorkerQualification;
-
+/**
+ * Main.
+ */
 public final class Main {
     private Main() {
     }
 
+    /**
+     * Runs a pizzeria to process set amount of orders.
+     *
+     * @param args CLI args
+     * @throws Exception not handled
+     */
     public static void main(final String[] args) throws Exception {
-        Pizzeria pizzeria = new Pizzeria(10, 10);
-        pizzeria.addPizzaMaker(WorkerQualification.MIDDLE);
-        pizzeria.addPizzaMaker(WorkerQualification.MIDDLE);
-        pizzeria.addTransporter(2);
-        pizzeria.addTransporter(1);
+        // Deserializing pizzeria properties
+        Gson gson =
+            new GsonBuilder()
+                .registerTypeAdapter(Pizzeria.class, new PizzeriaDeserializer())
+                .create();
+        Pizzeria pizzeria;
+        String propertiesPath = "./src/main/resources/properties.json";
+        try (FileReader fileReader = new FileReader(propertiesPath)) {
+            pizzeria = gson.fromJson(fileReader, Pizzeria.class);
+        }
+
+        // Running pizzeria
         pizzeria.start();
-        for (int i = 0; i < 10; i++) {
-            Future<Order> orderFuture = submitRandomOrder();
+
+        // Submiting orders
+        RandomOrderGenerator randomOrderGenerator =
+                new RandomOrderGenerator(5, 1000, 2000);
+        for (int i = 0; i < 30; i++) {
+            Future<Order> orderFuture =
+                    randomOrderGenerator.getRandomOrderWithDelay();
             Order order = orderFuture.get();
             pizzeria.addOrder(order);
         }
+
+        // Shutting down pizzeria
         pizzeria.stop();
-    }
-
-    private static Order createRandomOrder() {
-        Random random = new Random();
-        int orderSize = random.nextInt(1, 5);
-        Collection<MenuItem> orderContent = new ArrayList<>();
-        for (int i = 0; i < orderSize; i++) {
-            PizzaType pizzaType =
-                    RandomEnumGenerator.randomEnum(PizzaType.class);
-            PizzaSize pizzaSize =
-                    RandomEnumGenerator.randomEnum(PizzaSize.class);
-            PizzaCrust pizzaCrust =
-                    RandomEnumGenerator.randomEnum(PizzaCrust.class);
-            orderContent.add(new Pizza(pizzaType, pizzaSize, pizzaCrust));
-        }
-        return new Order(orderContent);
-    }
-
-    private static Future<Order> submitRandomOrder() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Callable<Order> callable = () -> {
-            Thread.sleep(new Random().nextInt(1000, 4000));
-            return createRandomOrder();
-        };
-        try {
-            return executor.submit(callable);
-        } finally {
-            executor.shutdown();
-        }
     }
 }

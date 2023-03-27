@@ -10,6 +10,8 @@ import java.util.Collection;
 public record Order(Collection<MenuItem> content) {
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "@" + Integer.toHexString(hashCode());
+        return getClass().getSimpleName()
+                + "@"
+                + Integer.toHexString(hashCode());
     }
 }

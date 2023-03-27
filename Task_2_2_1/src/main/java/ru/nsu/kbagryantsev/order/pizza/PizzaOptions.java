@@ -1,9 +1,9 @@
-package ru.nsu.kbagryantsev.order;
+package ru.nsu.kbagryantsev.order.pizza;
 
 /**
- * Pizza types available in Brighton, UK.
+ * Pizza options available in Brighton, UK Dodo.
  */
-public enum PizzaType {
+public enum PizzaOptions {
     /**
      * Tikka masala sauce, chicken, yoghurt and mint sauce, chilli pepper,
      * onion red, pepper bell, mozzarella cheese.

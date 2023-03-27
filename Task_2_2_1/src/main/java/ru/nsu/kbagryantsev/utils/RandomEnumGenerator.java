@@ -2,10 +2,26 @@ package ru.nsu.kbagryantsev.utils;
 
 import java.util.Random;
 
-public class RandomEnumGenerator {
+/**
+ * Random enum generator.
+ */
+public final class RandomEnumGenerator {
+    private RandomEnumGenerator() {
+    }
+
+    /**
+     * Random instance.
+     */
     private static final Random RANDOM = new Random();
 
-    public static <E> E randomEnum(Class<E> enumClass) {
+    /**
+     * Gets a random value from given enum.
+     *
+     * @param enumClass enum
+     * @param <E>       enum type
+     * @return random enum value
+     */
+    public static <E> E randomEnum(final Class<E> enumClass) {
         E[] values = enumClass.getEnumConstants();
         return values[RANDOM.nextInt(values.length)];
     }
