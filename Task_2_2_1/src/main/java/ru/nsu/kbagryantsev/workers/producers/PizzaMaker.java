@@ -142,6 +142,7 @@ public final class PizzaMaker implements Runnable {
 
     /**
      * Qualification getter.
+     *
      * @return worker qualification
      */
     @SuppressWarnings("unused")
