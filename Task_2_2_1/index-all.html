@@ -52,7 +52,7 @@ loadScripts(document, 'script');</script>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#add(T)" class="member-name-link">add(T)</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#add(T)" class="member-name-link">add(T)</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Adds a given element.</div>
 </dd>
@@ -60,7 +60,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Adds an unprocessed order.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/Pizzeria.html#addPizzaMaker(ru.nsu.kbagryantsev.workers.WorkerQualification)" class="member-name-link">addPizzaMaker(WorkerQualification)</a> - Method in class ru.nsu.kbagryantsev.<a href="ru/nsu/kbagryantsev/Pizzeria.html" title="class in ru.nsu.kbagryantsev">Pizzeria</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/Pizzeria.html#addPizzaMaker(ru.nsu.kbagryantsev.workers.core.WorkerQualification)" class="member-name-link">addPizzaMaker(WorkerQualification)</a> - Method in class ru.nsu.kbagryantsev.<a href="ru/nsu/kbagryantsev/Pizzeria.html" title="class in ru.nsu.kbagryantsev">Pizzeria</a></dt>
 <dd>
 <div class="block">Adds a pizza maker.</div>
 </dd>
@@ -128,17 +128,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>CompletedOrder</code> record class.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html#consume()" class="member-name-link">consume()</a> - Method in class ru.nsu.kbagryantsev.workers.producers.<a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/Consumer.html" class="type-name-link" title="annotation interface in ru.nsu.kbagryantsev.workers.core">Consumer</a> - Annotation Interface in <a href="ru/nsu/kbagryantsev/workers/core/package-summary.html">ru.nsu.kbagryantsev.workers.core</a></dt>
 <dd>
-<div class="block">Gets an order from incoming order pool.</div>
-</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#consume()" class="member-name-link">consume()</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
-<dd>
-<div class="block">Gets as many orders as possible within available capacity.</div>
-</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/Consumer.html" class="type-name-link" title="annotation interface in ru.nsu.kbagryantsev.workers">Consumer</a> - Annotation Interface in <a href="ru/nsu/kbagryantsev/workers/package-summary.html">ru.nsu.kbagryantsev.workers</a></dt>
-<dd>
-<div class="block">Annotates a class which implements methods which may be treated as
+<div class="block">Annotates a class which executes operations which may be treated as
  Producer-Consumer pattern reference.</div>
 </dd>
 <dt><a href="ru/nsu/kbagryantsev/order/CompletedOrder.html#content()" class="member-name-link">content()</a> - Method in record class ru.nsu.kbagryantsev.order.<a href="ru/nsu/kbagryantsev/order/CompletedOrder.html" title="class in ru.nsu.kbagryantsev.order">CompletedOrder</a></dt>
@@ -149,9 +141,17 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/kbagryantsev/order/Order.html#param-content"><code>content</code></a> record component.</div>
 </dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.Header.html#CONTINUE" class="member-name-link">CONTINUE</a> - Enum constant in enum class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.Header.html" title="enum class in ru.nsu.kbagryantsev.utils">Package.Header</a></dt>
+<dd>
+<div class="block">Package transmitted with no extra information.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#data()" class="member-name-link">data()</a> - Method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./ru/nsu/kbagryantsev/utils/Package.html#param-data"><code>data</code></a> record component.</div>
+</dd>
 <dt><a href="ru/nsu/kbagryantsev/RandomOrderGenerator.html#delayBound()" class="member-name-link">delayBound()</a> - Method in record class ru.nsu.kbagryantsev.<a href="ru/nsu/kbagryantsev/RandomOrderGenerator.html" title="class in ru.nsu.kbagryantsev">RandomOrderGenerator</a></dt>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/kbagryantsev/RandomOrderGenerator.html#param-delayBound"><code>delayBound</code></a> record component.</div>
@@ -160,11 +160,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/kbagryantsev/RandomOrderGenerator.html#param-delayOrigin"><code>delayOrigin</code></a> record component.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#deliver(ru.nsu.kbagryantsev.order.CompletedOrder)" class="member-name-link">deliver(CompletedOrder)</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html#deliver(ru.nsu.kbagryantsev.order.CompletedOrder)" class="member-name-link">deliver(CompletedOrder)</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/Transporter.html" title="class in ru.nsu.kbagryantsev.workers">Transporter</a></dt>
 <dd>
 <div class="block">Delivers an order.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#deliverAll(java.util.Collection)" class="member-name-link">deliverAll(Collection&lt;CompletedOrder&gt;)</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html#deliverAll(java.util.Collection)" class="member-name-link">deliverAll(Collection&lt;CompletedOrder&gt;)</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/Transporter.html" title="class in ru.nsu.kbagryantsev.workers">Transporter</a></dt>
 <dd>
 <div class="block">Delivers all orders in given collection.</div>
 </dd>
@@ -235,6 +235,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Indicates whether some other object is "equal to" this one.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
@@ -262,7 +266,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Oven-baked garlic bread with herbs.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#getDeliveryTime()" class="member-name-link">getDeliveryTime()</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html#getDeliveryTime()" class="member-name-link">getDeliveryTime()</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/Transporter.html" title="class in ru.nsu.kbagryantsev.workers">Transporter</a></dt>
 <dd>
 <div class="block">Considered to be deprecated in the future.</div>
 </dd>
@@ -305,25 +309,38 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Returns a hash code value for this object.</div>
+</dd>
 <dt><a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html#HAWAIIAN" class="member-name-link">HAWAIIAN</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.pizza.<a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html" title="enum class in ru.nsu.kbagryantsev.order.pizza">PizzaOptions</a></dt>
 <dd>
 <div class="block">Ham, extra mozzarella, marinara sauce, pineapple.</div>
 </dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#header()" class="member-name-link">header()</a> - Method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./ru/nsu/kbagryantsev/utils/Package.html#param-header"><code>header</code></a> record component.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Checks the queue is empty.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#isFull()" class="member-name-link">isFull()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#isFull()" class="member-name-link">isFull()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Checks the queue is full.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#isTerminating()" class="member-name-link">isTerminating()</a> - Method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">If a package has <a href="ru/nsu/kbagryantsev/utils/Package.Header.html#TERMINATE"><code>Package.Header.TERMINATE</code></a> header, returns true,
+ otherwise false.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:J">J</h2>
 <dl class="index">
-<dt><a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html#JUNIOR" class="member-name-link">JUNIOR</a> - Enum constant in enum class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html#JUNIOR" class="member-name-link">JUNIOR</a> - Enum constant in enum class ru.nsu.kbagryantsev.workers.core.<a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers.core">WorkerQualification</a></dt>
 <dd>
 <div class="block">Junior.</div>
 </dd>
@@ -361,18 +378,22 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Available menu subgroups.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html#MIDDLE" class="member-name-link">MIDDLE</a> - Enum constant in enum class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html#MIDDLE" class="member-name-link">MIDDLE</a> - Enum constant in enum class ru.nsu.kbagryantsev.workers.core.<a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers.core">WorkerQualification</a></dt>
 <dd>
 <div class="block">Middle.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
 <dl class="index">
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#notifyAllOnEmpty()" class="member-name-link">notifyAllOnEmpty()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#nonBlockingRemove()" class="member-name-link">nonBlockingRemove()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
+<dd>
+<div class="block">Returns optional element from the queue.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#notifyAllOnEmpty()" class="member-name-link">notifyAllOnEmpty()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Notifies all threads waiting on empty queue.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#notifyAllOnFull()" class="member-name-link">notifyAllOnFull()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#notifyAllOnFull()" class="member-name-link">notifyAllOnFull()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Notifies all threads waiting on full queue.</div>
 </dd>
@@ -390,6 +411,22 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.utils">Package</a> - Record Class in <a href="ru/nsu/kbagryantsev/utils/package-summary.html">ru.nsu.kbagryantsev.utils</a></dt>
+<dd>
+<div class="block">Data wrapper.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#%3Cinit%3E(java.lang.Object)" class="member-name-link">Package(Object)</a> - Constructor for record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Instantiates a package with default <a href="ru/nsu/kbagryantsev/utils/Package.Header.html#CONTINUE"><code>Package.Header.CONTINUE</code></a> header.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#%3Cinit%3E(ru.nsu.kbagryantsev.utils.Package.Header,java.lang.Object)" class="member-name-link">Package(Package.Header, Object)</a> - Constructor for record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>Package</code> record class.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.Header.html" class="type-name-link" title="enum class in ru.nsu.kbagryantsev.utils">Package.Header</a> - Enum Class in <a href="ru/nsu/kbagryantsev/utils/package-summary.html">ru.nsu.kbagryantsev.utils</a></dt>
+<dd>
+<div class="block">Package header.</div>
+</dd>
 <dt><a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html#PEPPERONI" class="member-name-link">PEPPERONI</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.pizza.<a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html" title="enum class in ru.nsu.kbagryantsev.order.pizza">PizzaOptions</a></dt>
 <dd>
 <div class="block">Marinara sauce, extra mozzarella, double pepperoni.</div>
@@ -418,11 +455,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Pizza crust.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a> - Class in <a href="ru/nsu/kbagryantsev/workers/producers/package-summary.html">ru.nsu.kbagryantsev.workers.producers</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.workers">PizzaMaker</a> - Class in <a href="ru/nsu/kbagryantsev/workers/package-summary.html">ru.nsu.kbagryantsev.workers</a></dt>
 <dd>
 <div class="block">Pizza maker.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html#%3Cinit%3E(ru.nsu.kbagryantsev.utils.ProductionQueue,ru.nsu.kbagryantsev.utils.ProductionQueue,ru.nsu.kbagryantsev.workers.WorkerQualification)" class="member-name-link">PizzaMaker(ProductionQueue&lt;Order&gt;, ProductionQueue&lt;CompletedOrder&gt;, WorkerQualification)</a> - Constructor for class ru.nsu.kbagryantsev.workers.producers.<a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html#%3Cinit%3E(ru.nsu.kbagryantsev.utils.SynchronizedQueue,ru.nsu.kbagryantsev.utils.SynchronizedQueue,ru.nsu.kbagryantsev.workers.core.WorkerQualification)" class="member-name-link">PizzaMaker(SynchronizedQueue&lt;Package&gt;, SynchronizedQueue&lt;Package&gt;, WorkerQualification)</a> - Constructor for class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers">PizzaMaker</a></dt>
 <dd>
 <div class="block">Initializes a pizza maker.</div>
 </dd>
@@ -456,22 +493,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/kbagryantsev/utils/PizzeriaDeserializer.html#%3Cinit%3E()" class="member-name-link">PizzeriaDeserializer()</a> - Constructor for class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/PizzeriaDeserializer.html" title="class in ru.nsu.kbagryantsev.utils">PizzeriaDeserializer</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html#produce(ru.nsu.kbagryantsev.order.Order)" class="member-name-link">produce(Order)</a> - Method in class ru.nsu.kbagryantsev.workers.producers.<a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html#produce(ru.nsu.kbagryantsev.order.Order)" class="member-name-link">produce(Order)</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers">PizzaMaker</a></dt>
 <dd>
 <div class="block">Produces an order.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/Producer.html" class="type-name-link" title="annotation interface in ru.nsu.kbagryantsev.workers">Producer</a> - Annotation Interface in <a href="ru/nsu/kbagryantsev/workers/package-summary.html">ru.nsu.kbagryantsev.workers</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/Producer.html" class="type-name-link" title="annotation interface in ru.nsu.kbagryantsev.workers.core">Producer</a> - Annotation Interface in <a href="ru/nsu/kbagryantsev/workers/core/package-summary.html">ru.nsu.kbagryantsev.workers.core</a></dt>
 <dd>
-<div class="block">Annotates a class which implements methods which may be treated as
+<div class="block">Annotates a class which executes operations which may be treated as
  Producer-Consumer pattern reference.</div>
-</dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a>&lt;<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="type parameter in ProductionQueue">T</a>&gt; - Class in <a href="ru/nsu/kbagryantsev/utils/package-summary.html">ru.nsu.kbagryantsev.utils</a></dt>
-<dd>
-<div class="block">Thread-safe queue.</div>
-</dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#%3Cinit%3E(int)" class="member-name-link">ProductionQueue(int)</a> - Constructor for class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
-<dd>
-<div class="block">Maximal size of the queue.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
@@ -492,13 +521,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>RandomOrderGenerator</code> record class.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#remove()" class="member-name-link">remove()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#remove()" class="member-name-link">remove()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
-<div class="block">Removes a single element.</div>
-</dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#removeSome(int)" class="member-name-link">removeSome(int)</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
-<dd>
-<div class="block">Tries to remove as many elements as possible below the given bound.</div>
+<div class="block">Guarantees a single element from the queue.</div>
 </dd>
 <dt><a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html#ROCK_IT" class="member-name-link">ROCK_IT</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.pizza.<a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html" title="enum class in ru.nsu.kbagryantsev.order.pizza">PizzaOptions</a></dt>
 <dd>
@@ -519,18 +544,16 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/kbagryantsev/workers/package-summary.html">ru.nsu.kbagryantsev.workers</a> - package ru.nsu.kbagryantsev.workers</dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/package-summary.html">ru.nsu.kbagryantsev.workers.producers</a> - package ru.nsu.kbagryantsev.workers.producers</dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/package-summary.html">ru.nsu.kbagryantsev.workers.core</a> - package ru.nsu.kbagryantsev.workers.core</dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/package-summary.html">ru.nsu.kbagryantsev.workers.transporters</a> - package ru.nsu.kbagryantsev.workers.transporters</dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers">PizzaMaker</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.kbagryantsev.workers.producers.<a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html#run()" class="member-name-link">run()</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/Transporter.html" title="class in ru.nsu.kbagryantsev.workers">Transporter</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
-<dt><a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html#SENIOR" class="member-name-link">SENIOR</a> - Enum constant in enum class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html#SENIOR" class="member-name-link">SENIOR</a> - Enum constant in enum class ru.nsu.kbagryantsev.workers.core.<a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers.core">WorkerQualification</a></dt>
 <dd>
 <div class="block">Senior.</div>
 </dd>
@@ -587,17 +610,17 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Stops all workers.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.kbagryantsev.workers.producers.<a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a></dt>
-<dd>
-<div class="block">Terminates pizza maker.</div>
-</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#stop()" class="member-name-link">stop()</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
-<dd>
-<div class="block">Terminates a transporter.</div>
-</dd>
 <dt><a href="ru/nsu/kbagryantsev/order/pizza/PizzaCrust.html#STUFFED" class="member-name-link">STUFFED</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.pizza.<a href="ru/nsu/kbagryantsev/order/pizza/PizzaCrust.html" title="enum class in ru.nsu.kbagryantsev.order.pizza">PizzaCrust</a></dt>
 <dd>
 <div class="block">Crust with extra stuff.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a>&lt;<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="type parameter in SynchronizedQueue">T</a>&gt; - Class in <a href="ru/nsu/kbagryantsev/utils/package-summary.html">ru.nsu.kbagryantsev.utils</a></dt>
+<dd>
+<div class="block">Thread-safe queue.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#%3Cinit%3E(int)" class="member-name-link">SynchronizedQueue(int)</a> - Constructor for class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
+<dd>
+<div class="block">Maximal size of the queue.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
@@ -605,6 +628,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/kbagryantsev/order/side/SideOptions.html#TERIYAKI_WINGS" class="member-name-link">TERIYAKI_WINGS</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.side.<a href="ru/nsu/kbagryantsev/order/side/SideOptions.html" title="enum class in ru.nsu.kbagryantsev.order.side">SideOptions</a></dt>
 <dd>
 <div class="block">Delicious oven-baked chicken wings with teriyaki sauce.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.Header.html#TERMINATE" class="member-name-link">TERMINATE</a> - Enum constant in enum class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.Header.html" title="enum class in ru.nsu.kbagryantsev.utils">Package.Header</a></dt>
+<dd>
+<div class="block">Poisoning package.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#terminating()" class="member-name-link">terminating()</a> - Static method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Returns an empty package with <a href="ru/nsu/kbagryantsev/utils/Package.Header.html#TERMINATE"><code>Package.Header.TERMINATE</code></a> header.</div>
 </dd>
 <dt><a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html#THE_MIGHTY_MEATS" class="member-name-link">THE_MIGHTY_MEATS</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.pizza.<a href="ru/nsu/kbagryantsev/order/pizza/PizzaOptions.html" title="enum class in ru.nsu.kbagryantsev.order.pizza">PizzaOptions</a></dt>
 <dd>
@@ -638,19 +669,23 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.kbagryantsev.workers.producers.<a href="ru/nsu/kbagryantsev/workers/producers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers.producers">PizzaMaker</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.html" title="class in ru.nsu.kbagryantsev.utils">Package</a></dt>
+<dd>
+<div class="block">Returns a string representation of this record class.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/PizzaMaker.html" title="class in ru.nsu.kbagryantsev.workers">PizzaMaker</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html#toString()" class="member-name-link">toString()</a> - Method in class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/Transporter.html" title="class in ru.nsu.kbagryantsev.workers">Transporter</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/kbagryantsev/order/pizza/PizzaCrust.html#TRADITIONAL" class="member-name-link">TRADITIONAL</a> - Enum constant in enum class ru.nsu.kbagryantsev.order.pizza.<a href="ru/nsu/kbagryantsev/order/pizza/PizzaCrust.html" title="enum class in ru.nsu.kbagryantsev.order.pizza">PizzaCrust</a></dt>
 <dd>
 <div class="block">Thick dough crust.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a> - Class in <a href="ru/nsu/kbagryantsev/workers/transporters/package-summary.html">ru.nsu.kbagryantsev.workers.transporters</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html" class="type-name-link" title="class in ru.nsu.kbagryantsev.workers">Transporter</a> - Class in <a href="ru/nsu/kbagryantsev/workers/package-summary.html">ru.nsu.kbagryantsev.workers</a></dt>
 <dd>
 <div class="block">Entity transporting completed orders.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html#%3Cinit%3E(ru.nsu.kbagryantsev.utils.ProductionQueue,int)" class="member-name-link">Transporter(ProductionQueue&lt;CompletedOrder&gt;, int)</a> - Constructor for class ru.nsu.kbagryantsev.workers.transporters.<a href="ru/nsu/kbagryantsev/workers/transporters/Transporter.html" title="class in ru.nsu.kbagryantsev.workers.transporters">Transporter</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/Transporter.html#%3Cinit%3E(ru.nsu.kbagryantsev.utils.SynchronizedQueue,int)" class="member-name-link">Transporter(SynchronizedQueue&lt;Package&gt;, int)</a> - Constructor for class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/Transporter.html" title="class in ru.nsu.kbagryantsev.workers">Transporter</a></dt>
 <dd>
 <div class="block">Initialises a courier by his/her parameters.</div>
 </dd>
@@ -681,7 +716,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.Header.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.Header.html" title="enum class in ru.nsu.kbagryantsev.utils">Package.Header</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class ru.nsu.kbagryantsev.workers.core.<a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers.core">WorkerQualification</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
@@ -715,7 +754,12 @@ the order they are declared.</div>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html#values()" class="member-name-link">values()</a> - Static method in enum class ru.nsu.kbagryantsev.workers.<a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/Package.Header.html#values()" class="member-name-link">values()</a> - Static method in enum class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/Package.Header.html" title="enum class in ru.nsu.kbagryantsev.utils">Package.Header</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html#values()" class="member-name-link">values()</a> - Static method in enum class ru.nsu.kbagryantsev.workers.core.<a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html" title="enum class in ru.nsu.kbagryantsev.workers.core">WorkerQualification</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
@@ -757,15 +801,15 @@ the order they are declared.</div>
 </dl>
 <h2 class="title" id="I:W">W</h2>
 <dl class="index">
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#waitOnEmpty()" class="member-name-link">waitOnEmpty()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#waitOnEmpty()" class="member-name-link">waitOnEmpty()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Waits on empty queue.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html#waitOnFull()" class="member-name-link">waitOnFull()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/ProductionQueue.html" title="class in ru.nsu.kbagryantsev.utils">ProductionQueue</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html#waitOnFull()" class="member-name-link">waitOnFull()</a> - Method in class ru.nsu.kbagryantsev.utils.<a href="ru/nsu/kbagryantsev/utils/SynchronizedQueue.html" title="class in ru.nsu.kbagryantsev.utils">SynchronizedQueue</a></dt>
 <dd>
 <div class="block">Waits on full queue.</div>
 </dd>
-<dt><a href="ru/nsu/kbagryantsev/workers/WorkerQualification.html" class="type-name-link" title="enum class in ru.nsu.kbagryantsev.workers">WorkerQualification</a> - Enum Class in <a href="ru/nsu/kbagryantsev/workers/package-summary.html">ru.nsu.kbagryantsev.workers</a></dt>
+<dt><a href="ru/nsu/kbagryantsev/workers/core/WorkerQualification.html" class="type-name-link" title="enum class in ru.nsu.kbagryantsev.workers.core">WorkerQualification</a> - Enum Class in <a href="ru/nsu/kbagryantsev/workers/core/package-summary.html">ru.nsu.kbagryantsev.workers.core</a></dt>
 <dd>
 <div class="block">Worker qualification linguistic variable.</div>
 </dd>
