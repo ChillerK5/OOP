@@ -1,14 +1,15 @@
-package ru.nsu.kbagryantsev.workers.producers;
+package ru.nsu.kbagryantsev.workers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import ru.nsu.kbagryantsev.order.CompletedOrder;
 import ru.nsu.kbagryantsev.order.Order;
-import ru.nsu.kbagryantsev.utils.ProductionQueue;
-import ru.nsu.kbagryantsev.workers.Consumer;
-import ru.nsu.kbagryantsev.workers.Producer;
-import ru.nsu.kbagryantsev.workers.WorkerQualification;
+import ru.nsu.kbagryantsev.utils.Package;
+import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
+import ru.nsu.kbagryantsev.workers.core.Consumer;
+import ru.nsu.kbagryantsev.workers.core.Producer;
+import ru.nsu.kbagryantsev.workers.core.WorkerQualification;
 
 /**
  * Pizza maker. Produces completed orders from incoming orders.
@@ -27,15 +28,11 @@ public final class PizzaMaker implements Runnable {
     /**
      * Completed orders storage.
      */
-    private final ProductionQueue<CompletedOrder> productQueue;
+    private final SynchronizedQueue<Package> productQueue;
     /**
      * Incoming orders storage.
      */
-    private final ProductionQueue<Order> sourceQueue;
-    /**
-     * Run flag.
-     */
-    private Boolean isActive = false;
+    private final SynchronizedQueue<Package> sourceQueue;
 
     /**
      * Initializes a pizza maker.
@@ -44,8 +41,8 @@ public final class PizzaMaker implements Runnable {
      * @param productQueue  completed orders storage
      * @param qualification pizza maker qualification
      */
-    public PizzaMaker(final ProductionQueue<Order> sourceQueue,
-                      final ProductionQueue<CompletedOrder> productQueue,
+    public PizzaMaker(final SynchronizedQueue<Package> sourceQueue,
+                      final SynchronizedQueue<Package> productQueue,
                       final WorkerQualification qualification) {
         this.sourceQueue = sourceQueue;
         this.productQueue = productQueue;
@@ -54,12 +51,17 @@ public final class PizzaMaker implements Runnable {
 
     @Override
     public void run() {
-        isActive = true;
         try {
-            while (isActive) {
-                Order incomingOrder = consume();
+            while (true) {
+                Package incomingPackage = sourceQueue.remove();
+                if (incomingPackage.isTerminating()) {
+                    break;
+                }
+                Order incomingOrder = (Order) incomingPackage.data();
+                logReceived(incomingOrder);
                 CompletedOrder completedOrder = produce(incomingOrder);
-                productQueue.add(completedOrder);
+                Package outcomingPackage = new Package(completedOrder);
+                productQueue.add(outcomingPackage);
             }
         } finally {
             sourceQueue.notifyAllOnFull();
@@ -80,22 +82,11 @@ public final class PizzaMaker implements Runnable {
             Thread.sleep(getProductionTime(order));
             // PRODUCTION PROCESS CODE END
         } catch (InterruptedException e) {
-            stop();
+            throw new RuntimeException();
         }
         CompletedOrder completedOrder = new CompletedOrder(order.content());
         logCompleted(order, completedOrder);
         return completedOrder;
-    }
-
-    /**
-     * Gets an order from incoming order pool.
-     *
-     * @return incoming order
-     */
-    public Order consume() {
-        Order order = sourceQueue.remove();
-        logReceived(order);
-        return order;
     }
 
     /**
@@ -122,22 +113,13 @@ public final class PizzaMaker implements Runnable {
     /**
      * Logs completed order.
      *
-     * @param order incoming order
+     * @param order          incoming order
      * @param completedOrder completed order
      */
     private void logCompleted(final Order order,
                               final CompletedOrder completedOrder) {
         logger.info("%-25s\tcompleted\t%s -> %s"
                 .formatted(this, order, completedOrder));
-    }
-
-    /**
-     * Terminates pizza maker. All current operations will be executed.
-     */
-    public void stop() {
-        isActive = false;
-        sourceQueue.notifyAllOnFull();
-        productQueue.notifyAllOnEmpty();
     }
 
     /**

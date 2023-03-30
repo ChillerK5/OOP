@@ -2,12 +2,12 @@ package ru.nsu.kbagryantsev;
 
 import java.util.HashMap;
 import java.util.Map;
-import ru.nsu.kbagryantsev.order.CompletedOrder;
 import ru.nsu.kbagryantsev.order.Order;
-import ru.nsu.kbagryantsev.utils.ProductionQueue;
-import ru.nsu.kbagryantsev.workers.WorkerQualification;
-import ru.nsu.kbagryantsev.workers.producers.PizzaMaker;
-import ru.nsu.kbagryantsev.workers.transporters.Transporter;
+import ru.nsu.kbagryantsev.utils.Package;
+import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
+import ru.nsu.kbagryantsev.workers.PizzaMaker;
+import ru.nsu.kbagryantsev.workers.Transporter;
+import ru.nsu.kbagryantsev.workers.core.WorkerQualification;
 
 /**
  * Pizzeria class. Aggregates pizza makers and transporters. Processes and
@@ -17,11 +17,11 @@ public final class Pizzeria {
     /**
      * Incoming orders storage.
      */
-    private final ProductionQueue<Order> orderStorage;
+    private final SynchronizedQueue<Package> orderStorage;
     /**
      * Completed orders storage.
      */
-    private final ProductionQueue<CompletedOrder> completedOrderStorage;
+    private final SynchronizedQueue<Package> completedOrderStorage;
     /**
      * Associates pizza maker instance with its thread.
      */
@@ -34,7 +34,7 @@ public final class Pizzeria {
     /**
      * Intialises a pizzeria.
      *
-     * @param orderStorageCapacity incoming orders storage capacity
+     * @param orderStorageCapacity          incoming orders storage capacity
      * @param completedOrderStorageCapacity completed orders storage capacity
      */
     public Pizzeria(final int orderStorageCapacity,
@@ -42,9 +42,9 @@ public final class Pizzeria {
         this.pizzaMakers =
                 new HashMap<>();
         this.orderStorage =
-                new ProductionQueue<>(orderStorageCapacity);
+                new SynchronizedQueue<>(orderStorageCapacity);
         this.completedOrderStorage =
-                new ProductionQueue<>(completedOrderStorageCapacity);
+                new SynchronizedQueue<>(completedOrderStorageCapacity);
         this.transporters =
                 new HashMap<>();
     }
@@ -82,7 +82,7 @@ public final class Pizzeria {
      * @param order unprocessed order
      */
     public void addOrder(final Order order) {
-        orderStorage.add(order);
+        orderStorage.add(new Package(order));
     }
 
     /**
@@ -96,9 +96,18 @@ public final class Pizzeria {
     /**
      * Stops all workers. Invokes workers stop method.
      */
-    public void stop() {
-        //TODO wait for all workers termination
-        pizzaMakers.keySet().forEach(PizzaMaker::stop);
-        transporters.keySet().forEach(Transporter::stop);
+    public void stop() throws InterruptedException {
+        for (int i = 0; i < pizzaMakers.size(); i++) {
+            orderStorage.add(Package.terminating());
+        }
+        for (Thread thread : pizzaMakers.values()) {
+            thread.join();
+        }
+        for (int i = 0; i < transporters.size(); i++) {
+            completedOrderStorage.add(Package.terminating());
+        }
+        for (Thread thread : transporters.values()) {
+            thread.join();
+        }
     }
 }

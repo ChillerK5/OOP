@@ -1,4 +1,4 @@
-package ru.nsu.kbagryantsev.workers;
+package ru.nsu.kbagryantsev.workers.core;
 
 /**
  * Worker qualification linguistic variable.

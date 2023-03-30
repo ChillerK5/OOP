@@ -38,7 +38,7 @@ public final class Main {
         // Submiting orders
         RandomOrderGenerator randomOrderGenerator =
                 new RandomOrderGenerator(5, 1000, 2000);
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 10; i++) {
             Future<Order> orderFuture =
                     randomOrderGenerator.getRandomOrderWithDelay();
             Order order = orderFuture.get();

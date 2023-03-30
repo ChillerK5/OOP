@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import ru.nsu.kbagryantsev.Pizzeria;
-import ru.nsu.kbagryantsev.workers.WorkerQualification;
+import ru.nsu.kbagryantsev.workers.core.WorkerQualification;
 
 /**
  * Deserializer for {@link Pizzeria}.

@@ -1,8 +1,7 @@
 package ru.nsu.kbagryantsev.utils;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Optional;
 import java.util.Queue;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Queue;
  *
  * @param <T> any type
  */
-public final class ProductionQueue<T> {
+public final class SynchronizedQueue<T> {
     /**
      * Queue.
      */
@@ -33,7 +32,7 @@ public final class ProductionQueue<T> {
      *
      * @param maxSize integer size
      */
-    public ProductionQueue(final int maxSize) {
+    public SynchronizedQueue(final int maxSize) {
         this.maxSize = maxSize;
         this.data = new ArrayDeque<>(maxSize);
     }
@@ -83,7 +82,7 @@ public final class ProductionQueue<T> {
      */
     public void notifyAllOnEmpty() {
         synchronized (emptyQueue) {
-            emptyQueue.notifyAll();
+            emptyQueue.notify();
         }
     }
 
@@ -97,7 +96,7 @@ public final class ProductionQueue<T> {
     }
 
     /**
-     * Adds a given element.
+     * Adds a given element. This is a blocking operation.
      *
      * @param element element
      */
@@ -106,7 +105,6 @@ public final class ProductionQueue<T> {
             try {
                 waitOnFull();
             } catch (InterruptedException e) {
-                //TODO handle properly
                 throw new RuntimeException();
             }
         }
@@ -117,7 +115,8 @@ public final class ProductionQueue<T> {
     }
 
     /**
-     * Removes a single element.
+     * Guarantees a single element from the queue. This is a blocking
+     * operation.
      *
      * @return element
      */
@@ -126,7 +125,6 @@ public final class ProductionQueue<T> {
             try {
                 waitOnEmpty();
             } catch (InterruptedException e) {
-                //TODO handle properly
                 throw new RuntimeException();
             }
         }
@@ -139,27 +137,16 @@ public final class ProductionQueue<T> {
     }
 
     /**
-     * Tries to remove as many elements as possible below the given bound.
+     * Returns optional element from the queue.
      *
-     * @param n elements bound
-     * @return collection of elements
+     * @return element
      */
-    public Collection<T> removeSome(final int n) {
-        while (data.isEmpty()) {
-            try {
-                waitOnEmpty();
-            } catch (InterruptedException e) {
-                //TODO handle properly
-                throw new RuntimeException();
-            }
+    public Optional<T> nonBlockingRemove() {
+        if (isEmpty()) {
+            return Optional.empty();
         }
-        Collection<T> elements = new ArrayList<>();
         synchronized (data) {
-            while (!data.isEmpty() && elements.size() < n) {
-                elements.add(data.poll());
-            }
+            return Optional.ofNullable(data.poll());
         }
-        notifyAllOnFull();
-        return elements;
     }
 }

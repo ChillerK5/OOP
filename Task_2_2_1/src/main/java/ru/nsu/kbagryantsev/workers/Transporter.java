@@ -1,13 +1,15 @@
-package ru.nsu.kbagryantsev.workers.transporters;
+package ru.nsu.kbagryantsev.workers;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.nsu.kbagryantsev.order.CompletedOrder;
-import ru.nsu.kbagryantsev.utils.ProductionQueue;
-import ru.nsu.kbagryantsev.workers.Consumer;
-import ru.nsu.kbagryantsev.workers.producers.PizzaMaker;
+import ru.nsu.kbagryantsev.utils.Package;
+import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
+import ru.nsu.kbagryantsev.workers.core.Consumer;
 
 /**
  * Entity transporting completed orders.
@@ -21,15 +23,11 @@ public final class Transporter implements Runnable {
     /**
      * Shared order storage.
      */
-    private final ProductionQueue<CompletedOrder> sourceQueue;
+    private final SynchronizedQueue<Package> sourceQueue;
     /**
      * Maximal amount of order a transporter can proceed.
      */
     private final int capacity;
-    /**
-     * Run flag.
-     */
-    private boolean isActive = false;
 
     /**
      * Initialises a courier by his/her parameters.
@@ -37,42 +35,39 @@ public final class Transporter implements Runnable {
      * @param sourceQueue shared data structure
      * @param capacity    maximal amount of orders a courier can transport
      */
-    public Transporter(final ProductionQueue<CompletedOrder> sourceQueue,
+    public Transporter(final SynchronizedQueue<Package> sourceQueue,
                        final int capacity) {
         this.sourceQueue = sourceQueue;
         this.capacity = capacity;
     }
 
-    /**
-     * Gets as many orders as possible within available capacity.
-     *
-     * @return collection of orders in work
-     */
-    public Collection<CompletedOrder> consume() {
-        Collection<CompletedOrder> completedOrders =
-            sourceQueue.removeSome(capacity);
-        completedOrders.forEach(this::logReceived);
-        return completedOrders;
-    }
-
-    /**
-     * Terminates a transporter.
-     */
-    public void stop() {
-        isActive = false;
-        sourceQueue.notifyAllOnFull();
-    }
-
-    /**
-     * Considered to be deprecated in the future. Calculates estimated
-     * single delivery time bound.
-     *
-     * @return integer delivery time
-     */
-    public int getDeliveryTime() {
-        final int maxDeliveryTime = 4000;
-        final int minDeliveryTime = 1000;
-        return new Random().nextInt(minDeliveryTime, maxDeliveryTime);
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                Package guaranteedPackage = sourceQueue.remove();
+                if (guaranteedPackage.isTerminating()) {
+                    break;
+                }
+                Collection<CompletedOrder> orders = new ArrayList<>();
+                orders.add((CompletedOrder) guaranteedPackage.data());
+                Optional<Package> packageOptional =
+                        sourceQueue.nonBlockingRemove();
+                while (packageOptional.isPresent()
+                        && orders.size() < capacity) {
+                    Package trailingPackage = packageOptional.get();
+                    if (trailingPackage.isTerminating()) {
+                        sourceQueue.add(trailingPackage);
+                        break;
+                    }
+                    orders.add((CompletedOrder) trailingPackage.data());
+                }
+                orders.forEach(this::logReceived);
+                deliverAll(orders);
+            }
+        } finally {
+            sourceQueue.notifyAllOnFull();
+        }
     }
 
     /**
@@ -87,7 +82,7 @@ public final class Transporter implements Runnable {
             Thread.sleep(getDeliveryTime());
             // PRODUCTION PROCESS CODE END
         } catch (InterruptedException e) {
-            stop();
+            throw new RuntimeException();
         }
         logDelivered(completedOrder);
     }
@@ -101,6 +96,18 @@ public final class Transporter implements Runnable {
         completedOrders.forEach(this::deliver);
     }
 
+    /**
+     * Considered to be deprecated in the future. Calculates estimated
+     * single delivery time bound.
+     *
+     * @return integer delivery time
+     */
+    public int getDeliveryTime() {
+        final int maxDeliveryTime = 4000;
+        final int minDeliveryTime = 1000;
+        return new Random().nextInt(minDeliveryTime, maxDeliveryTime);
+    }
+
     private void logDelivered(final CompletedOrder completedOrder) {
         logger.info("%-30s\tdelivered\t%s".formatted(this, completedOrder));
     }
@@ -112,20 +119,7 @@ public final class Transporter implements Runnable {
     @Override
     public String toString() {
         return getClass().getSimpleName()
-            + "@"
-            + Integer.toHexString(hashCode());
-    }
-
-    @Override
-    public void run() {
-        isActive = true;
-        try {
-            while (isActive) {
-                Collection<CompletedOrder> completedOrders = consume();
-                deliverAll(completedOrders);
-            }
-        } finally {
-            sourceQueue.notifyAllOnFull();
-        }
+                + "@"
+                + Integer.toHexString(hashCode());
     }
 }
