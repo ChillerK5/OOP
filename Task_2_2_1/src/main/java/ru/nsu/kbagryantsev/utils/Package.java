@@ -4,7 +4,7 @@ package ru.nsu.kbagryantsev.utils;
  * Data wrapper. Includes a header with package status.
  *
  * @param header {@code Header}
- * @param data package data
+ * @param data   package data
  */
 public record Package(Header header, Object data) {
     /**
@@ -39,7 +39,7 @@ public record Package(Header header, Object data) {
      * otherwise false.
      *
      * @return {@code true} if has {@link Header#TERMINATE} header, otherwise
-     * {@code false}
+    {@code false}
      */
     public boolean isTerminating() {
         return this.header == Header.TERMINATE;
