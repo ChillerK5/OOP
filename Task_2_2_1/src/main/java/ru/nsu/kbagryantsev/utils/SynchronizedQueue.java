@@ -3,6 +3,7 @@ package ru.nsu.kbagryantsev.utils;
 import java.util.ArrayDeque;
 import java.util.Optional;
 import java.util.Queue;
+import org.checkerframework.checker.index.qual.Positive;
 
 /**
  * Thread-safe queue.
@@ -32,7 +33,7 @@ public final class SynchronizedQueue<T> {
      *
      * @param maxSize integer size
      */
-    public SynchronizedQueue(final int maxSize) {
+    public SynchronizedQueue(@Positive final int maxSize) {
         this.maxSize = maxSize;
         this.data = new ArrayDeque<>(maxSize);
     }
@@ -145,8 +146,11 @@ public final class SynchronizedQueue<T> {
         if (isEmpty()) {
             return Optional.empty();
         }
+        Optional<T> optionalT;
         synchronized (data) {
-            return Optional.ofNullable(data.poll());
+            optionalT = Optional.ofNullable(data.poll());
         }
+        notifyAllOnFull();
+        return optionalT;
     }
 }

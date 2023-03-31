@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.index.qual.Positive;
 import ru.nsu.kbagryantsev.order.CompletedOrder;
 import ru.nsu.kbagryantsev.utils.Package;
 import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
@@ -36,15 +37,16 @@ public final class Transporter implements Runnable {
      * @param capacity    maximal amount of orders a courier can transport
      */
     public Transporter(final SynchronizedQueue<Package> sourceQueue,
-                       final int capacity) {
+                       @Positive final int capacity) {
         this.sourceQueue = sourceQueue;
         this.capacity = capacity;
     }
 
     @Override
     public void run() {
+        boolean terminationFlag = false;
         try {
-            while (true) {
+            while (!terminationFlag) {
                 Package guaranteedPackage = sourceQueue.remove();
                 if (guaranteedPackage.isTerminating()) {
                     break;
@@ -57,7 +59,7 @@ public final class Transporter implements Runnable {
                         && orders.size() < capacity) {
                     Package trailingPackage = packageOptional.get();
                     if (trailingPackage.isTerminating()) {
-                        sourceQueue.add(trailingPackage);
+                        terminationFlag = true;
                         break;
                     }
                     orders.add((CompletedOrder) trailingPackage.data());

@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import org.checkerframework.checker.index.qual.Positive;
 import ru.nsu.kbagryantsev.order.MenuItem;
 import ru.nsu.kbagryantsev.order.MenuItemOptions;
 import ru.nsu.kbagryantsev.order.Order;
@@ -27,9 +28,9 @@ import ru.nsu.kbagryantsev.utils.RandomEnumGenerator;
  * @param delayOrigin  minimal order delay in milliseconds
  * @param delayBound   maximal order delay in milliseconds
  */
-public record RandomOrderGenerator(int maxOrderSize,
-                                   int delayOrigin,
-                                   int delayBound) {
+public record RandomOrderGenerator(@Positive int maxOrderSize,
+                                   @Positive int delayOrigin,
+                                   @Positive int delayBound) {
     /**
      * Random instance.
      */

@@ -2,7 +2,7 @@ package ru.nsu.kbagryantsev.workers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import ru.nsu.kbagryantsev.order.CompletedOrder;
 import ru.nsu.kbagryantsev.order.Order;
 import ru.nsu.kbagryantsev.utils.Package;
@@ -96,7 +96,7 @@ public final class PizzaMaker implements Runnable {
      * @param order order
      * @return estimated time
      */
-    private int getProductionTime(final @NotNull Order order) {
+    private int getProductionTime(final @NonNull Order order) {
         final int averagePizzaProductionTime = 1000;
         return averagePizzaProductionTime * order.content().size();
     }
@@ -128,7 +128,7 @@ public final class PizzaMaker implements Runnable {
      * @return worker qualification
      */
     @SuppressWarnings("unused")
-    private WorkerQualification getQualification() {
+    public WorkerQualification getQualification() {
         return qualification;
     }
 

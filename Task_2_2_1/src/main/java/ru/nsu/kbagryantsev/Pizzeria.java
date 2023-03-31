@@ -2,6 +2,7 @@ package ru.nsu.kbagryantsev;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.checkerframework.checker.index.qual.Positive;
 import ru.nsu.kbagryantsev.order.Order;
 import ru.nsu.kbagryantsev.utils.Package;
 import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
@@ -37,8 +38,8 @@ public final class Pizzeria {
      * @param orderStorageCapacity          incoming orders storage capacity
      * @param completedOrderStorageCapacity completed orders storage capacity
      */
-    public Pizzeria(final int orderStorageCapacity,
-                    final int completedOrderStorageCapacity) {
+    public Pizzeria(@Positive final int orderStorageCapacity,
+                    @Positive final int completedOrderStorageCapacity) {
         this.pizzaMakers =
                 new HashMap<>();
         this.orderStorage =
@@ -68,7 +69,7 @@ public final class Pizzeria {
      *
      * @param capacity transporter capacity
      */
-    public void addTransporter(final int capacity) {
+    public void addTransporter(@Positive final int capacity) {
         Transporter transporter = new Transporter(
                 completedOrderStorage,
                 capacity);
