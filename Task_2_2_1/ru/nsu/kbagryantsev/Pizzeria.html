@@ -109,8 +109,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Pizzeria</a><wbr>(int&nbsp;orderStorageCapacity,
- int&nbsp;completedOrderStorageCapacity)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Pizzeria</a><wbr>(@org.checkerframework.checker.index.qual.Positive int&nbsp;orderStorageCapacity,
+ @org.checkerframework.checker.index.qual.Positive int&nbsp;completedOrderStorageCapacity)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Intialises a pizzeria.</div>
 </div>
@@ -139,7 +139,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Adds a pizza maker.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTransporter(int)" class="member-name-link">addTransporter</a><wbr>(int&nbsp;capacity)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addTransporter(int)" class="member-name-link">addTransporter</a><wbr>(@org.checkerframework.checker.index.qual.Positive int&nbsp;capacity)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds a transporter.</div>
 </div>
@@ -173,8 +173,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(int,int)">
 <h3>Pizzeria</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Pizzeria</span><wbr><span class="parameters">(int&nbsp;orderStorageCapacity,
- int&nbsp;completedOrderStorageCapacity)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Pizzeria</span><wbr><span class="parameters">(@org.checkerframework.checker.index.qual.Positive int&nbsp;orderStorageCapacity,
+ @org.checkerframework.checker.index.qual.Positive int&nbsp;completedOrderStorageCapacity)</span></div>
 <div class="block">Intialises a pizzeria.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -205,7 +205,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addTransporter(int)">
 <h3>addTransporter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTransporter</span><wbr><span class="parameters">(int&nbsp;capacity)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addTransporter</span><wbr><span class="parameters">(@org.checkerframework.checker.index.qual.Positive int&nbsp;capacity)</span></div>
 <div class="block">Adds a transporter. Intializes a worker's thread.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

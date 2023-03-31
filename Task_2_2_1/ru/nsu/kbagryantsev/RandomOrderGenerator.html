@@ -102,7 +102,7 @@ loadScripts(document, 'script');</script>
 <dd><code><span id="param-delayBound">delayBound</span></code> - maximal order delay in milliseconds</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">RandomOrderGenerator</span>(int&nbsp;maxOrderSize, int&nbsp;delayOrigin, int&nbsp;delayBound)
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">RandomOrderGenerator</span>(@org.checkerframework.checker.index.qual.Positive int&nbsp;maxOrderSize, @org.checkerframework.checker.index.qual.Positive int&nbsp;delayOrigin, @org.checkerframework.checker.index.qual.Positive int&nbsp;delayBound)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 <div class="block">Random order generator.</div>
 </section>
@@ -116,9 +116,9 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int)" class="member-name-link">RandomOrderGenerator</a><wbr>(int&nbsp;maxOrderSize,
- int&nbsp;delayOrigin,
- int&nbsp;delayBound)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int)" class="member-name-link">RandomOrderGenerator</a><wbr>(@org.checkerframework.checker.index.qual.Positive int&nbsp;maxOrderSize,
+ @org.checkerframework.checker.index.qual.Positive int&nbsp;delayOrigin,
+ @org.checkerframework.checker.index.qual.Positive int&nbsp;delayBound)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an instance of a <code>RandomOrderGenerator</code> record class.</div>
 </div>
@@ -136,12 +136,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@org.checkerframework.checker.index.qual.Positive int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delayBound()" class="member-name-link">delayBound</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-delayBound"><code>delayBound</code></a> record component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@org.checkerframework.checker.index.qual.Positive int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delayOrigin()" class="member-name-link">delayOrigin</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-delayOrigin"><code>delayOrigin</code></a> record component.</div>
@@ -166,7 +166,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a hash code value for this object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@org.checkerframework.checker.index.qual.Positive int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maxOrderSize()" class="member-name-link">maxOrderSize</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-maxOrderSize"><code>maxOrderSize</code></a> record component.</div>
@@ -196,9 +196,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(int,int,int)">
 <h3>RandomOrderGenerator</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RandomOrderGenerator</span><wbr><span class="parameters">(int&nbsp;maxOrderSize,
- int&nbsp;delayOrigin,
- int&nbsp;delayBound)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RandomOrderGenerator</span><wbr><span class="parameters">(@org.checkerframework.checker.index.qual.Positive int&nbsp;maxOrderSize,
+ @org.checkerframework.checker.index.qual.Positive int&nbsp;delayOrigin,
+ @org.checkerframework.checker.index.qual.Positive int&nbsp;delayBound)</span></div>
 <div class="block">Creates an instance of a <code>RandomOrderGenerator</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -284,7 +284,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="maxOrderSize()">
 <h3>maxOrderSize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">maxOrderSize</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@org.checkerframework.checker.index.qual.Positive int</span>&nbsp;<span class="element-name">maxOrderSize</span>()</div>
 <div class="block">Returns the value of the <a href="#param-maxOrderSize"><code>maxOrderSize</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -295,7 +295,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="delayOrigin()">
 <h3>delayOrigin</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">delayOrigin</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@org.checkerframework.checker.index.qual.Positive int</span>&nbsp;<span class="element-name">delayOrigin</span>()</div>
 <div class="block">Returns the value of the <a href="#param-delayOrigin"><code>delayOrigin</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -306,7 +306,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="delayBound()">
 <h3>delayBound</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">delayBound</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@org.checkerframework.checker.index.qual.Positive int</span>&nbsp;<span class="element-name">delayBound</span>()</div>
 <div class="block">Returns the value of the <a href="#param-delayBound"><code>delayBound</code></a> record component.</div>
 <dl class="notes">
 <dt>Returns:</dt>
