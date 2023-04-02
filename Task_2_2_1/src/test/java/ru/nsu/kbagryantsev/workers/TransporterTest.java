@@ -10,6 +10,9 @@ import ru.nsu.kbagryantsev.order.drink.DrinkOptions;
 import ru.nsu.kbagryantsev.utils.Package;
 import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
 
+/**
+ * Transporter tests.
+ */
 public class TransporterTest {
     @Test
     void givenOrders_whenDeliverAll_thenSuccess() {

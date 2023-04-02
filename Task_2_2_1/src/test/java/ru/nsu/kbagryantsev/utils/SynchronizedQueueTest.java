@@ -5,6 +5,9 @@ import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Synchronized queue tests.
+ */
 public class SynchronizedQueueTest {
     @Test
     void givenFullQueue_whenCheckIsFull_thenReturnTrue() {
@@ -34,7 +37,8 @@ public class SynchronizedQueueTest {
     }
 
     @Test
-    void givenFullQueue_whenAddingElement_thenExpectWait_untilElementRemoved() throws InterruptedException {
+    void givenFullQueue_whenAddingElement_thenExpectWait_untilElementRemoved()
+            throws InterruptedException {
         SynchronizedQueue<Object> queue = new SynchronizedQueue<>(1);
         queue.add(new Object());
         Thread thread = new Thread(() -> queue.add(new Object()));
@@ -47,7 +51,8 @@ public class SynchronizedQueueTest {
     }
 
     @Test
-    void givenEmptyQueue_whenRemovingElement_thenWait_untilElementAdded() throws InterruptedException {
+    void givenEmptyQueue_whenRemovingElement_thenWait_untilElementAdded()
+            throws InterruptedException {
         SynchronizedQueue<Object> queue = new SynchronizedQueue<>(1);
         Thread thread = new Thread(queue::remove);
         thread.start();

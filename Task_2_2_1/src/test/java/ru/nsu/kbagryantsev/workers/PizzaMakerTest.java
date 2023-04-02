@@ -12,6 +12,9 @@ import ru.nsu.kbagryantsev.utils.Package;
 import ru.nsu.kbagryantsev.utils.SynchronizedQueue;
 import ru.nsu.kbagryantsev.workers.core.WorkerQualification;
 
+/**
+ * Pizza maker tests.
+ */
 public class PizzaMakerTest {
     @Test
     void givenOrder_whenProduce_thenCalculateProductionTimeAndCheckCompleted() {
@@ -20,7 +23,8 @@ public class PizzaMakerTest {
         Order order = new Order(List.of(
                 new Drink(DrinkOptions.COLA),
                 new Drink(DrinkOptions.COLA)));
-        PizzaMaker pizzaMaker = new PizzaMaker(sourceQueue, productQueue, WorkerQualification.MIDDLE);
+        PizzaMaker pizzaMaker =
+                new PizzaMaker(sourceQueue, productQueue, WorkerQualification.MIDDLE);
         Assertions.assertDoesNotThrow(() -> pizzaMaker.produce(order));
         CompletedOrder completedOrder = pizzaMaker.produce(order);
         Assertions.assertEquals(order.content(), completedOrder.content());
@@ -30,7 +34,8 @@ public class PizzaMakerTest {
     void givenMiddlePizzaMaker_whenGetQualification_thenExpectMiddle() {
         SynchronizedQueue<Package> sourceQueue = new SynchronizedQueue<>(5);
         SynchronizedQueue<Package> productQueue = new SynchronizedQueue<>(5);
-        PizzaMaker pizzaMaker = new PizzaMaker(sourceQueue, productQueue, WorkerQualification.MIDDLE);
+        PizzaMaker pizzaMaker =
+                new PizzaMaker(sourceQueue, productQueue, WorkerQualification.MIDDLE);
         Assertions.assertEquals(WorkerQualification.MIDDLE, pizzaMaker.getQualification());
     }
 
@@ -38,7 +43,8 @@ public class PizzaMakerTest {
     void givenPizzaMaker_thenStartWork() throws InterruptedException {
         SynchronizedQueue<Package> sourceQueue = new SynchronizedQueue<>(5);
         SynchronizedQueue<Package> productQueue = new SynchronizedQueue<>(5);
-        PizzaMaker pizzaMaker = new PizzaMaker(sourceQueue, productQueue, WorkerQualification.MIDDLE);
+        PizzaMaker pizzaMaker =
+                new PizzaMaker(sourceQueue, productQueue, WorkerQualification.MIDDLE);
         Thread thread = new Thread(pizzaMaker);
         thread.start();
         for (int i = 0; i < 10; i++) {

@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.kbagryantsev.order.drink.Drink;
 import ru.nsu.kbagryantsev.order.drink.DrinkOptions;
 
+/**
+ * Order tests.
+ */
 public class OrderTests {
     @Nested
     class OrderTest {

@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.nsu.kbagryantsev.Pizzeria;
 
+/**
+ * Pizza deserializer tests.
+ */
 public class PizzeriaDeserializerTest {
     @Test
     void givenCorrectPizzeriaProperties_thenReturnPizzeria() throws IOException {
@@ -25,11 +28,13 @@ public class PizzeriaDeserializerTest {
     void givenIncorrectPizzeriaProperties_thenThrowExceptions() throws IOException {
         Gson gson =
                 new GsonBuilder()
-                        .registerTypeAdapter(Pizzeria.class, new PizzeriaDeserializer())
+                        .registerTypeAdapter(Pizzeria.class,
+                                new PizzeriaDeserializer())
                         .create();
         String propertiesPath = "./src/test/resources/incorrect_properties.json";
         try (FileReader fileReader = new FileReader(propertiesPath)) {
-            Assertions.assertThrows(IllegalArgumentException.class, () -> gson.fromJson(fileReader, Pizzeria.class));
+            Assertions.assertThrows(IllegalArgumentException.class,
+                    () -> gson.fromJson(fileReader, Pizzeria.class));
         }
     }
 }

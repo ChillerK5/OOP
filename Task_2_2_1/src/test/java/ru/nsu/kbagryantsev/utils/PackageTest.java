@@ -3,6 +3,9 @@ package ru.nsu.kbagryantsev.utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Package tests.
+ */
 public class PackageTest {
     @Test
     void givenSomeData_thenReturnDefaultPackage() {

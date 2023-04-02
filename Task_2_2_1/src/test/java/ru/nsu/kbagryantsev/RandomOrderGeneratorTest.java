@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.nsu.kbagryantsev.order.Order;
 
+/**
+ * Random order generator tests.
+ */
 public class RandomOrderGeneratorTest {
     @Test
     void givenAverageParameters_whenQuierOrderDelay_thenSuccess() throws InterruptedException {
