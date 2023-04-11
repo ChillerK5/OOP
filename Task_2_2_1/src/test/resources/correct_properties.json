@@ -1,0 +1,26 @@
+{
+	"pizzaMakers": [
+		{
+			"qualification": "MIDDLE"
+		},
+		{
+			"qualification": "SENIOR"
+		},
+		{
+			"qualification": "JUNIOR"
+		}
+	],
+	"transporters": [
+		{
+			"capacity": 3
+		},
+		{
+			"capacity": 3
+		},
+		{
+			"capacity": 3
+		}
+	],
+	"completedOrderStorageCapacity": 10,
+	"orderStorageCapacity": 10
+}
