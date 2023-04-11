@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"ru.nsu.kbagryantsev","l":"ru.nsu.kbagryantsev"}];updateSearchResults();
