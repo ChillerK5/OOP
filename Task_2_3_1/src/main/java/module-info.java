@@ -1,4 +1,5 @@
-module ru.nsu.kbagryantsev {
+open module ru.nsu.kbagryantsev {
+
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,5 +12,4 @@ module ru.nsu.kbagryantsev {
     requires com.almasb.fxgl.all;
 
     exports ru.nsu.kbagryantsev;
-    opens ru.nsu.kbagryantsev to javafx.fxml;
 }
