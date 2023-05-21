@@ -1,49 +1,46 @@
 package ru.nsu.kbagryantsev;
 
-import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
-import static com.almasb.fxgl.dsl.FXGL.geto;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
-import com.almasb.fxgl.pathfinding.CellMoveComponent;
-import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
+import com.almasb.fxgl.entity.components.BoundingBoxComponent;
+import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import static ru.nsu.kbagryantsev.SnakeGame.BLOCK_SIZE;
+import static ru.nsu.kbagryantsev.EntityType.*;
 
 public class GameFactory implements EntityFactory {
+    @Spawns("Obstacle")
+    public Entity newObstacle(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(OBSTACLE)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .collidable()
+                .build();
+    }
 
-    @Spawns("H")
-    public Entity newSnakeHead(SpawnData spawnData) {
-        return FXGL.entityBuilder(spawnData)
-                .type(EntityType.SNAKE_HEAD)
-                .viewWithBBox(new Rectangle(BLOCK_SIZE, BLOCK_SIZE, Color.AQUA))
-                .with(new CellMoveComponent(BLOCK_SIZE, BLOCK_SIZE, 1000))
-                .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
+    @Spawns("SnakeHead")
+    public Entity newSnakeHead(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(SNAKE_HEAD)
+                .view(new Rectangle(16, 16, Color.DARKCYAN))
+                .bbox(new HitBox(new Point2D(1, 1), BoundingShape.box(14, 14)))
                 .with(new SnakeHeadComponent())
                 .collidable()
                 .build();
     }
 
-    @Spawns("B")
-    public Entity newSnakeBody(SpawnData spawnData) {
-        return FXGL.entityBuilder(spawnData)
-                .type(EntityType.SNAKE_BODY)
-                .viewWithBBox(new Rectangle(BLOCK_SIZE, BLOCK_SIZE, Color.AQUA))
-                .with(new CellMoveComponent(BLOCK_SIZE, BLOCK_SIZE, 1000))
-                .with(new AStarMoveComponent(new LazyValue<>(() -> geto("grid"))))
-                .collidable()
-                .build();
-    }
-
-    @Spawns("F")
-    public Entity newFood(SpawnData spawnData) {
-        return FXGL.entityBuilder(spawnData)
-                .type(EntityType.FOOD)
-                .viewWithBBox(new Circle(10, 10, 10, Color.GREEN))
+    @Spawns("SnakeBody")
+    public Entity newSnakeBody(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(SNAKE_BODY)
+                .view(new Rectangle(16, 16, Color.DARKSLATEGRAY))
+                .bbox(new HitBox(new Point2D(1, 1), BoundingShape.box(14, 14)))
                 .collidable()
                 .build();
     }
