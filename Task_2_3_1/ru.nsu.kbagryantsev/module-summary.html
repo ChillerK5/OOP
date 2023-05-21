@@ -15,7 +15,11 @@
 <script type="text/javascript" src="../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="module-declaration-page">
-<script type="text/javascript">var pathtoroot = "../";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -78,12 +82,18 @@ loadScripts(document, 'script');</script>
 <!-- ============ PACKAGES SUMMARY =========== -->
 <h2>Packages</h2>
 <div id="package-summary-table">
-<div class="caption"><span>Exports</span></div>
-<div class="summary-table two-column-summary">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="package-summary-table-tab0" role="tab" aria-selected="true" aria-controls="package-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('package-summary-table', 'package-summary-table', 4)" class="active-table-tab">All Packages</button><button id="package-summary-table-tab1" role="tab" aria-selected="false" aria-controls="package-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('package-summary-table', 'package-summary-table-tab1', 4)" class="table-tab">Exports</button><button id="package-summary-table-tab2" role="tab" aria-selected="false" aria-controls="package-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('package-summary-table', 'package-summary-table-tab2', 4)" class="table-tab">Opens</button></div>
+<div id="package-summary-table.tabpanel" role="tabpanel">
+<div class="summary-table four-column-summary" aria-labelledby="package-summary-table-tab0">
 <div class="table-header col-first">Package</div>
+<div class="table-header col-second">Exported To Modules</div>
+<div class="table-header col-second">Opened To Modules</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color package-summary-table package-summary-table-tab1"><a href="ru/nsu/kbagryantsev/package-summary.html">ru.nsu.kbagryantsev</a></div>
-<div class="col-last even-row-color package-summary-table package-summary-table-tab1">&nbsp;</div>
+<div class="col-first even-row-color package-summary-table package-summary-table-tab1 package-summary-table-tab2"><a href="ru/nsu/kbagryantsev/package-summary.html">ru.nsu.kbagryantsev</a></div>
+<div class="col-second even-row-color package-summary-table package-summary-table-tab1 package-summary-table-tab2">All Modules</div>
+<div class="col-second even-row-color package-summary-table package-summary-table-tab1 package-summary-table-tab2">All Modules</div>
+<div class="col-last even-row-color package-summary-table package-summary-table-tab1 package-summary-table-tab2">&nbsp;</div>
+</div>
 </div>
 </div>
 </section>

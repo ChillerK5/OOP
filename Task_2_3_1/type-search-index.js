@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.kbagryantsev","l":"HelloApplication"},{"p":"ru.nsu.kbagryantsev","l":"HelloController"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.kbagryantsev","l":"EntityType"},{"p":"ru.nsu.kbagryantsev","l":"GameFactory"},{"p":"ru.nsu.kbagryantsev","l":"SnakeGame"},{"p":"ru.nsu.kbagryantsev","l":"SnakeHeadComponent"},{"p":"ru.nsu.kbagryantsev","l":"SnakeUIController"}];updateSearchResults();
